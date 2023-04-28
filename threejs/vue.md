@@ -36,3 +36,14 @@ module.exports = {
 }
 
 ```
+
+## Shaders
+
+```js
+var shaderMaterial = new THREE.ShaderMaterial( {
+  vertexShader: document.getElementById( 'vertexShader' ).textContent,
+  fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+})
+
+
+```
