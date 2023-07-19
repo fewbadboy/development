@@ -32,6 +32,17 @@ function type() {
 type.call([]) // [object Array]
 type.call(null) // [object Window]
 type.call(undefined) // [object Window]
+
+function hello(thing) {
+  console.log(this + " says hello " + thing);
+}
+
+person = { name: "Brendan" }
+person.hello = hello;
+
+person.hello("world") // still desugars to person.hello.call(person, "world")
+
+hello("world") // "[object DOMWindow]world"
 ```
 
 bind 方法：永久的被绑定到 bind 的第一个参数，无论这个函数是如何被调用的

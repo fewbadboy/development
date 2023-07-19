@@ -1,6 +1,6 @@
 # Commit 规范
 
-[commitlint](https://github.com/conventional-changelog/commitlint)
+[CommitLint](https://github.com/conventional-changelog/commitlint)
 
 ## 模板
 
@@ -13,6 +13,7 @@ footer?
 基于 [Angular](https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines)
 
 type:
+
 1. build: Changes that affect the build system or external dependencies
 2. ci: Changes to our CI configuration files and scripts
 3. docs: Documentation only changes
