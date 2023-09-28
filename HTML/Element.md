@@ -32,10 +32,6 @@ p.then(function(stream) {
 
 用于一个文档中包含的所有相对 URL 的根 URL
 
-## blockquote / q
-
-- cite 存放出处的 URL 地址， 若要以文本的形式引文出处，可以用 `<cite>` 元素
-
 ## caption
 
 展示一个表格的标题
@@ -43,8 +39,6 @@ p.then(function(stream) {
 ## cite
 
 表示一个作品的引用，且必须包含作品的标题
-
-## code
 
 ## colgroup / col
 
@@ -76,18 +70,6 @@ p.then(function(stream) {
 ## dfn
 
 术语的一个定义
-
-## dialog
-
-一个对话框， show/showModal() 方法调用渲染对话框
-
-## em / mark / strong
-
-标记出需要用户着重阅读的内容, 起强调的作用
-
-## embed / iframe / object
-
-外部内容嵌入文档指定位置
 
 ## fieldset / legend
 
@@ -183,21 +165,10 @@ WebP 图像和动画的最佳选择
 
 ## select / optgroup / option
 
-## output
-
-表示计算或用户操作的结果
-
 ## picture
 
 零或多个 source 元素 和 一个 img 元素组成来为不同的显示/设备场景提供图像版本
 浏览器会选择最匹配的子 source 元素，如果没有匹配的，就选择 img 元素的 src 属性中的 URL
-
-## progress
-
-显示完成进度
-
-- max
-- value
 
 ## section
 
@@ -208,9 +179,3 @@ WebP 图像和动画的最佳选择
 包含表单控件或与执行搜索或筛选操作相关的其他内容
 
 ## template / slot
-
-## small
-
-## sub / sup
-
-## var

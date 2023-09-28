@@ -289,22 +289,6 @@ parseLog("1560979912,Caroline") // 'Caroline committed on 6/20/2019, 5:31:52 AM'
 
 performance
 
-## Web Cryptography API
-
-- Crypto.getRandomValues(typedArray): 获取符合密码学要求的安全的随机值。传入参数的数组被随机值填充（在加密意义上的随机）。是一个基于整数的 TypedArray，它可以是 Int8Array、Uint8Array、Int16Array、 Uint16Array、 Int32Array 或者 Uint32Array。在数组中的所有的元素会被随机数重写。
-SubtleCrypto
-- Crypto.subtle 只读
-  - 生成密码学摘要
-  支持4种摘要算法SHA-1(类似MD5,不安全)和3种SHA-2(SHA-256,SHA-384,SHA-512三种)
-  - digest(algorithm, data)：生成消息摘要
-  - encrpty(algorithm, key, data): RSA-OAEP/AES-CTR/AES-CBC/AES-GCM
-  - decrpty(algorithm, key, data)
-
-## 调用堆栈、消息队列
-
-![run](./stack-queue-heap.webp)
-如果执行栈里的任务执行完成,即执行栈为空的时候（即JS引擎线程空闲）,事件触发线程才会从消息队列取出一个任务（即异步的回调函数）放入执行栈中执行。执行完了后,再次执行栈, 等执行栈为空,事件触发线程会重复上一步操作,再取出一个消息队列中的任务,这种机制就被称为事件循环（event loop）机制。
-
 ## 参考
 
 `?.` 引用为空(nullish)(null 或 undefined)

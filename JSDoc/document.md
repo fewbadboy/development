@@ -3,10 +3,20 @@
 ## Block Tags
 
 - abstract 定义的成员在继承的时候必须要实现
+
+```js
+Parent.prototype.isSolid = function() {
+    throw new Error('Must be implement')
+}
+Child.prototype.isSolid = function() {
+    return true
+}
+```
+
 - access `@access <package|private|protected|public>`
 - alias
 - async
-- augments 标记指示继承自哪
+- augments 标记指示继承自哪 别名 extends
 - author `@author <name> [<emailAddress>]`
 - borrows
 
@@ -21,7 +31,7 @@ var util = {
 
 /**
  * Remove whitespace from around a string.
- * @param {string} str
+ * @param {string} str - The string value
  */
 function aliasTrim(str) {}
 ```
@@ -61,6 +71,14 @@ Requester.prototype.send = function(cb) {}
 - constructs
 - copyright
 - default
+
+```js
+/**
+ * @constant
+ * @default
+ */
+const red = '#f00'
+```
 - deprecated
 - description
 - enum
@@ -69,8 +87,8 @@ Requester.prototype.send = function(cb) {}
 - exports
 - external
 - file
-- fires `@fires <className>#[event:]<eventName>` 调用时触发指定类型的事件
-- function
+- fires `@fires <className>#[event:]<eventName>` 调用时触发指定类型的事件 别名 emits
+- function 别名 func method
 - generator
 - global
 - hideconstructor
@@ -84,7 +102,7 @@ Requester.prototype.send = function(cb) {}
 - lends
 - license
 - listens
-- member `@member [<type>] [<name>]`
+- member `@member [<type>] [<name>]` 别名 var
 - memberof 标识属于哪个
 - mixes
 - mixin
@@ -93,16 +111,16 @@ Requester.prototype.send = function(cb) {}
 - namespace
 - override
 - package
-- param
+- param 别名 arg argument
 - private
-- property
+- property 别名 prop
 - protected
 - public
 - readonly
 - requires 标识当前代码需要的模块
 - returns
 - see
-- since
+- since 特定版本上添加类、方法或其他
 - static
 - summary
 - this
