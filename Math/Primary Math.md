@@ -1,5 +1,7 @@
 # Primary Math
 
+[math-only-math](https://www.math-only-math.com/)
+
 ## Greatest common factor(GCF)
 
 - Using prime factorization to find the GCF
@@ -24,26 +26,6 @@ GCF(36, 48)=12
 GCF(114, 288)=6
 
 ## Least common multiple(LCM)
-
-- Using a table
-
-    1. List the numbers vertically in a table.
-    2. Divide each number by 2 (the first prime number). If any of the numbers divides evenly, write the result in the following column of the table, and write the divisor (in this case 2) at the top of the table. If it does not divide evenly, rewrite the number in the following column.
-    3. Divide each subsequent column by 2 until none of the numbers can be evenly divided by 2. Continue this process for the next largest prime number until the quotient of all the numbers is equal to 1 (the last column is all 1s).
-    4. Multiply the numbers in the top row (the prime factors). The product is the LCM.
-
-    ||2|2|2|7|
-    |-:|-:|-:|-:|-:|
-    |7|7|7|7|1|
-    |8|4|2|1|1|
-    |14|7|7|7|1|
-
-    LCM(7, 8, 14) = 2 × 2 × 2 × 7 = 56
-
-
-- Euclid's algorithm
-
-    LCM(a,b) = |a·b| / GCF(a,b)
 
 ## Golden ratio
 

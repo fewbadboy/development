@@ -1,7 +1,5 @@
 # At-rules
 
-## @counter-style
-
 ## @layer
 
 声明一个级联层，也可用于定义多个级联层时的优先级顺序
@@ -20,41 +18,6 @@
   .alert {
     color: red;
   }
-}
-```
-
-## @media
-
-media types
-
-- all
-- print
-- screen
-
-media feature
-
-- width
-- height
-- aspect-ratio
-- any-hover
-- orientation
-- resolution
-
-Logical operations
-
-- and
-- not
-- only
-- or
-- ,
-
-## @property
-
-```css
-@property --property-name {
-  syntax: "<color>";
-  inherit: false;
-  initial-value: #ff0000;
 }
 ```
 

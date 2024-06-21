@@ -1,27 +1,5 @@
 # HTTP 概述
 
-## 资源和 URI
-
-URI（统一资源标识符）是一个指向资源的字符串
-
-URI 的最常见形式是统一资源定位符 (URL)
-
-### URI 语法
-
-协议 主机 端口 路径 查询 片段 五部分组成
-
-常见协议：
-
-- data: Data URIs
-- file：指定主机上文件的名称
-- ftp
-- http/https
-- mailto
-- ssh
-- tel
-- ws/wss
-- view-source: 资源的源代码
-
 ## Data URL 语法
 
 `data:[<mediatype>][;base64],<data>`

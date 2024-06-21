@@ -1,0 +1,13 @@
+{
+  "line-length": {
+    "code_block_line_length": 80
+  },
+  "no-inline-html": {
+    "allowed_elements": [
+      "kbd"
+    ]
+  },
+  "fenced-code-language": {
+    "allowed_languages": []
+  }
+}

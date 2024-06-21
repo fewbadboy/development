@@ -1,5 +1,0 @@
-# document
-
-## introduction
-
-Clear Code
