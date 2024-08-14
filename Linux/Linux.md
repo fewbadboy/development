@@ -9,20 +9,21 @@
 
 ## 目录结构
 
-- bin 存放最经常使用的命令
-- boot 启动Linux时的核心文件
-- dev Linux外部设备，存放方式和访问文件的方式是一样的
-- etc  系统管理所需要的配置文件和子目录
-- home 用户的主目录
-- root 系统管理员的用户目录
-- run 临时文件系统，存储系统启动以来的信息
-- sbin 系统管理员使用的系统文件程序
-- tmp 临时文件
-- usr unix shared resources（共享资源）
-- var 放着在不断扩充着的东西，我们习惯将那些经常被修改的目录放在这个目录下(eg. log)
-- opt 给主机额外安装软件的目录
-- proc (不在硬盘而是在内存，存储当前内核运行状态的一系列特殊文件，目录是个虚拟的)
-- lib C 编译器的库
+- bin  存放基本命令的二进制可执行文件
+- boot 启动加载器和内核相关文件
+- dev  Linux外部设备。用于访问硬件设备，如硬盘、打印机等
+- etc  系统配置文件目录。网络配置，用户账户等
+- home 每个用户的主目录，用户个人文件和配置文件均在这
+- root 管理员的用户目录
+- run  临时文件系统，存储系统启动以来的信息
+- sbin 系统管理员使用的基本系统二进制文件
+- tmp  临时文件，系统重启会清空
+- usr  主要系统默认的用户级软件和共享数据，由操作系统的包管理器管理和维护
+- opt  安装附加的、独立的第三方软件包，不由系统包管理器管理
+- var  放着在不断扩充着的东西，将那些经常被修改的目录放在这个目录下(eg. log)
+- proc 虚拟文件系统，提供系统进程和内核信息的接口
+- lib  系统的共享库文件和内核模块
+- mnt  挂载临时文件
 
 ## 字符处理
 
@@ -39,9 +40,6 @@ cat linux.txt | sort -r # 反向排序
 # uniq 去重
 
 # cut 截取文本
-# cut -c 2-5  打印 2-5 列的字符
-# cut -f 2 -d ':'  冒号分割结果的结果 fields(f) 中的第二列
-
 # tr 文本转换或删除
 # paste 文本的合并
 # split 分割大文件(行、二进制文件按大小)
@@ -101,25 +99,6 @@ sed '/^$/d' name.txt # 删除空行
 sed 'y/OLD/NEW/' name.txt
 sed 's/love/**&**/g' name.txt # & 保存搜索字符替换其他字符 love 替换成 **love**
 sed 's/\(love\)able/1rs/' name.txt # \(\)保存匹配的结果  结果 lovers
-
-# 插入文本 i 匹配行前插入， a 匹配行后插入
-sed '2 i Insert' name.txt
-sed '/Second/i\Insert' name.txt # 匹配字符的上一行插入
-
-# 读入文本 r
-sed '/^&/r person.txt' name.txt # person.txt 放在空行后面
-
-# 打印行
-sed -n '2,4p' name.txt
-
-# 写文件
-sed -n '2,4w output.txt' name.txt
-
-# sed.rules 文件内容 s/this/that/g /^$/d
-sed -f sed.rules name.txt
-
-# 替换匹配行的下一行的内容
-sed '/^$/{n;s/line/LINE/g}' name.txt
 ```
 
 ## 文本处理工具 awk
@@ -127,41 +106,6 @@ sed '/^$/{n;s/line/LINE/g}' name.txt
 [awk-command](https://likegeeks.com/awk-command/)
 基于列的文本处理工具
 每个非空格的部分叫域，从左到右分别 $1,...表示 $0 表示全部的域
-
-```shell
-akw 'print $1' column.txt
-# 指定域分隔符 -F
-akw -F . 'print $1' column.txt
-
-# 内部变量 NF 获取每行中域的个数
-akw 'print $(NF - 1)' column.txt
-
-# 截取字符串 substr
-akw 'print substr($1,0,4)' column.txt
-
-# 确定长度 length 当前行总长度
-akw 'print length($1)' column.txt
-
-# 求和
-# cal.awk
-awk -f cal.awk column.txt
-```
-
-```shell
-# cal.awk
-# 运行前
-BEGIN {
-  total = 0
-}
-# 运行中
-{
-  total += $3
-}
-# 运行后
-END {
-  print total
-}
-```
 
 ## 周期性执行任务 cron
 

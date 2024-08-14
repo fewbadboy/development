@@ -4,11 +4,21 @@
 
 ## introduction
 
-Definitions
+定义
 
-- 选项 "geometry.type" 是可选的七个区分大小写的值: "Point", "MultiPoint", "LineString", "MultiLineString", "Polygon","MultiPolygon", 和 "GeometryCollection"
-- 选项 "GeoJSON types" 是可选的九个区分大小写的值: "Feature", "FeatureCollection", and 上面 geometry.type 的可选值 .
-- 在 "FeatureCollection" 和 "GeometryCollection" 中的 "Collection" d对数组成员. "features" 和 "geometries" 的成员是标准有序的 JSON 数组.
+- 选项 geometry.type 是可选的区分大小写的值:
+  - Point
+  - MultiPoint
+  - LineString
+  - MultiLineString
+  - Polygon
+  - MultiPolygon
+  - GeometryCollection
+- 选项 GeoJSON types 是可选的区分大小写的值:
+  - Feature
+  - FeatureCollection
+  - 上面 geometry.type 的可选值.
+- FeatureCollection 和 GeometryCollection 中的  features 和 geometries 的成员是标准有序的数组
 
 Example:
 
@@ -42,12 +52,10 @@ Example:
 }
 ```
 
-'geo' URI:
+映射地理坐标:
 
-- geo:lat,lon,alt
+- geo:lat 维度, lon 经度, alt 海拔
 - GeoJSON: {"type": "Point", "coordinates": [lon, lat, alt]}
-
-## GeoJSON Text
 
 ## GeoJSON Object
 

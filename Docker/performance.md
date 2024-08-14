@@ -17,10 +17,12 @@ docker 分层存储，Dockerfile 里每一行指令是一层，会做缓存
 
 ```dockerfile
 FROM node:18-alpine3.14 as build-stage
+MAINTAINER fewbadboy fewbadboy@gmail.com
 ENV NODE_ENV=production
+# 为后续的 RUN CMD ENTRYPOINT 指令配置工作目录
 WORKDIR /app
 COPY package* yarn.lock .
-RUN npm config set registry https://registry.npm.taobao.org/ && npm install
+RUN npm config set registry https://mirrors.cloud.tencent.com/npm/ && npm install
 COPY . .
 RUN npm run build
 
@@ -31,7 +33,7 @@ COPY --from=build-stage /app/dist /app
 COPY --from=build-stage /app/package.json /app/package.json
 WORKDIR /app
 # 安装启动服务依赖的相关资源
-RUN npm config set registry https://registry.npm.taobao.org/ && npm install --production
+RUN npm config set registry https://mirrors.cloud.tencent.com/npm/ && npm install --production
 EXPOSE 3000
 CMD ["node", "/app/main.js"]
 ```
@@ -41,66 +43,6 @@ FROM nginx:alpine
 RUN mkdir -p /app/web
 COPY --from=0 /app/web /app/web
 COPY nginx.conf /etc/nginx/nginx.conf
-```
-
-```js
-// node build/index.js --preview
-const { run } = require('runjs')
-const chalk = require('chalk')
-const config = require('../vue.config.js')
-const rawArgv = process.argv.slice(2)
-const args = rawArgv.join(' ')
-
-if (process.env.npm_config_preview || rawArgv.includes('--preview')) {
-  const report = rawArgv.includes('--report')
-
-  run(`vue-cli-service build ${args}`)
-
-  const port = 9526
-  const publicPath = config.publicPath
-
-  var connect = require('connect')
-  var serveStatic = require('serve-static')
-  const app = connect()
-
-  app.use(
-    publicPath,
-    serveStatic('./web', {
-      index: ['index.html', '/']
-    })
-  )
-
-  app.listen(port, function () {
-    console.log(chalk.green(`> Preview at  http://localhost:${port}${publicPath}`))
-    if (report) {
-      console.log(chalk.green(`> Report at  http://localhost:${port}${publicPath}report.html`))
-    }
-
-  })
-} else {
-  run(`vue-cli-service build ${args}`)
-}
-
-```
-
-## ARG 增加构建灵活性
-
-```dockerfile
-FROM node:18-alpine3.14
-ARG aaa
-ARG bbb
-
-WORKDIR /app
-
-COPY ./test.js .
-
-ENV aaa=${aaa} \
-  bbb=${bbb}
-CMD ["node", "/app/test.js"]
-```
-
-```shell
-docker build --build-arg aaa=1 --build-arg bbb=2  -t arg-test -f 333.Dockerfile .
 ```
 
 ## CMD 结合 ENTRYPOINT
@@ -125,20 +67,26 @@ ADD 解压缩然后复制到容器
 
 COPY 是完整的复制到容器里
 
-```shell
-
-```
-
 ## 防止容器启动后退出
-
-`tail -f /dev/null`
-
-这样就可以 `docker exec <container>` `docker attach <container>`
 
 ```shell
 docker run -d ubuntu bash -c "shuf -i 1-10000 -n 1 -o /data.txt && tail -f /dev/null"
 
+# 查看本机容器
 docker ps -a
 
-docker exec <container-id> cat /data.txt
+docker exec container-id cat /data.txt
 ```
+
+```shell
+RUN apt-get update && apt-get install -y nginx
+RUN echo "\ndaemon off;" >> /etc/nginx/nginx.conf
+# 容器启动时执行指令
+CMD /usr/sbin/nginx
+
+# 添加 ssh 服务， 修改 pam 登录限制
+```
+
+## 加速
+
+进入容器修改软件源

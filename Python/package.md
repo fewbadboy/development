@@ -16,12 +16,10 @@
 
 [folium](https://python-visualization.github.io/folium/latest/)
 
-[pillow](https://pypi.org/project/pillow/) image processing
+[pillow](https://pypi.org/project/pillow/) 图像处理
 
 [qr code](https://www.qr-code-generator.com/)
 
 [py auto gui](https://pyautogui.readthedocs.io/en/latest/)
 
-## tensorflow
-
-[tensorflow](https://tensorflow.google.cn/)
+[pytorch](https://pytorch.org/) 深度学习库

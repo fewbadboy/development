@@ -176,7 +176,7 @@ git rebase master
 
 # 快进合并 master 分支，使之包含来自 dev 分支的修改
 # git rebase <basebranch> <topicbranch>
- git rebase master dev
+git rebase master dev
 ```
 
 ## reset

@@ -2,11 +2,13 @@
 
 [CommitLint](https://github.com/conventional-changelog/commitlint)
 
-## 模板
+## Commit 消息指导
 
 ```docs
 type(scope?): subject
+
 body?
+
 footer?
 ```
 
@@ -14,12 +16,13 @@ footer?
 
 type:
 
-1. build: Changes that affect the build system or external dependencies
-2. ci: Changes to our CI configuration files and scripts
-3. docs: Documentation only changes
-4. feat:  A new feature
-5. fix: A bug fix
-6. pref: A code change that improves performance
-7. refactor: A code change that neither fixes a bug nor adds a feature
-8. style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
-9. test: Adding missing tests or correcting existing tests
+1. build: 影响 build 或外部依赖项的更改
+2. ci: CI 配置文件和脚本的更改
+3. docs: 仅修改文档
+4. feat:  添加新功能
+5. fix: 修复 bug
+6. pref: 提升性能
+7. refactor: 重构(既不是修复 bug 也不是添加新的功能)
+8. style: 不影响代码含义的更改(空格, 格式, 缺少分号等)
+9. test: 添加或纠正测试代码
+10. revert: body 部分应该是 `回复提交到 <hash>`

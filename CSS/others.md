@@ -1,5 +1,12 @@
 # property
 
+`caret-color` 文本框插入符号颜色
+`clip-path` 创建一个剪切区域
+`mask-*` 遮罩
+`object-*` 调整大小适应容器
+`offset-*` 沿着定义的路径对元素进行动画处理
+`shape-*` 
+
 `overflow: hidden` 也可以通过 JavaScript Element.scrollTop 属性来滚动元素
 
 `overscroll-behavior`: auto contain(不会触发滚动链) 对话框中有滚动内容，当对话框滚动到底部，对话框下面的也开始滚动(滚动链)

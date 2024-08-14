@@ -111,6 +111,7 @@ vue-puzzle-vcode
 
 [GSAP](https://gsap.com/) 动画
 [easing](https://easings.net/) Easing functions
+[lottie](https://airbnb.io/lottie) 解析导出为 json 的 Adob​​e After Effects 动画，渲染它们
 
 [heatmap js](https://www.patrick-wied.at/static/heatmapjs/) 热力图
 

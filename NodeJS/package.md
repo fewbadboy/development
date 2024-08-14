@@ -1,22 +1,21 @@
 # package
 
-## async
+## 执行代码
 
-流程控制模块，处理异步的各种协作模式
+```js
+npm install -g js-beautify highlight.js
+node a.js | js-beautiful | highlight
+```
 
 ## badge-maker
 
 badge
 
-## chalk
+## cssnano
 
-- picocolors 更快更小
+## picocolors
 
 终端字符串样式设定
-
-## clock-shop
-
-[clock-shop](https://github.com/drawcall/clock-shop)
 
 ## chokidar
 
@@ -44,6 +43,10 @@ badge
 
 ## jsencrypt
 
+## lint-staged
+
+## commit-lint
+
 ## husky
 
 ## inquirer
@@ -53,14 +56,6 @@ badge
 ## iconv-lite
 
 转换成不同的编码格式
-
-## immer
-
-简化了不可变数据结构的处理(创建副本，而不会影响原始对象)
-
-## mande
-
-fetch 请求的进阶版
 
 ## minimist
 
@@ -146,5 +141,3 @@ import * as TWEEN from '@tweenjs/tween.js'
 ## vis
 
 [DOT](https://renenyffenegger.ch/notes/tools/Graphviz/examples/index) 书写规则
-
-## jtopo

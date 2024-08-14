@@ -1,8 +1,23 @@
 # document
 
-## automatically infer the types
+## Interface 和 Type
 
-大多数情况下，不需要类型注解 (Annotations)
+```ts
+// 不能重复声明
+type Animal = {
+  name: string;
+}
+
+type Bear = Animal & { 
+  honey: boolean;
+}
+
+const bear = getBear();
+bear.name;
+bear.honey;
+```
+
+接口可以继承(extends)
 
 ## type assertions
 
@@ -14,10 +29,9 @@ document.getElementById("main_canvas") as HTMLCanvasElement
 <HTMLCanvasElement>document.getElementById("main_canvas")
 ```
 
-## literal types
+## 字面量 types
 
 ```ts
-// 对线要声明类型用于读写数据
 type Person = { name: string }
 
 const obj: Person = {
@@ -34,7 +48,7 @@ const req = { url: "https://example.com", method: "GET" as "GET" };
 handleRequest(req.url, req.method);
 ```
 
-## null and undefined
+## null 和 undefined
 
 `!`后缀移除 null 和 undefined 类型检查
 
@@ -50,14 +64,6 @@ function test(x?: number | null | undefined) {
 
 ```
 
-## type of
-
-```ts
-// typeof
-symbol
-bigint
-```
-
 ## narrowing
 
 缩小类型范围
@@ -67,16 +73,12 @@ bigint
 - instanceof
 - is
 
-## Function Overloads
+## Function 重载
 
 ```ts
 function makeDate(timestamp: number): Date;
 function makeDate(m: number, d: number, y: number): Date;
 ```
-
-## tuple
-
-确切地知道它包含多少元素，以及它在特定位置包含哪些类型
 
 ## type guards
 
@@ -84,4 +86,63 @@ function makeDate(m: number, d: number, y: number): Date;
 function isFish(pet: Animal): pet is Fish {
   return (pet as Fish).swim !== undefined
 }
+```
+
+## KeyOf Type 操作符
+
+```ts
+type Some = { [k: string]: boolean }
+type S = keyof Some // string | number
+// JS 对象的 key 总是转换成 string, 因此 obj[0] 等价于 obj['0']
+```
+
+## 映射 类型
+
+```ts
+// 移除可选属性后重命名
+type C<Type> = {
+  [Property in keyof Type as `get${Capitalize<string & Property>}`]-?: () => Type[Property]
+}
+
+type Person = {
+  id: number
+  name?: string
+}
+
+type Car = C<Person>
+```
+
+## 公共 Type
+
+- Awaited
+- Partial
+- Required
+- Readonly
+- Record
+- Pick 针对 key
+- Omit
+- Exclude 针对 UnionType
+- Extract 提取
+- NonNullable 排除 null 和 undefined
+- Parameters
+- ConstructorParameters
+- ReturnType
+- InstanceType
+- NoInfer
+- ThisParameterType
+- OmitThisParameter
+- ThisType
+- Uppercase
+- Lowercase
+- Capitalize
+- Uncapitalize
+
+## Type Inference 推理
+
+一些地方 TypeScript 实现类型推理
+
+## tsc CLI
+
+```ts
+tsc --init // create tsconfig.json
 ```
