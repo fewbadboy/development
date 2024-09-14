@@ -165,9 +165,10 @@ g.next() // { value: undefined, done: true }
 
 ## 动画
 
-requestAnimationFrame(callback): requestAnimationFrame() 运行在后台标签页或者隐藏的 iframe标签里时，被暂停调用
+1. window.requestAnimationFrame(callback)
+大多数浏览器在后台标签页或者隐藏的 iframe标签里时暂停调用，为了提高性能和电池使用寿命
 
-setTimeout(fun, delay, param1,...)/setInterval()
+2. setTimeout(fun, delay, param1,...)/setInterval()
 根据 HTML 标准，setTimeout 调用 0ms 超时 五次以上时， 浏览器强制执行 4ms 的最小超时
 
 如果想在浏览器中实现 0ms 延时的定时器，你可以参考 window.postMessage()
@@ -209,8 +210,6 @@ context.drawImage( image, 100, 100 );
 // addPath/closePath/moveTo/lineTo/arc/ellipse/rect
 // bezierCurveTo/quadraticCurveTo/roundRect
 const path = new Path2D()
-
-
 
 // startAngle: 0 x正轴
 // counterclockwise: false 顺时针

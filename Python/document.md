@@ -110,7 +110,7 @@ if __name__ == '__main__':
 pip --version
 pip3 --version # 仅安装一个 python 版本时，指向同一版本
 # Command:
-# install/uninstall
+# install/uninstall --upgrade libName 升级
 # download
 # inspect 检查 python 环境
 # list 已安装包的列表

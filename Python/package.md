@@ -2,19 +2,29 @@
 
 [pip 搜索](https://pypi.org/search/)
 
-[matplotlib](https://matplotlib.org/)
+[Dash](https://dash.plotly.com/)
+
+Python 中快速构建数据应用程序的原始低代码框架
+
+[MatPlotLib](https://matplotlib.org/)
 
 图形可视化
 
-[pandas](https://pandas.pydata.org/) 数据分析和维护工具
+[pandas](https://pandas.pydata.org/)
 
-[plotly](https://plotly.com)
+数据分析和维护工具
+
+[plotly](https://plotly.com/python/)
+
+图形库
 
 [num py](https://numpy.org/)
 
 [py game](https://www.pygame.org/docs/)
 
 [folium](https://python-visualization.github.io/folium/latest/)
+
+Leaflet.js 库的映射
 
 [pillow](https://pypi.org/project/pillow/) 图像处理
 

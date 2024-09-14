@@ -61,4 +61,18 @@ async function test(file) {
   })
 }
 
+export async function loadImage(image) {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.src = image
+    Object.assign(img, {
+      onload: () => {
+        resolve(img)
+      },
+      onerror: (error) => {
+        reject(error)
+      }
+    })
+  })
+}
 ```
