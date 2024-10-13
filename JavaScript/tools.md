@@ -5,6 +5,9 @@
 [e charts](https://echarts.apache.org/zh/index.html)
 [D3](https://d3js.org/)
 [arc gis](https://developers.arcgis.com/)
+[vis.js](https://visjs.org/)
+
+[p5](https://p5js.org/)
 
 ## 地图
 
@@ -23,14 +26,16 @@ flv.js
 
 ## UI
 
-Ant Design
+[We UI](https://weui.io/)
+[we ui 文档](https://wechat-miniprogram.github.io/weui/docs/)
 
-[lottie](https://airbnb.io/lottie) 解析 Adobe After Effects 导出的 JSON 动画
-[We UI](https://weui.io/) [we ui 文档](https://wechat-miniprogram.github.io/weui/docs/)
+[Prime Vue](https://primevue.org/)
 
 [ant design](https://ant.design/)
+
+[Element Plus](https://element-plus.org/)
+
 [pro components](https://procomponents.ant.design/)
-[notifications stack](https://notistack.com/)
 
 ## 桌面
 
@@ -63,10 +68,16 @@ vue-puzzle-vcode
 ## 框架
 
 [solid js](https://www.solidjs.com/docs/latest)
+
 [qwik](https://qwik.dev/)
+
 [deno](https://deno.com/)
 
 [nest js](https://nestjs.com/)
+
+## 前端开发解决方案
+
+[Open Tiny](https://opentiny.design/)
 
 ## 文档
 
@@ -92,10 +103,14 @@ vue-puzzle-vcode
 ## HTTP 请求
 
 [axios](https://axios-http.com/)
-
 [Mock Service Worker](https://mswjs.io/docs/)
-
 [天气接口](https://openweathermap.org/)
+
+## 服务器
+
+[nitro](https://nitro.unjs.io/) Server Toolkit
+[h3](https://h3.unjs.io/guide) short for HTTP
+[cross ws](https://crossws.unjs.io/) cross-platform WebSocket servers
 
 ## 其他
 
@@ -109,14 +124,19 @@ vue-puzzle-vcode
 
 [crypto js](https://cryptojs.gitbook.io/) 加密
 
-[GSAP](https://gsap.com/) 动画
+[GreenSock Animation Platform](https://gsap.com/) 动画
 [easing](https://easings.net/) Easing functions
-[lottie](https://airbnb.io/lottie) 解析导出为 json 的 Adob​​e After Effects 动画，渲染它们
+[lottie](https://airbnb.io/lottie) 解析 Adobe After Effects 导出的 JSON 动画
+[auto-animate](https://auto-animate.formkit.com/)
 
 [heatmap js](https://www.patrick-wied.at/static/heatmapjs/) 热力图
 
-[js13kgames](https://js13kgames.com/) js 代码游戏
+[js13k games](https://js13kgames.com/) js 代码游戏
 
 [create js](https://createjs.com/)
 
 [async](https://caolan.github.io/async) 类似 Lodash
+
+[crontab](https://crontab.guru/) CornTab 表达式验证
+
+[css nano](https://cssnano.github.io/cssnano/) 基于 postcss 插件和环境构建

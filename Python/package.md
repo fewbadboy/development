@@ -33,3 +33,5 @@ Leaflet.js 库的映射
 [py auto gui](https://pyautogui.readthedocs.io/en/latest/)
 
 [pytorch](https://pytorch.org/) 深度学习库
+
+[python-docx](https://python-docx.readthedocs.io/en/latest/) docx 文档处理

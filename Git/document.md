@@ -40,8 +40,18 @@ git mv file_from file_to
 # 创建一个可以移动的新的指针
 git branch testing
 
+# 删除本地分支 dev
+git branch -d dev
+
 # 重命名当前分支
 git branch -M main
+
+# 删除远程分支
+# 服务器的默认名称: origin
+git push origin --delete branch-name
+
+# 显示远程分支
+git branch -r
 ```
 
 ## checkout
@@ -55,9 +65,6 @@ git checkout main
 # 等效于 git branch dev, git checkout dev
 git checkout -b dev
 
-# 删除分支 dev
-git branch -d dev
-
 # 撤销之前所作的修改, 就是用最近一次提交版本去覆盖
 git checkout -- a.txt
 ```
@@ -70,7 +77,7 @@ git checkout -- a.txt
 # git remote show <remote> 查看远程仓库的更多信息
 # git remote rename <old> <new>
 # git remote remove <name>
-git remote
+git remote show
 
 # 添加远程仓库 git remote add <shortname> <url>
 git remote add shortname https://github.com/fewbadboy/development.git
@@ -83,7 +90,11 @@ git fetch shortname
 git pull shortname
 
 # 推送到上游 git push <remote> <branch>
+# 将本地的 master 分支推送到远程 master 分支，远程不存在时会自动创建
 git push origin master
+
+# 将本地的 master 分支推送到远程 main 分支
+git push origin master:main
 
 # 不想在每一次推送时都输入用户名与密码,保存在内存中几分钟
 git config --global credential.helper cache
