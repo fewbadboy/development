@@ -9,12 +9,11 @@
 - first-line
 - first-letter
 - file-selector-button 针对 type="file" 的 input 元素
-- backdrop 紧挨着顶层呈现的任何元素的下方呈现
 
 ## Class
 
 - active 鼠标按下状态
-- any-link
+- any-link 匹配所有 :link 或 :visited 的元素
 - autofill
 - checked
 - current
@@ -23,16 +22,16 @@
 - enabled/disabled  设置 disabled 元素样式
 - empty
 - first/last-child 同级元素中的第一个元素
-- first/last-of-type
-- nth-child(-n+3) 前三， even 偶数， odd
-- nth-last-of-child()
+- first/last-of-type 一组兄弟元素中同类型的元素
+- nth-child(-n+3) 根据父元素的子列表中元素的索引。前三， even 偶数， odd
+- nth-last-of-child() 基于同类型的兄弟元素
 - only-child 等价于 :first-child:last-child
 - only-of-type
 - focus(select 影响 option) / focus-visible(select 不设置option) / focus-within
 - fullscreen
 - has()
 - hover
-- in-range 范围值在 min 和 max 之间(时间同样可以设置)
+- in-range input 元素范围值在 min 和 max 之间(时间同样可以设置)
 - out-of-range
 - indeterminate 半选状态
 - invalid/valid 表单验证样式

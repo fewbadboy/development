@@ -8,17 +8,20 @@
 /* 声明在后面的优先级高，class="alert" 内部颜色为 blue */
 @layer module, state;
 
-@layer state {
-  .alert {
-    color: blue;
-  }
-}
-
 @layer module {
   .alert {
     color: red;
   }
 }
+@layer state {
+  .alert {
+    color: blue;
+  }
+}
 ```
+
+## @import
+
+位于任何其他 @ 规则（@charset 和 @layer 除外）和样式声明之前
 
 ## @supports

@@ -7,6 +7,13 @@
 - SUSE(SLES, openSUSE)
 - ...
 
+## 设置时区
+
+```shell
+timedatectl list-timezones
+sudo timedatectl set-timezone Asia/Shanghai # UTC
+```
+
 ## 目录结构
 
 - bin  存放基本命令的二进制可执行文件

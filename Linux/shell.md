@@ -36,7 +36,7 @@ eval 'll'
 
 # exec 用当前执行的命令去替换当前的shell进程，清理老进程的环境
 
-# export 使变量被子Shell识别
+# export 当前会话中，设置环境变量，并使其对所有子进程可见
 ```
 
 字符串操作
@@ -447,9 +447,22 @@ Shell 也可以包含外部脚本
 ## 执行文件
 
 ```shell
-. filename   # 注意点号(.)和文件名中间有一空格
-# 或
+# . 命令
+. filename
+
+# source 命令
 source filename
+
+# source script.sh 
+# 执行脚本后，修改当前环境变量, MY_VAR 在当前的 shell 中可用
+
+# ./script.sh 
+# 执行脚本后 MY_VAR 是一个孤立饿环境变量
+# ./script.sh
+
+# script.sh
+export MY_VAR=Hello
+echo $MY_VAR
 ```
 
 ## 录制回放终端会话
@@ -601,6 +614,7 @@ dd if=/dev/zero of=junk.data bs=1M count=1
 
 # comm 必须使用两个排过序的文件做比较
 # 交集 差集 
+# sort 排序文档
 sort a.txt -o a.txt;sort b.txt -o b.txt
 comm a.txt b.txt -1-2
 
@@ -699,9 +713,16 @@ trans en:fr "I love linux"
 ## 压缩解压缩
 
 ```shell
-# c 创建归档文件 f 归档文件名 v(verbose 更多细节) x 归档文件提取到当前目录
+# c 创建归档文件 
+# f 归档文件名
+# v(verbose 更多细节)
+# x 归档文件提取到当前目录
 # z gzip 压缩 
-tar -zcvf archive.tar.gz file1 file2 ...
+
+# 创建 gzip 压缩
+tar -czvf archive.tar.gz file1 file2 ...
+
+# 解压 gzip 压缩 -xzvf
 
 # 单个文件压缩
 gzip file
@@ -723,6 +744,7 @@ unzip files.zip
 
 ```shell
 # 网络配置
+# ifconfig eth0 up/down 启用/关闭
 ifconfig lo
 
 # DNS
@@ -734,7 +756,7 @@ host google.com
 # 路由
 route
 
-# SSh
+# SSh 远程安全登录
 ssh username@remote_host -p 22
 
 # SCP(secure copy) 文件复制
@@ -749,15 +771,24 @@ ssh-keygen -t rsa
 
 # 分析网络流量
 lsof
+
+# 网络状态
 netstat
-iptables # 防火墙
+
+# 防火墙
+iptables 
+
+# 路由追踪
+traceroute
 ```
 
 ## 监视
 
 ```shell
+# 磁盘使用情况
 # du disk usage
 # df disk free
+df -h 
 
 # time 测量程序执行的时间
 # Real 总时间 User 除去阻塞时间 Sys 内核中的CPU时间
@@ -772,13 +803,14 @@ time ls
 logger -t TAG log_message
 tail -n 2 /var/log/messages
 
-# 监视磁盘
+# 监视磁盘：实时显示系统资源使用情况
 top
 
 # 检查磁盘及文件系统错误
 fsck
 
-# ps -ax(all) 
+# 显示进程
+ps -ax(all) 
 
 # which 在 PATH 中查找可执行的文件的位置
 # whereis 返回路径，手册及源码的路径
@@ -794,4 +826,10 @@ wall # 广播
 
 # /proc 伪文件(linux 内核的内部数据)
 
+```
+
+## 服务
+
+```shell
+# service xxxx start/stop/restart/status
 ```

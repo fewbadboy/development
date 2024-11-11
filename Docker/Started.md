@@ -108,7 +108,7 @@ FROM node:20.11.0-alpine
 ENV NODE_ENV=production
 WORKDIR /app
 COPY ./ /app
-RUN npm install --registry=https://mirrors.cloud.tencent.com/npm/ && npm run build
+RUN npm install --registry=https://registry.npmmirror.com/ && npm run build
 
 FROM nginx
 RUN mkdir -p /app/web
@@ -122,7 +122,7 @@ or
 FROM node:14.18.0 AS build
 WORKDIR /app
 COPY ./ /app
-RUN npm install --registry=https://mirrors.cloud.tencent.com/npm/ && npm run build
+RUN npm install --registry=https://registry.npmmirror.com/ && npm run build
 
 FROM nginx
 RUN mkdir -p /app/web

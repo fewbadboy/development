@@ -1,13 +1,44 @@
 # 工具库
 
+## 编译器
+
+[Babel](https://babeljs.io/) 将 ECMAScript 2015+ 代码转换为当前和旧版浏览器向后兼容版本
+
+## 构建
+
+[webpack](https://webpack.js.org/)
+
+[rollup js](https://rollupjs.org/)
+[rollup awesome](https://github.com/rollup/awesome)
+
+[esbuild](https://esbuild.github.io/)
+
+[create-react-app](https://create-react-app.dev/)
+
+[turbo](https://turbo.build/)
+
 ## 图表
 
-[e charts](https://echarts.apache.org/zh/index.html)
+[echarts](https://echarts.apache.org/zh/index.html)
+
 [D3](https://d3js.org/)
+
 [arc gis](https://developers.arcgis.com/)
+
 [vis.js](https://visjs.org/)
 
+[G6](https://g6.antv.antgroup.com/) 图可视化引擎
+[L7](https://l7.antv.antgroup.com/) 地理空间
+
+[Cytoscape.js](https://js.cytoscape.org/)
+
 [p5](https://p5js.org/)
+
+## canvas
+
+[Canvas Confetti](https://www.kirilv.com/canvas-confetti/) 五彩纸屑
+[roughJS](https://roughjs.com/) 手绘风格
+[fireworks](https://github.com/crashmax-dev/fireworks-js) 烟花
 
 ## 地图
 
@@ -37,6 +68,8 @@ flv.js
 
 [pro components](https://procomponents.ant.design/)
 
+[UIverse](https://uiverse.io/)
+
 ## 桌面
 
 [electron js](https://www.electronjs.org/)
@@ -65,6 +98,10 @@ vue-puzzle-vcode
 
 [eslint-vue](https://eslint.vuejs.org/)
 
+## react
+
+[next.js](https://nextjs.org/)
+
 ## 框架
 
 [solid js](https://www.solidjs.com/docs/latest)
@@ -84,17 +121,6 @@ vue-puzzle-vcode
 [vue press](https://vuepress.vuejs.org/)
 [documentation](https://docus.dev/)
 
-## 构建
-
-[webpack](https://webpack.js.org/)
-
-[rollup js](https://rollupjs.org/)
-[rollup awesome](https://github.com/rollup/awesome)
-
-[esbuild](https://esbuild.github.io/)
-
-[create-react-app](https://create-react-app.dev/)
-
 ## 规范
 
 [jsdoc](https://www.jsdoc.com.cn/)
@@ -112,7 +138,17 @@ vue-puzzle-vcode
 [h3](https://h3.unjs.io/guide) short for HTTP
 [cross ws](https://crossws.unjs.io/) cross-platform WebSocket servers
 
+## 测试框架
+
+[jest.js](https://jestjs.io/)
+
+[cypress](https://www.cypress.io/) 自动化测试
+
+[testing-library](https://testing-library.com/)
+
 ## 其他
+
+[storybook](https://storybook.js.org/) 构建 UI 组件和界面
 
 [sonar](https://www.sonarsource.com/) 代码安全检查
 
@@ -127,6 +163,7 @@ vue-puzzle-vcode
 [GreenSock Animation Platform](https://gsap.com/) 动画
 [easing](https://easings.net/) Easing functions
 [lottie](https://airbnb.io/lottie) 解析 Adobe After Effects 导出的 JSON 动画
+
 [auto-animate](https://auto-animate.formkit.com/)
 
 [heatmap js](https://www.patrick-wied.at/static/heatmapjs/) 热力图
@@ -140,3 +177,5 @@ vue-puzzle-vcode
 [crontab](https://crontab.guru/) CornTab 表达式验证
 
 [css nano](https://cssnano.github.io/cssnano/) 基于 postcss 插件和环境构建
+
+[Browserslist](https://browsersl.ist/)

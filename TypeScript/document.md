@@ -32,14 +32,6 @@ document.getElementById("main_canvas") as HTMLCanvasElement
 ## 字面量 types
 
 ```ts
-type Person = { name: string }
-
-const obj: Person = {
-  name: 'person'
-}
-```
-
-```ts
 declare function handleRequest(url: string, method: "GET" | "POST"): void;
 
 // 不然 method 值被当作 string 解析，无法通过编译
@@ -116,30 +108,28 @@ type Car = C<Person>
 
 - Awaited
 - Partial
-- Required
-- Readonly
 - Record
-- Pick 针对 key
-- Omit
 - Exclude 针对 UnionType
 - Extract 提取
 - NonNullable 排除 null 和 undefined
-- Parameters
-- ConstructorParameters
-- ReturnType
-- InstanceType
-- NoInfer
-- ThisParameterType
-- OmitThisParameter
-- ThisType
-- Uppercase
-- Lowercase
-- Capitalize
-- Uncapitalize
 
-## Type Inference 推理
+## module
 
-一些地方 TypeScript 实现类型推理
+```ts
+/**
+ * 不想在使用模块前花时间去编写声明时
+ * 采用如下简写方式
+ * 模块里所有导出的类型将是 any
+ */ 
+declare module "module-name";
+```
+
+模块解析的时候：
+
+1. 相对导入 `/`, `./`, `../` 开头的，不能解析为一个外部模块的声明
+2. 非相对导入的可以相对与 `baseUrl` 或路径映射(ts 配置文件中 paths 来声明映射)
+
+文件仅导出单个 class 或 function, 使用 export default
 
 ## tsc CLI
 

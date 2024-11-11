@@ -1,5 +1,15 @@
 # package.json
 
+## 清理缓存
+
+清理 node_modules 目录中的缓存
+
+```shell
+npm cache clean --force
+```
+
+重新启动项目
+
 ## 属性
 
 部分属性说明

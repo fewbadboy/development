@@ -15,7 +15,7 @@ badge
 
 ## picocolors
 
-终端字符串样式设定
+终端字符串样式颜色设定
 
 ## chokidar
 
@@ -48,6 +48,8 @@ badge
 ## commit-lint
 
 ## husky
+
+## prompts
 
 ## inquirer
 
@@ -103,16 +105,17 @@ Create a new middleware function to serve files from within a given root directo
 
 ```js
 var express = require('express')
-var serveStatic = require('serve-static')
 
 var app = express()
 
 // 预览已经 build 完的包
-app.use(serveStatic('./dist', { index: ['index.html', 'index.htm'] }))
+app.use(express.static('./dist', { index: ['index.html', 'index.htm'] }))
 app.listen(3000)
 ```
 
-## tailwindcss
+## nodemon
+
+自动重启 server
 
 ## @tweenjs/tween.js
 

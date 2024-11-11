@@ -182,22 +182,24 @@ g.next() // { value: undefined, done: true }
 
 ## canvas
 
+左上坐标原点
+
 ```js
 const canvas = document.createElement( 'canvas' );
 const context = canvas.getContext( '2d' );
-// video 也是可以
+
 // createPattern
 
 canvas.toDataURL('image/png') // 默认参数
 
-// drawImage(image, dx, dy)
-// drawImage(image, dx, dy, dWidth, dHeight)
+// fillRect/strokeRect/clearRect(x,y,width,height)
+
 // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
 context.drawImage( image, 100, 100 );
 // createImageData(width, height, settings)
 // context.getImageData(sx, sy, sw, sh, settings)
 
-// createRadialGradient
+// createRadialGradient/createConicGradient
 // const gradient = context.createLinearGradient()
 // gradient.addColorStop(0, '#0f0')
 // gradient.addColorStop(1, '#f00')
@@ -207,20 +209,20 @@ context.drawImage( image, 100, 100 );
 // context.strokeStyle = "rgb(255 0 0 / 0.5)"
 // context.stroke()
 
-// addPath/closePath/moveTo/lineTo/arc/ellipse/rect
+// addPath/closePath/moveTo/lineTo/arc/arcTo/ellipse/rect
 // bezierCurveTo/quadraticCurveTo/roundRect
 const path = new Path2D()
 
 // startAngle: 0 x正轴
 // counterclockwise: false 顺时针
 path.arc(x, y, radius, startAngle, endAngle, counterclockwise)
-lineJoin
-lineDashOffset
-getLineDash()
-setLineDash([4, 2]) // 
+// lineJoin
+// lineDashOffset
+// getLineDash()
+// setLineDash([4, 2])
 
 // translate() 移动 canvas 坐标原点
-// rotate((Math.PI / 180) * degree)
+// rotate((Math.PI / 180) * degree) // 基于当前原点旋转
 // scale(x, y)
 
 // clip() 剪切
@@ -234,7 +236,7 @@ setLineDash([4, 2]) //
 拖尾：每次更新动画时，半透明的覆盖上一层背景色，从而淡化之前轨迹
 
 ```js
-context.fillStyle = 'rgb(0 0 0 / 0.1)'
+context.fillStyle = 'rgb(0 0 0 / 5%)'
 context.fillRect(0, 0, canvas.width, canvas.height)
 ```
 
@@ -247,3 +249,11 @@ context.fillRect(0, 0, canvas.width, canvas.height)
 - x/y clientX/Y 别名
 - currentTarget(Event) 绑定事件处理程序的元素
 - target(Event) 调度事件的元素
+
+## Date
+
+```js
+const now = new Date();
+console.log(now.toLocaleString("en-US", { timeZone: "UTC" }));
+console.log(now.toLocaleString("en-US", { timeZone: "Asia/Shanghai" }));
+```

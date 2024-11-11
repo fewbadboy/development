@@ -6,12 +6,8 @@
 
 [触发条件](https://csstriggers.com/)
 
-## SASS
-
-CSS 扩展语言
-
-[sass-lang](https://sass-lang.com/)
-
 ## 库
+
+[贝塞尔动画曲线生成器](https://cubic-bezier.com/)
 
 [tailwindcss](https://tailwindcss.com/)

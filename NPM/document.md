@@ -1,8 +1,19 @@
 # document
 
+```shell
+#  https://registry.npmjs.org/
+
+# 淘宝镜像
+npm config set registry https://registry.npmmirror.com
+npm config get registry 
+
+# publish 时需要重新设置回 npm 官方镜像库
+```
+
 ## module
 
 ```shell
+
 npm set init-author-email "example-user@example.com"
 npm set init-author-name "example_user"
 npm set init-license "MIT"
@@ -28,8 +39,10 @@ npm cache clean --force
 
 npm install --verbose # npm install 报错可以查看更多详情
 
+# 
 # scoped modules
-npm init --scope=@scope-name
+npm init --scope=@scope-name # npm exec create-xxx
+
 
 # git remote add origin ...
 # scope-name 不同于 npm 用户名时，可以创建 scope-name 的组织，再发布（先 npm login）
@@ -45,14 +58,11 @@ npm deprecate package-name message
 
 # 自动增加 package.json 中 patch 部分
 # 自定更新 patch 部分为 2.0.1(基于上一个版本)
-npm version patch -m '修复部分bug' # major minor
+npm version patch -m '修复部分bug' # major.minor.patch
 
 # 更新版本号
 npm version 2.0.0
 npm publish # 默认发布 private
-
-# --save-prod --save-dev(-D)
-
 
 # 查看需要更新的包
 npm outdated --depth=0
@@ -73,12 +83,4 @@ npm owner add/rm username package-name
 # 查看 package 版本记录
 # contributors / dependencies
 npm view package-name versions/dependencies
-```
-
-## Config
-
-```shell
-# -reg: --registry
-# -v: --version
-# -f: --force
 ```

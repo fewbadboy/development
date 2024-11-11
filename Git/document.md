@@ -106,8 +106,8 @@ git config --global credential.helper cache
 # 遗漏文件没添加，或提交信息写错了重新提交
 git add *.doc
 
-# 修补提交
-git commit --amend 
+# 修补提交(不修改提交信息)
+git commit --amend --no-edit
 ```
 
 ## diff
@@ -164,8 +164,10 @@ git log --since=2.weeks --author='any' --committer='some' --grep='匹配的提�
 # 先切换到 master 分支，再合并 dev 分支到 master 分支
 git checkout master
 git merge dev
-# 删除分支
+# 删除本地 dev 分支
 git branch -d dev
+# 删除远程分支
+git push origin -d brach-name
 
 # 冲突时（俩分支对同一文件的同一部分做了不同的修改，解决冲突需要合并或者二选一
 # <<<<<<<< HEAD:index.html
