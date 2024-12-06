@@ -5,7 +5,7 @@
 `mask-*` 遮罩
 `object-*` 调整大小适应容器
 `offset-*` 沿着定义的路径对元素进行动画处理
-`shape-*` 
+`shape-*`
 
 `overflow: hidden` 也可以通过 JavaScript Element.scrollTop 属性来滚动元素
 

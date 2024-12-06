@@ -575,8 +575,6 @@ look hello path
 
 ## 交互输入自动化
 
-如 ssh
-
 ```shell
 read -p "name:" name
 read -p "age:" age

@@ -19,6 +19,8 @@
 
 ## 图表
 
+[font awesome](https://fontawesome.com/)
+
 [echarts](https://echarts.apache.org/zh/index.html)
 
 [D3](https://d3js.org/)
@@ -27,8 +29,7 @@
 
 [vis.js](https://visjs.org/)
 
-[G6](https://g6.antv.antgroup.com/) 图可视化引擎
-[L7](https://l7.antv.antgroup.com/) 地理空间
+[AntV](https://antv.antgroup.com/)
 
 [Cytoscape.js](https://js.cytoscape.org/)
 
@@ -129,6 +130,63 @@ vue-puzzle-vcode
 ## HTTP 请求
 
 [axios](https://axios-http.com/)
+
+```js
+service.interceptors.response.use(
+  response => {
+    /**
+     * 下载文件的信息
+     * 进行跨域请求时，后端需要明确暴露该头部
+     * headers: {
+     *  'content-disposition': 'attachment;filename=xxx.xlsx'
+     * }
+     */
+    const {
+      status,
+      config: { responseType },
+      data: { size, arrayBuffer },
+      data
+    } = response
+    if (/(blob|arrayBuffer)/.test(responseType)) {
+      if (status === 200 && responseType === 'blob' ? size > 0 : arrayBuffer > 0)
+        return Promise.resolve({ data: blobData, disposition: response.headers['content-disposition']})
+      return Promise.reject(blobData)
+    }
+  }
+)
+
+export function fetchPostFile(data) {
+  return request({
+    url: '/post',
+    method: 'post',
+    responseType: 'blob',
+    data
+  })
+}
+
+export function downloadFile(fileName, data) {
+  if (window.navigator.msSaveOrOpenBlob) {
+    window.navigator.msSaveOrOpenBlob(data, fileName)
+  } else {
+    const url = window.URL.createObjectURL(new Blob([data], { type: '' }))
+    const a = document.createElement('a')
+    a.setAttribute('href', url)
+    a.setAttribute('download', fileName)
+    a.click()
+    window.URL.revokeObjectURL(url)
+  }
+}
+
+export function downloadURL(fileName, url) {
+  const encodeURL = encodeURIComponent(url)
+  const a = document.createElement('a')
+  a.setAttribute('href', encodeURL)
+  a.setAttribute('download', fileName)
+  a.click()
+}
+
+```
+
 [Mock Service Worker](https://mswjs.io/docs/)
 [天气接口](https://openweathermap.org/)
 

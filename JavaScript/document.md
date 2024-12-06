@@ -4,22 +4,12 @@
 
 [MDN web Docs 词汇表](https://developer.mozilla.org/en-US/docs/Glossary)
 
-## let const
-
-暂时性死区：当前区域中存在 let const 声明的变量只要在声明之前使用就报错
-
-## 函数绑定
-
-`obj::fun(...arguments)` === `fun.bind(obj, arguments)`
-
 ## Data URLs
 
 [MIME_types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types)
 `data:[<media_type>][;base64],<data>`
 
 ## shallow clone
-
-所有标准内置对象复制操作(返回新对象)都创建浅复制（扩展运算符...）
 
 ```js
 // globalThis
@@ -38,8 +28,6 @@ console.log(`%c 成功:%c 成功的消息`,'color:green','border: 1px solid gree
 
 ## deep clone
 
-一个 JavaScript 对象可以被`序列化`(将一个对象或数据结构转换为适合网络传输或存储的格式（如数组缓冲区或文件格式）的过程)
-
 许多JavaScript 对象根本不能序列化。
 函数（带有闭包）、Symbol、在 [HTML DOM API](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API) 中表示 HTML 元素的对象、递归数据以及许多其他情况。
 在这些条件下调用 JSON.stringify() 来序列化会失效。
@@ -47,8 +35,15 @@ console.log(`%c 成功:%c 成功的消息`,'color:green','border: 1px solid gree
 ## Array
 
 ```js
+// 静态方法
+Array.isArray()
+
+Array.property.at()
+Array.property.findLast()
+
 /**
- * accumulator: 上一次调用 callbackFn 的结果。在第一次调用时，如果指定了 initialValue 则为指定的值，否则为 array[0] 的值。
+ * accumulator: 上一次调用 callbackFn 的结果。
+ * 在第一次调用时，如果指定了 initialValue 则为指定的值，否则为 array[0] 的值。
  * currentValue: 当前元素的值。在第一次调用时，如果指定了 initialValue，则为 array[0] 的值，否则为 array[1]。
  */
 Array.property.reduce((accumulator, currentValue,currentIndex, array) =>{}, initialValue)
@@ -57,7 +52,7 @@ Array.property.reduce((accumulator, currentValue,currentIndex, array) =>{}, init
  * 返回新的数组，不影响原数组
  */
 Array.property.toReversed()
-Array.property.toSorted()
+Array.property.toSorted(compareFn)
 Array.property.toSpliced()
 /**
  * 返回一个用给定 index 替换 value 的新数组
@@ -76,6 +71,7 @@ arr.at(2).name = 'hello'
 `[]` 获取属性名时，任何非字符串对象都会通过 `toString` 方法转换
 
 ```js
+object.fromEntries(iterable) // reverse of Object.entries()
 Object.groupBy(items, (item, index))
 Object.hasOwn(obj, prop)
 
@@ -116,6 +112,18 @@ Unicode 字符集(U+0000 - U+10FFFF)远大于 65535个，额外的字符以`surr
 
 - codePointAt(index) 从给定索引(基于 utf-16 编码)开始的 Unicode 码点值
 - match/matchAll 返回所有正则捕获组匹配值
+
+## Date
+
+```js
+Date.now()
+Date.parse()
+
+// ISO 8601, YYYY-MM-DDTHH:mm:ss.sssZ 或 ±YYYYYY-MM-DDTHH:mm:ss.sssZ
+const now = new Date();
+console.log(now.toLocaleString("en-US", { timeZone: "UTC" }));
+console.log(now.toLocaleString("en-US", { timeZone: "Asia/Shanghai" }));
+```
 
 ## Iterator
 
@@ -160,7 +168,7 @@ g.next() // { value: undefined, done: true }
 
 - all 返回所有 fulfill 或者第一个 reject 的原因
 - allSettled 返回记录各个 promise 结果的数组
-- any 返回第一个 fulfill 的 promise
+- any 返回第一个 fulfill 的 promise, 都拒绝时返回一个拒绝原因的数组
 - race 随着第一个 Promise 的最终状态而确定
 
 ## 动画
@@ -175,85 +183,17 @@ g.next() // { value: undefined, done: true }
 
 未被激活的 tabs 的定时最小延迟>=1000ms
 
-## 操作符
-
-- leftExpr ?? rightExpr
-- `obj.val?.prop` `obj.val?.[expr]` `obj.func?.(args)`
-
-## canvas
-
-左上坐标原点
-
-```js
-const canvas = document.createElement( 'canvas' );
-const context = canvas.getContext( '2d' );
-
-// createPattern
-
-canvas.toDataURL('image/png') // 默认参数
-
-// fillRect/strokeRect/clearRect(x,y,width,height)
-
-// drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
-context.drawImage( image, 100, 100 );
-// createImageData(width, height, settings)
-// context.getImageData(sx, sy, sw, sh, settings)
-
-// createRadialGradient/createConicGradient
-// const gradient = context.createLinearGradient()
-// gradient.addColorStop(0, '#0f0')
-// gradient.addColorStop(1, '#f00')
-
-// context.beginPath()
-// context.arc(...)
-// context.strokeStyle = "rgb(255 0 0 / 0.5)"
-// context.stroke()
-
-// addPath/closePath/moveTo/lineTo/arc/arcTo/ellipse/rect
-// bezierCurveTo/quadraticCurveTo/roundRect
-const path = new Path2D()
-
-// startAngle: 0 x正轴
-// counterclockwise: false 顺时针
-path.arc(x, y, radius, startAngle, endAngle, counterclockwise)
-// lineJoin
-// lineDashOffset
-// getLineDash()
-// setLineDash([4, 2])
-
-// translate() 移动 canvas 坐标原点
-// rotate((Math.PI / 180) * degree) // 基于当前原点旋转
-// scale(x, y)
-
-// clip() 剪切
-
-// shadowOffsetX/shadowOffsetY/shadowBlur/shadowColor
-
-// save()
-// restore()
-```
-
-拖尾：每次更新动画时，半透明的覆盖上一层背景色，从而淡化之前轨迹
-
-```js
-context.fillStyle = 'rgb(0 0 0 / 5%)'
-context.fillRect(0, 0, canvas.width, canvas.height)
-```
-
-## click 事件
+## MouseEvent
 
 - screenX/Y 屏幕
-- clientX/Y 从 content 计算（padding 及 border, margin 不包括）
+- clientX/Y 窗口(iframe 是一个单独的窗口)
 - offsetX/Y 事件到目标节点 padding 边
 - pageX/Y 存在滚动时，返回包括滚动到试图外的像素长度
 - x/y clientX/Y 别名
 - currentTarget(Event) 绑定事件处理程序的元素
 - target(Event) 调度事件的元素
 
-## Date
+## WheelEvent
 
-```js
-const now = new Date();
-console.log(now.toLocaleString("en-US", { timeZone: "UTC" }));
-console.log(now.toLocaleString("en-US", { timeZone: "Asia/Shanghai" }));
-```
+- deltaMode
+- deltaX/Y/Z deltaMode 中的滚动量

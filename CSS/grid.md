@@ -22,7 +22,7 @@
 .main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* odd行高 100px， even行高 200px  */
+  /* odd 行高 100px， even 行高 200px  */
   grid-auto-rows: 100px 200px;
 }
 .item {

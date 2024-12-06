@@ -81,10 +81,6 @@ Micro-generator framework
 
 create a progress bar in the console
 
-## semver
-
-semantic(语义) version
-
 ## shortcuts
 
 - shosho
