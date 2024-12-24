@@ -41,7 +41,6 @@
  * place-content/items/self: align-content justify-content;
  */
 .place {
-
   place-content: center;
 }
 ```
@@ -58,3 +57,104 @@
 - opacity: 透明度，默认参数 1
 - saturate: 饱和度，默认参数 1
 - sepia: 棕褐色，默认参数 0
+
+## 属性
+
+- accent-color: 设置 input 元素 type 为 checkbox, radio, range 和 progress 元素背景色
+- all：所有属性的简写
+- appearance: 用平台的样式展示 UI 样式
+- backdrop-filter: 将过滤器效果应用于元素后面的区域
+- backface-visibility: 设置元素的背面朝向用户时是否可见
+- background
+  - attachment: fixed 相对 viewport, locale, scroll(不随内容滚动) 相对元素
+  - clip: text 背景绘制在前景文本内, border/padding/content-box
+  - origin: border/padding/content-box
+  - repeat: space(尽可能重复，不进行裁剪) round(拉伸)
+- block-size: 依据 writing-mode 设置宽高
+- inline-size
+- border
+  - collapse: table 元素内部单元格是否共享或单独的边框
+  - image-slice:  将指定的图像分成多个区域
+  - image-outset: 设置元素的边框图像与其边框之间的距离
+  - block: 依据 writing-mode, direction, 和 text-orientation 简写
+  - inline: 同上
+- box
+  - sizing: 设置如何计算元素的总宽度和高度
+- caret-color: 插入符号颜色
+- clip-path: 创建剪辑区域
+- color-scheme: 颜色方案
+- column
+  - count: 列数目
+  - rule: rule-width, rule-style, rule-color 的简写
+- fill
+  - opacity
+- flex
+- gap
+- grid
+  - auto-flow: 控制自动放置算法
+  - auto-columns: min-content / minmax(20px, auto) / auto / 1fr
+  - grid-template-areas/rows/columns
+- inset: 对应 top, bottom, right 和 left 属性
+  - block-start/end
+  - inline-start/end
+- mask: 通过在特定点遮罩或剪切图像来隐藏元素
+  - image: 用作元素的遮罩层
+  - repeat
+- object
+  - fit: 调整元素(img,video)大小适应容器
+  - position
+- offset: 沿定义路径对元素进行动画
+  - anchor
+  - distance
+  - path
+  - position
+  - rotate
+- outline
+- place:  允许你同时沿块和行内方向对齐内容, align/justify-* 的简写
+  - self
+  - content
+  - items
+- resize: boh/horizontal/vertical 元素可调整大小
+- scroll
+  - behavior: smooth/auto
+- scrollbar-*
+- shape: 元素外添加一个形状
+  - outside
+  - margin
+  - image-threshold
+- stop: svg 渐变
+  - color
+  - opacity
+- stroke
+  - dasharray
+  - dashoffset
+  - opacity
+  - width
+- text
+  - decoration: 简写
+  - emphasis: 简写 *-style/color
+  - indent: 设置块中文本行前的空格的长度
+  - overflow: 溢出内容样式
+  - shadow
+  - transform: uppercase/lowercase/capitalize
+  - wrap: 控制元素内的文本如何换行
+- transform
+  - origin: 默认 center
+- transition
+  - property
+  - duration
+  - timing-function
+  - delay
+- translate
+- user-select: 控制用户是否可以选择文本
+- visibility: visible/hidden
+- white-space: 空白处理
+- word
+  - break
+  - spacing: 单词之间、标签之间的空间长度
+
+## 选择器
+
+- &: Baseline 2023
+- +: 有相同的父元素且匹配元素紧跟着第一个元素之后
+- ~: 有相同的父元素且匹配第一个元素之和的兄弟元素

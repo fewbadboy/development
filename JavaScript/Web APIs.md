@@ -30,22 +30,37 @@
 
 ### methods
 
-- closest(selectors)
-- computedStyleMap()
+- animate(keyframes, options)
+  - options: 部分参数
+    - delay
+    - direction
+    - duration
+    - easing
+    - iterations
+- checkVisibility()
+- closest(selectors): 遍历元素及其父元素
 - getAnimations()
 - getAttribute(attributeName)
-- getBoundingClientRect() 返回元素大小及其相对于视口的位置
+- getBoundingClientRect(): 返回元素大小及其相对于视口的位置
+- matches(selectors): 测试元素是否会被指定的 CSS 选择器选中
+- querySelector(selectors)
 - requestFullscreen()
+- scrollTo/By(): 前者绝对位置，后者基于当前位置相对滚动
 - scrollIntoView(Optional)
 
 ### event
 
-- mouseout 移动光标使其不再包含在元素或其子元素之一时
-- mouseover 光标移动到元素或其子元素之一时
-- pointer* 鼠标/触摸板/手写笔都会被触发
-- animation*
-- transition*
-- wheel
+- auxclick: 除了鼠标左键外的其他按钮
+- input: input,select,textarea 元素用户操作而直接发生改变时触发
+- mouseleave: 不冒泡，从元素本身离开时触发
+- mouseout: 冒泡，从元素或子元素离开时触犯
+- mouseover: 光标移动到元素或其子元素之一的上面时
+- pointer*: 鼠标/触摸板/手写笔都会被触发
+- animation*:
+- transition*:
+- wheel: Safari 不支持
+- touch*: Safari 不支持
+- transition*: 过度动画
 
 ## AbortControl
 

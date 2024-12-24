@@ -86,9 +86,10 @@ git remote add originName https://github.com/fewbadboy/development.git
 # 从远程仓库下载最新的提交、分支和标签，但它并不会自动合并或更新本地分支
 git fetch originName
 
-# 包含了两个操作：git fetch和git merge。它从远程仓库下载最新提交，并自动将其合并到当前分支。
+# 包含了两个操作：git fetch 和 git merge
+# 它从远程仓库下载最新提交，并自动将其合并到当前分支
 # --rebase 非默认的合并（merge）方式将远程分支的更新整合到当前分支中
-git pull [<远程名>] [<分支名>]
+git pull [<远程名>] [<远程分支名>:<本地分支名>]
 
 # 推送到上游 git push <remote> <branch>
 # 将本地的 master 分支推送到远程 master 分支，远程不存在时会自动创建

@@ -58,8 +58,7 @@ flv.js
 
 ## UI
 
-[We UI](https://weui.io/)
-[we ui 文档](https://wechat-miniprogram.github.io/weui/docs/)
+[ionicons](https://ionic.io/ionicons) 图标， icon font
 
 [Prime Vue](https://primevue.org/)
 
