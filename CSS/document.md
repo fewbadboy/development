@@ -140,10 +140,10 @@
   - wrap: 控制元素内的文本如何换行
 - transform
   - origin: 默认 center
-- transition
+- transition: 过度动画
   - property
   - duration
-  - timing-function
+  - timing-function: ease-in-out, linear, steps(integer, step-position) 位置默认 end
   - delay
 - translate
 - user-select: 控制用户是否可以选择文本

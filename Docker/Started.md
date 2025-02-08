@@ -50,8 +50,9 @@ share multi-container application
 # docker-compose.yml file
 services:
   app:
-    image: node:18-alpine
+    image: node:22.12.0-alpine
     command: sh -c "yarn install && yarn run dev"
+    # 宿主机:容器
     ports:
       - 3000:3000
     working_dir: /app

@@ -164,12 +164,41 @@ g.next() // { value: undefined, done: true }
 // next方法参数当作上一条 yield 语句的返回值
 ```
 
+## RegExp
+
+- exec
+- test
+
 ## Promise
 
 - all 返回所有 fulfill 或者第一个 reject 的原因
 - allSettled 返回记录各个 promise 结果的数组
 - any 返回第一个 fulfill 的 promise, 都拒绝时返回一个拒绝原因的数组
 - race 随着第一个 Promise 的最终状态而确定
+
+## 操作符
+
+### 计算属性
+
+`[]` 中放一个表达式
+
+```js
+let i = 0
+const person = {
+  [`id${++i}`]: i
+}
+```
+
+### 属性访问器
+
+分别是点和方括号
+
+## Encode
+
+- encode/decodeURI()
+- encode/decodeURIComponent(): 编码时转义的字符更多
+- TextEncode/Decode(): 返回 UTF-8 字节流
+- btoa/atob(): Base64 加密解密
 
 ## 动画
 

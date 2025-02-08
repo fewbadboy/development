@@ -6,16 +6,11 @@
 
 ## 构建
 
-[webpack](https://webpack.js.org/)
-
 [rollup js](https://rollupjs.org/)
-[rollup awesome](https://github.com/rollup/awesome)
 
 [esbuild](https://esbuild.github.io/)
 
 [create-react-app](https://create-react-app.dev/)
-
-[turbo](https://turbo.build/)
 
 ## 图表
 
@@ -136,6 +131,9 @@ service.interceptors.response.use(
     /**
      * 下载文件的信息
      * 进行跨域请求时，后端需要明确暴露该头部
+     * Access-Control-Allow-Headers: Content-Disposition
+     * Access-Control-Expose-Headers: Content-Disposition
+     * 
      * headers: {
      *  'content-disposition': 'attachment;filename=xxx.xlsx'
      * }
@@ -148,7 +146,7 @@ service.interceptors.response.use(
     } = response
     if (/(blob|arrayBuffer)/.test(responseType)) {
       if (status === 200 && responseType === 'blob' ? size > 0 : arrayBuffer > 0)
-        return Promise.resolve({ data: blobData, disposition: response.headers['content-disposition']})
+        return Promise.resolve({ data: blobData, disposition: decodeURIComponent(response.headers['content-disposition'])})
       return Promise.reject(blobData)
     }
   }

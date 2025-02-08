@@ -97,7 +97,18 @@ With them, you can change the document's structure, style, or content.
 
 ### AbortController
 
+根据需要终端请求
+
+### Document
+
+Instance properties
+
+- documentElement
+- lastModified
+
 ### Element
+
+inherit [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document)
 
 Methods
 
@@ -129,7 +140,16 @@ Methods
 
 访问设备文件系统上的文件，`<input type=file>` 实现等
 
-## Geolocation
+## FormData
+
+FormData(form, submitter)
+
+- 如果 submitter 具有 name 属性或为 `<input type="image">`，其数据将包含在 FormData 对象中
+- 编码类型为 multipart/form-data 时，使用与表格相同的格式
+- 简单 GET 提交查询参数也可以直接传递个 URLSearchParams 构造函数
+- append/delete/get/getAll/has/keys/set/values/entries
+
+## GeoLocation
 
 ## HTML DOM
 
