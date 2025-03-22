@@ -1,12 +1,5 @@
 # package
 
-## 执行代码
-
-```js
-npm install -g js-beautify highlight.js
-node a.js | js-beautiful | highlight
-```
-
 ## badge-maker
 
 badge
@@ -39,13 +32,7 @@ badge
 
 创建 mock 数据
 
-## fuse.js
-
 ## jsencrypt
-
-## lint-staged
-
-## commit-lint
 
 ## husky
 
@@ -108,10 +95,6 @@ var app = express()
 app.use(express.static('./dist', { index: ['index.html', 'index.htm'] }))
 app.listen(3000)
 ```
-
-## nodemon
-
-自动重启 server
 
 ## @tweenjs/tween.js
 

@@ -1,17 +1,5 @@
 # 工具库
 
-## 编译器
-
-[Babel](https://babeljs.io/) 将 ECMAScript 2015+ 代码转换为当前和旧版浏览器向后兼容版本
-
-## 构建
-
-[rollup js](https://rollupjs.org/)
-
-[esbuild](https://esbuild.github.io/)
-
-[create-react-app](https://create-react-app.dev/)
-
 ## 图表
 
 [font awesome](https://fontawesome.com/)
@@ -40,7 +28,9 @@
 
 [leaf let js](https://leafletjs.com/)
 [open layers](https://openlayers.org/)
-[cesium](https://cesium.com/platform/cesiumjs/)
+
+[cesium](https://cesium.com/platform/cesiumjs/) 3D 地理空间可视化
+
 [Geo JSON 地图数据](https://datav.aliyun.com/portal/school/atlas/area_selector)
 [Geo JSON 数据可视化](https://geojson.io/)
 地理坐标系统转换 [proj4js](https://trac.osgeo.org/proj4js/)
@@ -54,6 +44,7 @@ flv.js
 ## UI
 
 [ionicons](https://ionic.io/ionicons) 图标， icon font
+[icones](https://icones.js.org/)
 
 [Prime Vue](https://primevue.org/)
 
@@ -85,13 +76,8 @@ flv.js
 
 [awesome-vue](https://github.com/vuejs/awesome-vue)
 [vue use](https://vueuse.org/)
-[vue-i18n](https://vue-i18n.intlify.dev/)
 
 vue-puzzle-vcode
-
-[nuxt](https://nuxt.com/)
-
-[eslint-vue](https://eslint.vuejs.org/)
 
 ## react
 
@@ -187,29 +173,11 @@ export function downloadURL(fileName, url) {
 [Mock Service Worker](https://mswjs.io/docs/)
 [天气接口](https://openweathermap.org/)
 
-## 服务器
-
-[nitro](https://nitro.unjs.io/) Server Toolkit
-[h3](https://h3.unjs.io/guide) short for HTTP
-[cross ws](https://crossws.unjs.io/) cross-platform WebSocket servers
-
-## 测试框架
-
-[jest.js](https://jestjs.io/)
-
-[cypress](https://www.cypress.io/) 自动化测试
-
-[testing-library](https://testing-library.com/)
-
 ## 其他
-
-[storybook](https://storybook.js.org/) 构建 UI 组件和界面
 
 [sonar](https://www.sonarsource.com/) 代码安全检查
 
 [latex](https://latex.js.org/)
-
-[polyfill](https://polyfill.io/)
 
 [node-webkit](https://nwjs.io/) 直接通过 DOM 方式调用所有的 Node.js 模块
 
@@ -226,10 +194,6 @@ export function downloadURL(fileName, url) {
 [js13k games](https://js13kgames.com/) js 代码游戏
 
 [create js](https://createjs.com/)
-
-[async](https://caolan.github.io/async) 类似 Lodash
-
-[crontab](https://crontab.guru/) CornTab 表达式验证
 
 [css nano](https://cssnano.github.io/cssnano/) 基于 postcss 插件和环境构建
 

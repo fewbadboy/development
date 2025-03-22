@@ -1,27 +1,5 @@
 # Tips
 
-## multiple layers
-
-```js
-// Raycaster
-const raycaster = new Raycaster()
-// 物体相交时光线投射器的精度
-raycaster.params.Line.threshold = 0.1
-
-raycaster.layers.enable(0)
-raycaster.layers.enable(1)
-raycaster.layers.enable(2)
-
-const camera = new PerspectiveCamera(...)
-camera.layers.enable(0)
-camera.layers.enable(1)
-camera.layers.enable(2)
-
-// object set layer
-object.layers.set(index)
-
-```
-
 ## Quaternion and Euler
 
 ```js

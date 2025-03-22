@@ -8,8 +8,7 @@
 
 侦听响应式数组的变更方法
 
-- push / pop / shift / unshift / sort / reverse
-- splice
+- push / pop / shift / unshift / sort / reverse / splice
 
 ```js
 /**
@@ -26,36 +25,6 @@ this.temp.userList.splice(index, 1, {
 ## 3.x
 
 ### 响应式
-
-```js
-// 伪代码
-function reactive(obj) {
-  return new Proxy(obj, {
-    get(target, key) {
-      track(target, key)
-      return target[key]
-    },
-    set(target, key, value) {
-      target[key] = value
-      trigger(target, key)
-    }
-  })
-}
-
-function ref(value) {
-  const refObject = {
-    get value() {
-      track(refObject, 'value')
-      return value
-    },
-    set value(newValue) {
-      value = newValue
-      trigger(refObject, 'value')
-    }
-  }
-  return refObject
-}
-```
 
 - ref: 深层嵌套的对象、数组或者 JavaScript 内置的数据结构具有深入响应式。将值包装在特殊对象中
   - 模板渲染上下文中，只有顶级的 ref 属性才会被解包
@@ -78,7 +47,11 @@ function ref(value) {
 
 - shallowRef: 只追踪 .value 的访问(放弃深层响应式)
 - reactive: 使对象本身具有响应性，深层转换，返回一个原始对象的 Proxy
-  - 局限：不能操作原始类型(string,number,boolean)，不能替换整个对象(不然丢失引用关系)，解构丢失响应式连接
+  - 局限
+    - 仅使用于对象类型
+    - 不能操作原始类型(string,number,boolean)
+    - 不能替换整个对象(不然丢失引用关系)
+    - 解构丢失响应式连接
 - shallowReactive:
 
 ### nextTick
@@ -117,13 +90,22 @@ const fullName = computed({
 
 组件存在多个根元素，需要指定那个根接受父组件上的样式
 
-```html
-<div>header</div>
+```vue
+<div>vue</div>
 <div :class="$attrs.class">main</div>
+```
+
+绑定多个属性时可以用对象完成
+
+```vue
+<div v-bind="obj">
+  {{ callback('hello') }}
+</div>
 ```
 
 ### 条件渲染
 
+v-if 表达式为真值时渲染
 v-show 切换 display 的 CSS 属性，不支持在 template 元素上使用
 
 ### 列表渲染
@@ -142,9 +124,10 @@ v-for 与 对象
 
 ```html
 <ul>
-  <li v-for="(value, key) in myObject" :key="key">
-    {{ key }}:{{ value }}
-  </li>
+  <template v-for="(value, key, index) in myObject" :key="key">
+    <li>{{ key }}:{{ value }}</li>
+    <li>{{ index }}</li>
+  </template>
 </ul>
 ```
 
@@ -179,7 +162,17 @@ v-for 与 对象
 
 - 设定 value 属性时， value 属性值优先级最高
 - 文本类型的 input,textarea: 绑定 value 属性，监听 input 事件
-- checkbox,radio: 绑定 checked 属性监听 change 事件
+- checkbox,radio: 绑定 checked 属性监听 change 事件(value 可绑定属性值)
+
+```html
+<input
+  type="checkbox"
+  v-model="toggle"
+  true-value="yes"
+  false-value="no"
+/>
+```
+
 - select: 绑定 value 属性，监听 change 事件
 - 修饰符：lazy,number,trim
 
@@ -191,8 +184,11 @@ v-for 与 对象
   ```js
   const user = reactive({ name: '' })
   const total = ref(0)
-  watch(() => user.name, (name) => {
-    // todo
+  // getter 去监听一个 reactive 对象
+  const data = ref(null)
+  const stopWatch = watch(() => user.name, (name) => {
+    // 等待一些异步数据时
+    if (data.value) {}
   })
   // 多个来源
   watch([total, () => user.name], ([newTotal, newName]) => {
@@ -203,11 +199,11 @@ v-for 与 对象
 - watchEffect(onCleanup): 自动跟踪回调的响应式依赖，父组件更新之后所属组件 DOM 更新之前调用回调
 - watchPostEffect: vue 更新后执行回调
 - watchSyncEffect: 同步侦听器，会在 vue 进行任何更新前触发
-- onWatcherCleanup: 清理副作用 v3.5+
+- onWatcherCleanup: 清理副作用
 
 ### 模板引用
 
-- useTemplateRef(): 组合式 API 中获取引用 v3.5+
+- useTemplateRef(): 组合式 API 中获取引用
   - v-for 模板引用时，ref 数组并不保证与源数组相同的顺序
 
 ### setup
@@ -222,7 +218,7 @@ JavaScript 中 camelCase, DOM模板中都需要转换成 kebab-case
 - defineProps(): 只读，单向绑定原则
 
 ```js
-defineProps({
+const { propA } = defineProps({
   propA: {
     // 多种类型
     type: [String, Number],
@@ -326,6 +322,23 @@ const AsyncComp = defineAsyncComponent({
 })
 ```
 
+- 可组合(composable): 是一个用组合式 API 封装和重用逻辑的函数
+
+```js
+import { toValue } from 'vue'
+function useFuture(maybeRefOrGetter) {
+  // a ref or a getter,
+  // its normalized value will be returned.
+  const fetchData = () => {
+    const value = toValue(maybeRefOrGetter)
+  }
+
+  watchEffect(() => {
+    fetchData()
+  })
+}
+```
+
 - 自定义指令
   - 在 `<script setup>` 中，以 v 前缀开头的 camelCase 变量可以用作自定义指令
   - 全局：`app.directive('highlight', {})`
@@ -364,23 +377,42 @@ const myPlugin = {
     - 自定义动画类
       - enter-from/active/to-class
       - leave-from/active/to-class
+    - 支持嵌套
+    - key: 强制重新渲染动画
     - JavaScript hooks: 添加 `:css="false"` prop
       - before-enter/leave(el)
       - enter/leave(el, done)
       - enter/leave-cancelled(el)
       - after-enter/leave(el)
   - TransitionGroup
-    - v-move: 对移动元素引用过度
+    - v-move: 对移动元素引用过度 `v-leave-active { position: absolute; }`
   - KeepAlive
-  - Teleport: defer v3.5+ 推迟 Teleport 的目标解析，直到应用程序的其他部分解析完成
+  - Teleport: defer 推迟 Teleport 的目标解析，直到应用程序的其他部分解析完成
   - Suspense
 
-### 工具链
-
-- [eslint-plugin-vue](https://eslint.vuejs.org/)
+```css
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+```
 
 ### 性能优化
 
+- [virtual scrolling](https://vue-virtual-scroller-demo.netlify.app/)
 - 请记住，组件实例比普通 DOM 节点要昂贵得多，而且为了逻辑抽象创建太多组件实例将会导致性能损失
 
 ### 渲染函数

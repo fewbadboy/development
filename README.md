@@ -18,3 +18,8 @@ git push -uf origin main
 [StackOverflow](https://stackoverflow.com/)
 [VisualGo](https://visualgo.net/zh) 通过动画可视化数据结构和算法
 [V2EX](https://www.v2ex.com/)
+
+## Commit
+
+- learning: note
+- update: vue 3.0+

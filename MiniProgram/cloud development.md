@@ -1,8 +1,26 @@
-# document
+# cloud development
 
-## 索引
+## demonstration
 
-可以设为唯一(不重复)
+云函数运行环境是 Node.js
+
+### 图片处理
+
+```js
+// 云端上传图片及获取图片地址
+const { fileID } = wx.cloud.uploadFile({
+  cloudPath: 'demo.jpg',
+  fileContent: fileStream
+})
+const { fileList } = wx.cloud.getTempFileURL({
+  fileList: [fileID]
+})
+fileList[0].tempFileURL
+```
+
+### 消息推送
+
+客服消息推送
 
 ## 示例
 
@@ -157,7 +175,11 @@ exports.main = async (event, context) => {
     .orderBy('created_at', 'desc')
     .get()
   
-  // 8. 联合查询
+  /**
+   * 8. 联合查询
+   * list: [],
+   * errMsg
+   */
   const res = db.collection('user').aggregate()
     .match({
       created_at: _.gte(new Date('2025-03-01')).lte('2025-03-31')
@@ -170,7 +192,9 @@ exports.main = async (event, context) => {
     })
     .addFields({
       unit_price: { $arrayElemAt: ["$product_info.price", 0] }, // 获取单价
-      total_price: { $multiply: ["$quantity", { $arrayElemAt: ["$product_info.price", 0] }] } // 计算单项订单总价
+      total_price: { 
+        $multiply: ["$quantity", { $arrayElemAt: ["$product_info.price", 0] }] 
+      } // 计算单项订单总价
     })
     .group({
       _id: null,                 // 统计所有订单

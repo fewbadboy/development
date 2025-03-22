@@ -87,4 +87,7 @@ npm view package-name versions/dependencies
 
 # 运行一个本地或远程的 npm 包
 npx
+
+# 更新最新版本 重写 package.json
+npx npm-check-updates -u
 ```

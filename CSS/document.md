@@ -43,6 +43,18 @@
 .place {
   place-content: center;
 }
+
+/**
+ * flex 属性值说明
+ * 1. 单值语法
+ *  flex: <flex-grow> 1 0%
+ *  flex: 1 1 <flex-basis>
+ * 2. 双值语法
+ *  flex: <flex-grow> <flex-shrink> 0%
+ *  flex: <flex-grow> 1 <flex-basis>
+ * 3. 三值语法
+ *  flex: <flex-grow> <flex-shrink> <flex-basis>
+*/
 ```
 
 ## 过滤器(filter)

@@ -4,7 +4,6 @@
 # 基于当前目录下 Dockerfile创建镜像
 docker build -t imageName:tag .
 # 容器无论什么原因退出立刻重启
-# pause / unpause 文件系统打快照
 # run === create -> start
 # -p hostPort:containerPort (可使用多次)
 docker run -d -p 5000:5000 --restart=always --name containerName imageName cmd

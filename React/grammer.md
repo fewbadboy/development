@@ -1,79 +1,9 @@
 # document
 
-## 虚拟 DOM
-
-维护一个*虚拟 DOM* 来跟踪 state , props 或 context 的变化，从而决定如何高效的更新真实的 DOM。
-
-手动更改 DOM 时(不操作触发虚拟 DOM 更新机制相关的条件), React 无法感知到 DOM 的更改
-
-## 渲染过程
-
-渲染过程就是指 React 更新虚拟 DOM 并计算出需要更新真实 DOM 的操作
-
-1. 触发渲染(组件初始化渲染和组件 state 已更新)
-2. 渲染组件
-3. 提交给 DOM
-
-props, state, context 以及 hooks 输入的参数(如 useEffect 等的依赖项)更新时与这些内容有直接关系的部分重新渲染
-父组件重新渲染，子组件可能重新渲染(使用 React.memo 跳过重新渲染)
-
-## Pure
-
-针对相同的输入(props, state, context 以及 hooks 输入的参数)，每次得到相同的输出结果
-
-Props 和 state 是不可变的，Hooks 的返回值和参数是不可变的
-
-```ts
-function Post({ item }) {
-  item.url = new Url(item.url, base); // 🔴 Bad: never mutate props directly
-  return <Link url={item.url}>{item.title}</Link>;
-}
-function useIconStyle(icon) {
-  const newIcon = { ...icon }; // ✅ Good: make a copy instead
-  if (icon.enabled) {
-    newIcon.className = computeStyle(icon);
-  }
-  return newIcon;
-}
-```
-
-传递给 JSX 后，值是不可变的
-
 ## Using Hooks
 
 以 `use`开头命名的 Functions 被称为 Hooks.
 Hooks 仅在 React function 的顶部被调用.
-
-## DOM Event
-
-```ts
-export default function Form() {
-  const [value, setValue] = useState('');
-  
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
-    setValue(event.currentTarget.value)
-  }
-
-  return (
-    <>
-      <input value={value} onChange={handleChange} />
-    </>
-  )
-}
-```
-
-## Children
-
-```ts
-/**
- * React.ReactNode type union all the possible types passed as children in JSX
- * React.ReactElement only JSX elements
- */
-interface RenderModal {
-  title: string;
-  children: React.ReactNode;
-}
-```
 
 ## Style Props
 
@@ -98,54 +28,6 @@ interface ComponentProps {
 8. `key={crypto.randomUUID()}` key 在兄弟节点之间必须唯一(后端更新数据时需要更新)
 9. 保持组件是 pure. `must always return the same JSX given the same inputs.`
 10. side effects(需要手动操作 DOM 或与外部系统交互的行为)
-
-## Adding Interactivity
-
-```ts
-// scheduled using a snapshot of the state at the time the user interacted with it!
-export default function Button({children}) {
-  const [number, setNumber] = useState(0);
-  
-  // 传递参数时, onClick 用回调函数 () => handleClick(parameter)
-  // 直接绑定 handleClick(parameter) 渲染时触发函数回调，会导致无限循环
-  function handleClick() {}
-  return(
-    <div>
-      <input onChange={event => {
-        event.stopPropagation(); // preventDefault
-        setTimeout(() => {
-          /**
-           * 触发事件后去修改 number, 显示的时候还是 snapshot 的值
-           * 不是新修改的值
-           */
-          alert(`Number is: ${number}`);
-        }, 5000);
-      }} />
-      <button
-        onClick={handleClick}
-      >
-        {children}
-      </button>
-      </div>
-  )
-}
-```
-
-1. state 是隔离和私有的，更改其中一个组件不会影响另一个组件
-2. 相同输入，相同输出(在严格模式下开发，React 调用每个组件的函数两次，有助于发现由不纯函数引起的错误)
-3. Snapshot(快照): 通过用户交互时的状态快照去调度处理(存储状态当前也许发成了变化)
-4. 将一系列状态更新加入队列处理(在下一次 render 前更新相同的状态多次时，通过更新函数去计算基于上一个状态的下一个状态)
-
-    ```js
-    setNumber(5);
-    // n => n + 1 is called an updater function
-    setNumber(n => n + 1); 
-    setNumber(42);
-    /**
-     * 更新状态时状态参数队列化处理，在事件处理程序中的所有其他代码运行完毕后进行处理
-     * next render: state queue first return 5, then 5 + 1, then 42(final result)
-     */
-    ```
 
 ## Managing State
 
