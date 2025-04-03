@@ -21,6 +21,7 @@
 ### 入列微任务
 
 入列微任务，新加入的 queueMicrotask() 方法（以定义的形式被暴露在 Window 或 Worker 接口上）增加了一种标准的方式。
+
 避免使用 Promise 创建微任务
 
 ```js
@@ -31,7 +32,7 @@ queueMicrotask(() => {
 
 ### 使用场景
 
-这些场景关乎捕捉或检查结果、执行清理等；其时机晚于一段 JavaScript 执行上下文主体的退出，但早于任何事件处理函数、timeouts 或 intervals 及其他回调被执行。
+捕捉或检查结果、执行清理等；其时机晚于一段 JavaScript 执行上下文主体的退出，但早于任何事件处理函数、timeouts 或 intervals 及其他回调被执行。
 
 ```js
 element.prototype.getData = url => {
@@ -58,6 +59,7 @@ console.log("Data fetched");
 ```
 
 以上代码如若未在 if 语句中加入微任务执行效果如下
+
 |数据未缓存|数据已缓存|
 |--|--|
 |Fetching data|Fetching data|

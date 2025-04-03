@@ -29,9 +29,22 @@
 ## @media
 
 ```css
-@media(prefers-color-scheme: light) {
+@media (prefers-color-scheme: light) {
   :root {
     --btn-primary: #409eff;
   }
+}
+
+/**
+  * 响应式
+ */
+@media screen and (min-width: 300px) and (max-width: 600px) {
+  .md {
+    color: red;
+  }
+}
+
+@media (orientation: landscape) {
+
 }
 ```

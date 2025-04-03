@@ -10,7 +10,7 @@
 - first-line
 - first-letter
 - file-selector-button: 针对 type="file" 的 input 元素
-- slotted()
+- slotted
 
 ## Class
 

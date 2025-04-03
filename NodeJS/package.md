@@ -120,6 +120,6 @@ import * as TWEEN from '@tweenjs/tween.js'
 
 状态管理和编排
 
-## vis
+## undici
 
-[DOT](https://renenyffenegger.ch/notes/tools/Graphviz/examples/index) 书写规则
+HTTP/1.1 客户端

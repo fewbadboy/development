@@ -28,7 +28,7 @@ console.log(`%c 成功:%c 成功的消息`,'color:green','border: 1px solid gree
 
 ## deep clone
 
-许多JavaScript 对象根本不能序列化。
+许多 JavaScript 对象根本不能序列化。
 函数（带有闭包）、Symbol、在 [HTML DOM API](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API) 中表示 HTML 元素的对象、递归数据以及许多其他情况。
 在这些条件下调用 JSON.stringify() 来序列化会失效。
 
@@ -36,9 +36,14 @@ console.log(`%c 成功:%c 成功的消息`,'color:green','border: 1px solid gree
 
 ```js
 // 静态方法
+Array.from(arrayLike, mapFn, thisArg)
+Array.fromAsync(arrayLike, mapFn, thisArg)
+Array.of(element1, element2,...)
 Array.isArray()
 
-Array.property.at()
+Array.property.at(index) // index < 0，index + array.length
+Array.property.copyWithin(target, start, end)
+Array.property.fill(value, start, end)
 Array.property.findLast()
 
 /**
@@ -61,23 +66,39 @@ Array.property.toSpliced()
 Array.property.with(index, value)
 
 const arr = [1, 2, { name: 'test' }, 4, 5];
-const tes = arr.with(1, 6);
+const tes = arr.with(1, 6); // 改变给定索引的值
 arr.at(2).name = 'hello'
 // tes.at(2).name
 ```
 
 ## Object
 
+每一个属性名是一个 string 或 Symbol
 `[]` 获取属性名时，任何非字符串对象都会通过 `toString` 方法转换
 
 ```js
+Object.assign(target, source1, ...) // copy 所有自身可枚举属性
+Object.create(proto, propertiesObject)
+Object.freeze(obj) // 阻止对象扩展
 object.fromEntries(iterable) // reverse of Object.entries()
-Object.groupBy(items, (item, index))
+Object.groupBy(items, callbackFn)
 Object.hasOwn(obj, prop)
+Object.seal(obj) // 阻止对象扩展和现有属性不可配置
 
 Object.is(NaN, NaN) // 比较严格相等
 
 Object.prototype.toString.call([]).slice(8, -1)
+
+const obj = { name: 'js' }; 
+Object.getOwnPropertyDescriptors(obj);
+// {
+//   name: {
+//     configurable: true
+//     enumerable: true
+//     value: "js"
+//     writable: true
+//   }
+// }
 ```
 
 1. `for...in` 遍历对象自身和继承的可枚举属性
@@ -110,8 +131,34 @@ Unicode 字符集(U+0000 - U+10FFFF)远大于 65535个，额外的字符以`surr
 [..."👨‍👦"]; // [ '👨', '‍', '👦' ]
 ```
 
-- codePointAt(index) 从给定索引(基于 utf-16 编码)开始的 Unicode 码点值
-- match/matchAll 返回所有正则捕获组匹配值
+```js
+String.fromCharCode(num1,...) // 返回字符串,0 <= num <= 0xFFFF
+String.fromCodePoint(num1,...) // 返回字符串,0 <= num <= 0x10FFFF
+String.raw() // 模板文字的原始字符串
+String.prototype.at()
+String.prototype.charCodeAt()
+String.prototype.codePointAt()
+String.prototype.startsWith()
+String.prototype.endsWith()
+String.prototype.match(regexp) // 
+String.prototype.localeCompare(compareString, locales, options)
+String.prototype.padStart(targetLength, padString)
+String.prototype.padEnd(targetLength, padString)
+String.prototype.repeat(count)
+String.prototype.replace(pattern, replacement)
+String.prototype.search(regexp)
+String.prototype.split(separator, limit)
+String.prototype.trim()
+String.prototype.trimStart()
+String.prototype.trimEnd()
+```
+
+## Number
+
+```js
+Number.prototype.toFixed(digits) // 指定的小数位数
+Number.prototype.toPrecision(precision) // 指定的有效数字位数
+```
 
 ## Date
 
@@ -127,7 +174,7 @@ console.log(now.toLocaleString("en-US", { timeZone: "Asia/Shanghai" }));
 
 ## Iterator
 
-Symbol.iterator
+提供一个 `[Symbol.iterator]()` 方法，返回迭代器对象本身
 
 - for...of
 - 解构赋值(数组，Set)
@@ -150,6 +197,9 @@ for(let i of arr){
 ## Generator
 
 ```js
+Generator.prototype.next(value)
+Generator.prototype.return(value)
+Generator.prototype.throw(exception)
 function* gen () {
   yield 1;
   yield 2;
@@ -166,15 +216,26 @@ g.next() // { value: undefined, done: true }
 
 ## RegExp
 
-- exec
-- test
+`()` 捕获组，存储匹配内容，供后续引用或替换， 如 `\1` 引用
+`(?<name>)` 命名捕获组
+
+`(?:)` 非捕获组，相当于匹配空字符串
+
+```js
+RegExp.prototype.exec(str)
+RegExp.prototype.test(str)
+```
 
 ## Promise
 
-- all 返回所有 fulfill 或者第一个 reject 的原因
-- allSettled 返回记录各个 promise 结果的数组
-- any 返回第一个 fulfill 的 promise, 都拒绝时返回一个拒绝原因的数组
-- race 随着第一个 Promise 的最终状态而确定
+```js
+Promise.all() // 返回所有 fulfill 或者第一个 reject 的原因
+Promise.allSettled() // 返回记录各个 promise 结果的数组
+Promise.any() // 返回第一个 fulfill 的 promise, 都拒绝时返回一个拒绝原因的数组
+Promise.race() // 随着第一个 Promise 的最终状态而确定
+Promise.try(func, arg1, ...) // 接受任何回调
+Promise.withResolvers() // 返回 { promise, resolve, reject }
+```
 
 ## 操作符
 
@@ -205,10 +266,10 @@ const person = {
 1. window.requestAnimationFrame(callback)
 大多数浏览器在后台标签页或者隐藏的 iframe标签里时暂停调用，为了提高性能和电池使用寿命
 
-2. setTimeout(fun, delay, param1,...)/setInterval()
-根据 HTML 标准，setTimeout 调用 0ms 超时 五次以上时， 浏览器强制执行 4ms 的最小超时
+2. setTimeout(fun, delay, param1,...)/setInterval(func, delay, arg1,...)
+根据 HTML 标准，setTimeout 嵌套调用超时 五次以上时， 浏览器强制执行 4ms 的最小超时
 
-如果想在浏览器中实现 0ms 延时的定时器，你可以参考 window.postMessage()
+如果想在浏览器中实现 0ms 延时的定时器，可以参考 window.postMessage()
 
 未被激活的 tabs 的定时最小延迟>=1000ms
 

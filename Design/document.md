@@ -9,6 +9,7 @@
 [google fonts](https://fonts.google.com/)
 
 [google icons](https://fonts.google.com/icons)
+
 [icon font](https://www.iconfont.cn/)
 [icones js](https://icones.js.org/)
 
@@ -48,8 +49,6 @@
 [screen to gif](https://www.screentogif.com/)
 
 [figma](https://www.figma.com/)
-
-[Material 3](https://m3.material.io/)
 
 [GNU IMAGE MANIPULATION PROGRAM](https://www.gimp.org/)
 

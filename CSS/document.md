@@ -28,6 +28,16 @@
   color: var(--primary-color);
 }
 
+/**
+  * 支持嵌套
+  * .parent .child {}
+*/
+.parent {
+  & ~ .child {
+
+  }
+}
+
 ```
 
 ## 简写属性
@@ -101,6 +111,7 @@
 - fill
   - opacity
 - flex
+- float: 从页面的正常流程中移除，但仍保留为流程的一部分
 - gap
 - grid
   - auto-flow: 控制自动放置算法
@@ -122,6 +133,7 @@
   - position
   - rotate
 - outline
+  - offset
 - place:  允许你同时沿块和行内方向对齐内容, align/justify-* 的简写
   - self
   - content
@@ -170,3 +182,16 @@
 - &: Baseline 2023
 - +: 有相同的父元素且匹配元素紧跟着第一个元素之后
 - ~: 有相同的父元素且匹配第一个元素之和的兄弟元素
+
+## 函数
+
+- conic-gradient
+- cubic-bezier
+- drop-shadow
+- fit-content
+- inset
+- minmax
+- mod
+- path
+- polygon
+- steps

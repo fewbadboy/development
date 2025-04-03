@@ -52,8 +52,6 @@ flv.js
 
 [Element Plus](https://element-plus.org/)
 
-[pro components](https://procomponents.ant.design/)
-
 [UIverse](https://uiverse.io/)
 
 ## 桌面
@@ -67,8 +65,6 @@ flv.js
 [learn webGL](https://learnwebgl.brown37.net/)
 [webGL fundamentals](https://webglfundamentals.org/webgl/lessons/zh_cn/)
 [webGL2 fundamentals](https://webgl2fundamentals.org/)
-
-[three js](https://threejs.org/)
 
 [HDR](https://polyhaven.com/hdris/skies)
 
@@ -121,14 +117,15 @@ service.interceptors.response.use(
      * Access-Control-Expose-Headers: Content-Disposition
      * 
      * headers: {
-     *  'content-disposition': 'attachment;filename=xxx.xlsx'
+     *  'content-disposition': 'attachment;filename=xxx.xlsx' 仅支持 ASCII，不支持中文、空格、特殊字符
+     *  'content-disposition': 'attachment;filename*=UTF-8''xxx.xlsx' 支持 UTF-8 编码
      * }
      */
     const {
       status,
       config: { responseType },
       data: { size, arrayBuffer },
-      data
+      data: blobData
     } = response
     if (/(blob|arrayBuffer)/.test(responseType)) {
       if (status === 200 && responseType === 'blob' ? size > 0 : arrayBuffer > 0)
@@ -138,6 +135,14 @@ service.interceptors.response.use(
   }
 )
 
+export function fetchPostFile(params) {
+  return request({
+    url: '/get',
+    method: 'get',
+    responseType: 'blob',
+    params
+  })
+}
 export function fetchPostFile(data) {
   return request({
     url: '/post',
@@ -195,6 +200,7 @@ export function downloadURL(fileName, url) {
 
 [create js](https://createjs.com/)
 
-[css nano](https://cssnano.github.io/cssnano/) 基于 postcss 插件和环境构建
+[postcss](https://postcss.org/) 使用 JavaScript 转换 CSS
+[css nano](https://cssnano.github.io/cssnano/) 基于 postcss 插件和环境构建的压缩器
 
 [Browserslist](https://browsersl.ist/)
