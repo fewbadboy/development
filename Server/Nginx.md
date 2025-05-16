@@ -1,9 +1,15 @@
 # document
 
+## 
+
+## 配置
+
 ```conf
 # nginx.conf
 
 http {
+    
+
     # 负载均衡 加权轮询
     upstream backend {
         server 127.0.0.1 weight=3;
@@ -11,6 +17,7 @@ http {
         server 127.0.0.3 weight=1;
     }
 
+    # 服务器配置
     server {
         listen 443 ssl; # 启用 TLS
         server_name localhost;

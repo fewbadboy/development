@@ -25,7 +25,7 @@
 - empty: 空元素设置
 - first/last-child: 兄弟元素中的中的第一个元素
 - first/last-of-type: 兄弟元素中同类型的元素
-- nth-child(-n+3): 根据元素在父元素的子列表中的索引来匹配。前三， even 偶数， odd 奇数
+- nth-child(-n+3): 根据元素在父元素的子列表中的索引来匹配。 even 偶数， odd 奇数
 - nth-last-of-child(): 基于同类型的兄弟元素
 - only-child: 等价于 :first-child:last-child
 - only-of-type: 基于在兄弟元素中的相同类型(tag 名)

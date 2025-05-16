@@ -51,9 +51,6 @@ npm exec [option] [--] <command>[@version] [args...]
 # scoped modules
 npm init xxx # npm exec create-xxx
 
-# ping npm registry
-npm ping
-
 # git remote add origin ...
 # scope-name 不同于 npm 用户名时，可以创建 scope-name 的组织，再发布（先 npm login）
 # To publish scoped public packages
@@ -82,11 +79,8 @@ npm update --latest
 npm owner add/rm username package-name
 
 # 查看 package 版本记录
-# contributors / dependencies
-npm view package-name versions/dependencies
-
-# 运行一个本地或远程的 npm 包
-npx
+# contributors / dependencies / access
+npm view package-name versions/dependencies/access
 
 # 更新最新版本 重写 package.json
 npx npm-check-updates -u

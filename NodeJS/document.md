@@ -1,6 +1,6 @@
 # document
 
-## Environment Variable
+## Environment Variable(实验性)
 
 设置环境变量
 多个环境变量文件时，后续的会重写之前存在的变量
@@ -59,20 +59,19 @@ console.log('in main, a.done = %j, b.done = %j', a.done, b.done);
 - check: setImmediate() 回调在这调用(当前轮询阶段完成后执行脚本)
 - close callbacks: 一些关闭回调, e.g. socket.on('close', ...)
 
-`process.nextTick()` 是一个异步API, 从技术上讲不属于事件循环
+微任务：
+
+- `process.nextTick()` 是一个异步API, 从技术上讲不属于事件循环
+- `Promise.then/catch/finally` 回调
 
 ```js
 setTimeout(() => {
   console.log('timeout');
-}, 500);
+}, 0);
 
 setImmediate(() => {
   console.log('immediate');
 });
-
-process.nextTick(() => {
-  console.log('tick')
-})
 
 new Promise((resolve, reject) => {
   console.log('promise')
@@ -81,14 +80,28 @@ new Promise((resolve, reject) => {
   console.log(data)
 })
 
+process.nextTick(() => {
+  console.log('tick')
+})
+
 console.info('info')
 
 // promise
 // info
 // tick
 // hello
-// immediate
 // timeout
+// immediate
 ```
 
-## 模块
+## 非阻塞 I/O
+
+libuv 负责处理事件循环、异步 I/O、线程池、定时器等核心功能
+
+主线程提交任务(Node) → 线程池执行(libuv) → 回调进入事件循环 → 主线程执行回调
+
+## 环境变量
+
+```shell
+NODE_ENV=production node app.js
+```

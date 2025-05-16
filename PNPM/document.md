@@ -1,23 +1,19 @@
 # pnpm
 
+[Docker 容器中安装](https://pnpm.io/zh/installation#%E5%9C%A8-docker-%E5%AE%B9%E5%99%A8%E4%B8%AD)
+
 ## CLI
 
 ```shell
-# install / update
-npm install -g pnpm
-
 # 从缓存中安装 package
 # 为 project 安装所有的依赖
-pnpm i --offline
+pnpm install
 
-# 更新 package.json -L(--latest)
-pnpm up --latest
-
-# 添加/删除 package
-pnpm add/remove pkg
+# 更新 package.json 及 pnpm-lock.yaml
+pnpm update --latest
 
 # 审计: 查看已经安装包的已知安全问题
-pnpm audit 
+pnpm audit --fix # 强制修复到不易受攻击的版本
 
 # 检查过期 package
 pnpm outdated
@@ -25,14 +21,10 @@ pnpm outdated
 # run-script 的别名
 pnpm run
 
-# 项目范围执行 shell 命令
-pnpm exec
+pnpm dlx # 别名 pnpx
 
-# pnpx 别名，类似 npx
-pnpm dlx
-
-# 从 create-* / @foo/create-* 工具包创建项目
-pnpm create
+# 更新 pnpm
+pnpm self-update
 
 # 部署
 pnpm deploy 
@@ -40,3 +32,7 @@ pnpm deploy
 # 发布
 pnpm publish --access public
 ```
+
+## Docker
+
+[使用 Docker](https://pnpm.io/zh/docker)

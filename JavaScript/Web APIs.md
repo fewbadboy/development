@@ -26,10 +26,12 @@
 - outerHTML 用给定字符串解析的节点去替换该元素
 - scrollTop / scrollHeight (元素内容的高度，包括由于溢出而在屏幕上不可见的内容)
 - slot
+- shadowRoot 元素结构、样式及行为封装，防止外部样式污染
 - tagName
 
 ### methods
 
+- after
 - animate(keyframes, options)
   - options: 部分参数
     - delay

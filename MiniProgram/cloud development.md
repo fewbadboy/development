@@ -1,29 +1,59 @@
 # cloud development
 
-## demonstration
-
-云函数运行环境是 Node.js
-
-### 图片处理
+## 窗口信息
 
 ```js
-// 云端上传图片及获取图片地址
-const { fileID } = wx.cloud.uploadFile({
-  cloudPath: 'demo.jpg',
-  fileContent: fileStream
-})
-const { fileList } = wx.cloud.getTempFileURL({
-  fileList: [fileID]
-})
-fileList[0].tempFileURL
+const {
+  pixelRatio,
+  screenWidth,
+  windowWidth,
+  statusBarHeight,
+  safeAre: { left, right, top, bottom, width },
+  screenTop
+} = wx.getWindowInfo()
 ```
 
-## Explain 查询分析
+## 数据库
+
+### 安全规则
+
+- auth 用户登录信息 auth.openid 是用户的 openid
+- doc 记录内容(当前操作的数据文档内容)
+- now 当前时间的时间戳
+
+```json
+{
+  "read": true,
+  "write": "doc.openid === auth.openid",
+  "create": "",
+  "update": "",
+  "delate": "",
+}
+```
+
+### Explain 查询分析
+
+分析查询语句
+
+### 定时触发器
+
+单个云函数目录下创建 `config.json`
+
+```json
+{
+  "triggers": [
+    {
+      "name": "triggerRemove",
+      "type": "timer",
+      "config": "* * * 1 * * *"
+    }
+  ]
+}
+```
 
 ## 云函数示例
 
 ```js
-
 const cloud = require('wx-server-sdk');
 
 cloud.init({
@@ -35,16 +65,51 @@ const db = cloud.database();
 exports.main = async (event, context) => {
 
   /**
-   * _.all/elemMatch/size/push/pull/addToSet/...
-   * _.geoNear/geoWithin/geoIntersects
-   * _.expr
-   * _.set/remove/inc/mul/min/max/rename
+   * 查询：
+   * exists/mod
+   * and/or/not/nor
+   * eq/neq/le/lee/gt/gte/in/nin
+   * all/elemMatch/size
+   * geoNear/geoWithin/geoIntersects 地理位置操作
+   * expr 表达式
+   * 
+   * 更新：
+   * set/remove/inc/mul/min/max/rename
+   * push/pop/unshift/shift/pull/pullAll/addToSet/size/slice
+   * and/or/not
+   * cmp/eq/neq
+   * cond/ifNull/switch
+   * dateFromString/dateToString/year/dayOfYear
+   * literal 直接返回一个字面量
+   * mergeObjects/objectToArray
+   * setUnion/setDifference/setEquals/setIntersection
+   * split/substr/toLower
+   * avg/first/last/sum/max/min/mergeObjects
+   * 
    */
-
   const _ = db.command
+
+  /**
+   * replaceRoot({ newRoot: $.mergeObjects([$.arrayElemAt('', 0), '$$ROOT']) }) 
+   * sample 随机选取指定的数量
+   * sortByCount
+   * unwind 拆分数组，文档会从一个变成多个
+   * 
+   * 聚合操作符
+   * mod/multiply/pow/add/subtract/trunc
+   * arrayElemAt/arrayToObject/
+   */
   const $ = db.command.aggregate
 
   const { OPENID, APPID } = cloud.getWXContext()
+
+  /**
+   * 0. 统计匹配条数
+   * total
+   */
+  const res = await db.collection('user')
+    .count()
+
   /**
    * 1. 添加数据
    * 成功返回
@@ -56,7 +121,7 @@ exports.main = async (event, context) => {
   const res = await db.collection('user')
     .add({
       data: {
-        // _id: 'test-1' // 可选自定义 _id
+        // _id 系统自动设置 或 自己配置
         name: 'admin',
         createTime: db.serverDate() // 服务器时间
       }
@@ -64,32 +129,41 @@ exports.main = async (event, context) => {
 
   /**
     * 2. 查询数据
-    * 成功返回
+    * 查询一个记录
     * success: false 查询值为 null
-    * data: [] 查询存在满足值
+    * data: {}
     * errMsg
     */
   const res = await db.collection('user')
-    .doc('test-1')
+    .doc('_id')
     .get()
 
+  /**
+    * 2.1 查询数据 where
+    * 查询多个记录
+    * success: false 查询值为 null
+    * data: [] 
+    * errMsg
+    */
   const res = await db.collection('user')
     .where(_.and([
       {
         age: _.gt(18).and(_.lt(55))
       },
       {
-        name: /java/i
+        name: /java/i // db.RegExp({ regexp: 'java', option: 'i' })
       }
     ]))
-    // 指定返回的字段
+    /**
+     * field 普通查询指定返回字段
+     *  */ 
     .field({
       _id: true,
       name: true
     })
     .orderBy('name', 'desc')
     .skip(0)
-    .limit(10)
+    .limit(10) // 最大上限 20
     .get()
 
   /**
@@ -127,43 +201,39 @@ exports.main = async (event, context) => {
 
   /**
    * 5. 聚合
-   * match 筛选，相当于 where
-   * group 分组
-   * lookup 关联查询
-   * project 把指定字段传递给下一个流水线
-   * unwind 拆分数组(变成多个文档，值分别对应数组的每个元素)
-   * addFields
-   * limit
-   * sort
-   * sample
-   * -----
-   * 聚合表达式：$profile.name 
-   * 算术：abs/add/ceil/floor/divide/mod/multiply/subtract/trunc
-   * 数组：arrayElemAt/concatArrays/filter/...
-   * 布尔：and/or/not
-   * 比较：cmp/eq/...
-   * 条件：cond/ifNull/switch
-   * 日期：year/...
-   * 常量：literal
-   * 对象：mergeObjects/objectToArray
-   * 集合：allElementsTrue/setUnion/...
-   * 字符串：dateToString/split/substr/...
-   * 累加：addToSet/avg/max/sum/...
-   * 变量：let
-   *  */ 
-
-  // 按 .account 分组,统计 age
-  const res = await db.collection('user')
+   */ 
+  const res = await db.collection('books')
     .aggregate()
     .group({
-      _id: "$account",
-      total: { $sum: '$age' }
+      /**
+       * 按 category 字段分组
+       *  */ 
+      _id: "$category",
+      total: $.sum('$sales')
     })
     .end()
 
-  // 6. 事务
+  /**
+   * 6. 事务
+   *  */
+  const result = await db.runTransaction(async transaction => {
+    try {
+      // todo 数据库多操作
+      if () {
+        return {} // runTransaction resolve 的结果
+      } else {
+        await transaction.rollback(-100) // runTransaction reject 的结果
+      }
 
-  // 7. 索引 默认 _id 字段已经有索引，无需手动创建
+    } catch (e) {
+
+    }
+  })
+
+  /**
+   * 7. 索引
+   * 云开发控制台 - 数据库 - 可设置索引字段的排序(查询只能使用的排序)
+   *  */ 
   const res = db.collection('user')
     .where(
       _.or([
@@ -189,10 +259,19 @@ exports.main = async (event, context) => {
     .match({
       created_at: _.gte(new Date('2025-03-01')).lte('2025-03-31')
     })
+    /**
+     * 自定义连接条件(或 多相等条件)
+     * lookup({
+     *   from, 
+     *   left: {  }, 
+     *   pipeline: [], 
+     *   as 
+     * })
+     */
     .lookup({
-      from: 'product',    // 关联 product 表
-      localField: 'code', // 关联字段 user.code -> product.code
-      foreignField: 'code',
+      from: 'product',    // 被关联 product 表
+      localField: 'code', // 主表 user user.code
+      foreignField: 'code', // 被关联 product 表 product.code
       as: 'product_info'
     })
     .addFields({
@@ -209,49 +288,8 @@ exports.main = async (event, context) => {
 };
 ```
 
-## 云存储
-
-## 高级日志
-
-云开发 - 云函数 - 高级日志
-
-## 定时触发器
-
 ## 时区
 
 默认时区 UTC+0, 设置 UTC+8 时，需要设置函数的环境变量 `TZ: Asia/Shanghai`
 
-## 消息推送
-
-云开发 - 设置 - 其他设置
-
-目前仅支持客服消息推送(服务器主动向用户发送消息)
-
-```js
-// 云函数入口函数
-exports.main = async (event, context) => {
-  const wxContext = cloud.getWXContext()
-  
-  await cloud.openapi.customerServiceMessage.send({
-    touser: wxContext.OPENID,
-    msgtype: 'text',
-    text: {
-      content: '收到',
-    },
-  })
-
-  return 'success'
-}
-
-微信云
-```
-
-## 数据模型
-
-提供多端 SDK 可供调用
-
-在初始化 SDK 之后，会自动在 models 上挂载针对当前云开发环境下的数据模型的操作方法
-
-## 内容安全
-
-存放的数据进行内容安全审核，减少提审及运营过程中的违规问题
+## 地理位置

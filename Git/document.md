@@ -14,7 +14,7 @@ git config --global user.email git@git.com
 
 # git help <verb>
 
-git init
+git init --initial-branch=main
 # Untracked -> Index Added
 git add *.js
 

@@ -4,6 +4,10 @@
 
 [MDN web Docs 词汇表](https://developer.mozilla.org/en-US/docs/Glossary)
 
+```js
+// let 不能重复声明，TDZ
+```
+
 ## Data URLs
 
 [MIME_types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types)
@@ -235,6 +239,22 @@ Promise.any() // 返回第一个 fulfill 的 promise, 都拒绝时返回一个�
 Promise.race() // 随着第一个 Promise 的最终状态而确定
 Promise.try(func, arg1, ...) // 接受任何回调
 Promise.withResolvers() // 返回 { promise, resolve, reject }
+```
+
+## Modules
+
+```js
+// math.js
+export const pi = 3.14
+export default class RandomNumber {}
+
+// 别名调用
+import * as math from 'math.js'
+math.default
+
+// 解构调用
+import { default as RandomNumber } from 'math.js'
+
 ```
 
 ## 操作符

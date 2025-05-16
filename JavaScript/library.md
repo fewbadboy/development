@@ -41,19 +41,6 @@ flv.js
 [video js](https://docs.videojs.com/)
 [LivePlayer](https://www.liveqing.com/docs/manuals/LivePlayer.html)
 
-## UI
-
-[ionicons](https://ionic.io/ionicons) 图标， icon font
-[icones](https://icones.js.org/)
-
-[Prime Vue](https://primevue.org/)
-
-[ant design](https://ant.design/)
-
-[Element Plus](https://element-plus.org/)
-
-[UIverse](https://uiverse.io/)
-
 ## 桌面
 
 [electron js](https://www.electronjs.org/)
@@ -105,6 +92,7 @@ vue-puzzle-vcode
 
 ## HTTP 请求
 
+[undici](https://www.npmjs.com/package/undici)
 [axios](https://axios-http.com/)
 
 ```js
@@ -190,6 +178,7 @@ export function downloadURL(fileName, url) {
 
 [GreenSock Animation Platform](https://gsap.com/) 动画
 [easing](https://easings.net/) Easing functions
+
 [lottie](https://airbnb.io/lottie) 解析 Adobe After Effects 导出的 JSON 动画
 
 [auto-animate](https://auto-animate.formkit.com/)
