@@ -1,5 +1,6 @@
 # Commit 规范
 
+[Git commit rules](https://www.conventionalcommits.org)
 [CommitLint](https://github.com/conventional-changelog/commitlint)
 
 ## Commit 消息指导

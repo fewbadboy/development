@@ -1,21 +1,36 @@
 # 工具库
 
+## Logo
+
+[Cool Text](https://cooltext.com/)
+
+## 字体、icon
+
+[google fonts](https://fonts.google.com/)
+[google icons](https://fonts.google.com/icons)
+[ionicons](https://ionic.io/ionicons) 图标， icon font
+[icon 集合](https://icones.js.org/)
+
+## UI
+
+[Prime Vue](https://primevue.org/)
+[Element Plus](https://element-plus.org/)
+[UIverse](https://uiverse.io/)
+
+## color
+
+[duotones](https://duotones.co/)
+[flat ui colors](https://flatuicolors.com/)
+
 ## 图表
 
-[font awesome](https://fontawesome.com/)
-
+[font awesome](https://fontawesome.com/) 使用 icons
 [echarts](https://echarts.apache.org/zh/index.html)
-
-[D3](https://d3js.org/)
-
-[arc gis](https://developers.arcgis.com/)
-
 [vis.js](https://visjs.org/)
-
+[ArcGIS](https://developers.arcgis.com/) SDKs 支持多种语言库
 [AntV](https://antv.antgroup.com/)
-
-[Cytoscape.js](https://js.cytoscape.org/)
-
+[Cytoscape.js](https://js.cytoscape.org/) 网络图可视化
+[Vue Flow](https://vueflow.dev/)
 [p5](https://p5js.org/)
 
 ## canvas
@@ -33,11 +48,9 @@
 
 [Geo JSON 地图数据](https://datav.aliyun.com/portal/school/atlas/area_selector)
 [Geo JSON 数据可视化](https://geojson.io/)
-地理坐标系统转换 [proj4js](https://trac.osgeo.org/proj4js/)
 
 ## 视频
 
-flv.js
 [video js](https://docs.videojs.com/)
 [LivePlayer](https://www.liveqing.com/docs/manuals/LivePlayer.html)
 
@@ -52,7 +65,6 @@ flv.js
 [learn webGL](https://learnwebgl.brown37.net/)
 [webGL fundamentals](https://webglfundamentals.org/webgl/lessons/zh_cn/)
 [webGL2 fundamentals](https://webgl2fundamentals.org/)
-
 [HDR](https://polyhaven.com/hdris/skies)
 
 ## vue
@@ -62,37 +74,16 @@ flv.js
 
 vue-puzzle-vcode
 
-## react
-
-[next.js](https://nextjs.org/)
-
-## 框架
-
-[solid js](https://www.solidjs.com/docs/latest)
-
-[qwik](https://qwik.dev/)
-
-[deno](https://deno.com/)
-
-[nest js](https://nestjs.com/)
-
-## 前端开发解决方案
-
-[Open Tiny](https://opentiny.design/)
-
 ## 文档
 
-[vue press](https://vuepress.vuejs.org/)
 [documentation](https://docus.dev/)
 
 ## 规范
 
 [jsdoc](https://www.jsdoc.com.cn/)
-[Git commit rules](https://www.conventionalcommits.org)
 
 ## HTTP 请求
 
-[undici](https://www.npmjs.com/package/undici)
 [axios](https://axios-http.com/)
 
 ```js
@@ -117,7 +108,10 @@ service.interceptors.response.use(
     } = response
     if (/(blob|arrayBuffer)/.test(responseType)) {
       if (status === 200 && responseType === 'blob' ? size > 0 : arrayBuffer > 0)
-        return Promise.resolve({ data: blobData, disposition: decodeURIComponent(response.headers['content-disposition'])})
+        return Promise.resolve({ 
+          data: blobData,
+          disposition: decodeURIComponent(response.headers['content-disposition'])
+        })
       return Promise.reject(blobData)
     }
   }
@@ -160,36 +154,17 @@ export function downloadURL(fileName, url) {
   a.setAttribute('download', fileName)
   a.click()
 }
-
 ```
-
-[Mock Service Worker](https://mswjs.io/docs/)
-[天气接口](https://openweathermap.org/)
 
 ## 其他
 
 [sonar](https://www.sonarsource.com/) 代码安全检查
-
 [latex](https://latex.js.org/)
-
-[node-webkit](https://nwjs.io/) 直接通过 DOM 方式调用所有的 Node.js 模块
-
 [crypto js](https://cryptojs.gitbook.io/) 加密
-
 [GreenSock Animation Platform](https://gsap.com/) 动画
 [easing](https://easings.net/) Easing functions
-
+[scroll magic](https://scrollmagic.io/)
 [lottie](https://airbnb.io/lottie) 解析 Adobe After Effects 导出的 JSON 动画
-
-[auto-animate](https://auto-animate.formkit.com/)
-
-[heatmap js](https://www.patrick-wied.at/static/heatmapjs/) 热力图
-
-[js13k games](https://js13kgames.com/) js 代码游戏
-
 [create js](https://createjs.com/)
-
-[postcss](https://postcss.org/) 使用 JavaScript 转换 CSS
-[css nano](https://cssnano.github.io/cssnano/) 基于 postcss 插件和环境构建的压缩器
 
 [Browserslist](https://browsersl.ist/)

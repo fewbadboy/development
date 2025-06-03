@@ -4,40 +4,33 @@
 
 [gitignore](https://github.com/github/gitignore)
 
-## 安装及配置
+## 命令
 
 ```shell
+# 查看配置
+git config --list
+
+# 设置用户信息
 git config --global user.name "Git"
 git config --global user.email git@git.com
 
-# 针对特定项目使用不同的用户名称和邮件地址时，运行没 --global 选项的配置即可
+# 凭据管理策略 cache 保存内存，安全，重启失效；store 明文存磁盘，永久保存
+git config --global credential.helper 'cache --timeout=3600' # 缓存一小时
+
+# .gitignore 规则
+# / 开头防止递归， / 结尾指定目录
+# glob 模式 ? 只匹配一个字符， * 匹配零个或多个字符， ** 匹配任意层级的目录，! 表示不忽略
 
 # git help <verb>
 
-git init --initial-branch=main
-# Untracked -> Index Added
-git add *.js
-
-# -a 自动把所有已经跟踪过的文件暂存起来一并提交
-git commit -a -m "initial project"
-
-# 文件的状态
-git status
-
-# 移除文件,之前已经修改过或者放入暂存区的文件
-# 不添加入快照的文件删除无法恢复
-git rm -f log/\*.log
-
-# 移动文件
-git mv file_from file_to
+# -b <branch-name>
+git init --initial-branch=main # default name: master
 ```
 
 ## branch
 
 ```shell
-# HEAD 指向当前所在的分支
-
-# 创建一个可以移动的新的指针
+# 当前所在的提交对象上创建一个指针(分支名)
 git branch testing
 
 # 删除本地分支 dev
@@ -49,9 +42,6 @@ git branch -M main
 # 删除远程分支
 # 服务器的默认名称: origin
 git push origin --delete branch-name
-
-# 显示远程分支
-git branch -r
 ```
 
 ## checkout
@@ -73,11 +63,12 @@ git checkout -- a.txt
 
 ```shell
 # git 克隆的服务器的默认名称: origin
-# -v 显示读写远程仓库使用的 Git 保存的简写与其对应的 URL
+
+# 显示读写远程仓库使用的 Git 保存的简写与其对应的 URL
+git remote -v
 # git remote show <remote> 查看远程仓库的更多信息
 # git remote rename <old> <new>
 # git remote remove <name>
-git remote show
 
 # 添加远程仓库 git remote add <originName> <url>
 git remote add originName https://github.com/fewbadboy/development.git
@@ -86,8 +77,7 @@ git remote add originName https://github.com/fewbadboy/development.git
 # 从远程仓库下载最新的提交、分支和标签，但它并不会自动合并或更新本地分支
 git fetch originName
 
-# 包含了两个操作：git fetch 和 git merge
-# 它从远程仓库下载最新提交，并自动将其合并到当前分支
+# 包含了两个操作：git fetch 和 git merge 它从远程仓库下载最新提交，并自动将其合并到当前分支
 # --rebase 非默认的合并（merge）方式将远程分支的更新整合到当前分支中
 git pull [<远程名>] [<远程分支名>:<本地分支名>]
 
@@ -97,18 +87,15 @@ git push origin master
 
 # 将本地的 master 分支推送到远程 main 分支
 git push origin master:main
-
-# 不想在每一次推送时都输入用户名与密码,保存在内存中几分钟
-git config --global credential.helper cache
 ```
 
 ## commit
 
 ```shell
-# 遗漏文件没添加，或提交信息写错了重新提交
-git add *.doc
+# -a 跳过 git add 步骤
+git commit -a -m "initial project"
 
-# 修补提交(不修改提交信息)
+# 不修改提交信息的前提下，修改上一次提交的内容
 git commit --amend --no-edit
 ```
 
@@ -119,8 +106,7 @@ git commit --amend --no-edit
 git diff
 
 # 已暂存和最后一次提交的文件差异
-# git diff --staged
-git diff --cached
+git diff --staged
 
 # 已提交，未推送 与 远程仓库的文件差异
 git diff master origin/master 
@@ -134,7 +120,6 @@ git diff master origin/master
 
 ```shell
 # 查看提交历史
-
 git log -p -2 # --patch 最近 2 次提交
 git log --stat # 简略统计信息
 git log --pretty=formate:"%h  - %an : %s" --graph # --pretty=oneline
@@ -181,9 +166,7 @@ git push origin -d brach-name
 
 ## rebase
 
-变基：整合来自不同分支的修改
-
-将提交到某一分支上(dev)的所有修改在另一分支(master)上重新引用一次
+将提交到某一分支上(dev)的所有修改都移至另一分支上(master)
 
 ```shell
 git checkout dev
@@ -200,6 +183,8 @@ git rebase --continue
 
 ## reset
 
+取消暂存的文件
+
 ```shell
 # --soft 仅仅恢复头指针，其他的不变
 git reset --soft
@@ -209,8 +194,8 @@ git reset --mixed
 
 # --hard 一切全部恢复（重置了工作目录和暂存区）
 # 每次提交包含一个指向上次提交对象(父对象)的指针
-# HEAD 指向当前分支最新提交的引用
-git reset --hard HEAD^2
+# HEAD 上一次提交的快照，下一次提交的父结点
+git reset --hard HEAD
 ```
 
 ## restore
@@ -220,18 +205,6 @@ git reset --hard HEAD^2
 git restore --staged a.txt
 ```
 
-## show
-
-```shell
-# 查看标签信息和与之对应的提交信息
-git show v2.0
-```
-
 ## tag
 
-```shell
-# 查看 --list
-git tag -l "v1.8.5*"
-# 后期打标签
-git tag -a v3.0 9fceb02
-```
+给某个提交打"别名"

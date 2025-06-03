@@ -1,37 +1,5 @@
 # Design
 
-## Logo
-
-[Cool Text](https://cooltext.com/)
-
-## 字体、icon
-
-[google fonts](https://fonts.google.com/)
-
-[google icons](https://fonts.google.com/icons)
-
-[ionicons](https://ionic.io/ionicons) 图标， icon font
-
-[icon 集合](https://icones.js.org/)
-
-## UI
-
-[Prime Vue](https://primevue.org/)
-
-[ant design](https://ant.design/)
-
-[Element Plus](https://element-plus.org/)
-
-[UIverse](https://uiverse.io/)
-
-[Material UI](https://mui.com/)
-
-## color
-
-[duotones](https://duotones.co/)
-
-[flat ui colors](https://flatuicolors.com/)
-
 ## 图片
 
 [hippopx](https://www.hippopx.com/zh)
@@ -47,9 +15,7 @@
 ## 工具
 
 [Excalidraw](https://plus.excalidraw.com/) 构思白板
-
 [tiny png](https://tinypng.com/) 压缩图片
-
 [screen to gif](https://www.screentogif.com/)
 
 ## Hacker News

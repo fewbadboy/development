@@ -17,7 +17,7 @@ view.getUint8(1) // 255
 
 ```js
 // type MIME Type https://www.iana.org/assignments/media-types/media-types.xhtml
-new Blob(array, { type: '' })
+new Blob(array, { type: 'application/octet-stream' })
 URL.createObjectURL(File/Blob/MediaSource)
 ```
 

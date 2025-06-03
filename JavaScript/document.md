@@ -15,14 +15,17 @@
 
 ## shallow clone
 
+复制一个对象的第一层属性，对于嵌套的对象或数组，浅拷贝并不会递归地复制它们的内部数据，而是复制它们的引用
+
 ```js
-// globalThis
 const obj = { name: '张三', age: 18, skill: ['javascript', 'python'] }
-const copy = Object.assign(obj, { sex: '男' })
+const copy = Object.assign({}, obj, { sex: '男' })
 obj.name = '李四'
-// copy.name '李四'
+// copy.name '张三'
 
 const shallow = { ...obj }
+obj.name = '李四'
+// shallow.name '张三'
 obj.skill.push('java')
 // shallow.skill ['javascript', 'python', 'java']
 
@@ -81,7 +84,7 @@ arr.at(2).name = 'hello'
 `[]` 获取属性名时，任何非字符串对象都会通过 `toString` 方法转换
 
 ```js
-Object.assign(target, source1, ...) // copy 所有自身可枚举属性
+Object.assign(target, source1, ...) // copy 所有自身可枚举属性, 返回第一个参数
 Object.create(proto, propertiesObject)
 Object.freeze(obj) // 阻止对象扩展
 object.fromEntries(iterable) // reverse of Object.entries()
@@ -155,6 +158,19 @@ String.prototype.split(separator, limit)
 String.prototype.trim()
 String.prototype.trimStart()
 String.prototype.trimEnd()
+```
+
+## Math
+
+```js
+// 负数主要，判断奇数同样通过 0 去实现
+function isEven(n) {
+  return n%2 === 0
+}
+
+function isOdd(n) {
+  return n%2 !== 0
+}
 ```
 
 ## Number
@@ -255,9 +271,33 @@ math.default
 // 解构调用
 import { default as RandomNumber } from 'math.js'
 
+// 重导出
+export * from 'math.js'
 ```
 
 ## 操作符
+
+[优先级](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_precedence#%E6%B1%87%E6%80%BB%E8%A1%A8)
+
+### 解构
+
+取出数组或对象中的值，赋值给其他变量
+
+### 幂
+
+```js
+2 ** 10 // 1024 
+```
+
+### in
+
+指定属性在指定对象或原型链中
+
+### instanceof
+
+### ??
+
+左侧为 null 或 undefined 时返回右侧操作数
 
 ### 计算属性
 
@@ -273,6 +313,83 @@ const person = {
 ### 属性访问器
 
 分别是点和方括号
+
+## Proxy
+
+```js
+const target = {}
+const proxy = new Proxy(target, {
+  get(target, property, receiver){},
+  set(target, property, value, receiver){
+    return true // 代表属性设置成功
+  },
+  apply(target, thisArg, argumentsList){},
+  defineProperty(target, property, descriptor) {},
+  deleteProperty(target, property) {},
+  getPrototypeOf(target) {},
+  setPrototypeOf(target, prototype) {},
+})
+```
+
+```js
+const deps = new Map()
+
+let activeEffect = null
+function watchEffect(effect) {
+  activeEffect = effect
+  effect()
+  activeEffect = null
+}
+
+function reactive(object) {
+  return new Proxy(object, {
+    get(target, key) {
+      if (!deps.has(key)) {
+        // 简易收集依赖
+        deps.set(key, [])
+      }
+      if (activeEffect) deps.get(key).push(activeEffect)
+      return target[key]
+    },
+    set(target, key, value) {
+      target[key] = value
+      // 触发更新
+      if (deps.has(key)) {
+        deps.get(key).forEach((fn) => fn())
+      }
+      return true
+    }
+  })
+}
+
+const state = reactive({
+  message: 'hello'
+})
+
+input.addEventListener('input', (e) => {
+  // 触发 set
+  state.message = e.target.value
+})
+
+watchEffect(() => {
+  // 触发 get
+  text.textContent = state.message
+})
+
+```
+
+## Reflect
+
+```js
+Reflect.apply(target, thisArgument, argumentsList)
+Reflect.construct(target, argumentsList[, newTarget])
+Reflect.get(target, propertyKey[, receiver])
+Reflect.set(target, propertyKey, value[, receiver])
+Reflect.getPrototypeOf(target)
+Reflect.setPrototypeOf(target, prototype)
+Reflect.isExtensible(target)
+Reflect.preventExtensions(target)
+```
 
 ## Encode
 

@@ -2,9 +2,9 @@
 
 ## badge-maker
 
-badge
-
 ## cssnano
+
+基于 postcss 快速压缩
 
 ## picocolors
 
@@ -12,7 +12,7 @@ badge
 
 ## chokidar
 
-解决 fs.watch/watchFile 跨平台的部分问题
+跨平台文件监听库
 
 ## date-fns
 
@@ -26,29 +26,25 @@ badge
 
 过程命令执行
 
-## fast-glob
+## js-cookie
 
-## @faker-js/faker
-
-创建 mock 数据
+轻量级 处理 cookies
 
 ## jsencrypt
 
 ## husky
 
-## prompts
+## oxlint
 
-## inquirer
+高性能编译器
+
+## release-it
+
+自动执行版本控制和包发布相关任务
+
+## @inquirer/prompts
 
 创建交互式的 CLI prompts
-
-## iconv-lite
-
-转换成不同的编码格式
-
-## minimist
-
-parse argument options
 
 ## mitt
 
@@ -56,35 +52,21 @@ event emitter / pubsub
 
 ## mqtt
 
-## path-browserify
+## mock 数据
 
-浏览器端实现 Mode.js path 模块
+### @faker-js/faker
 
-## plop
+创建 mock 数据
 
-Micro-generator framework
-
-## progress
-
-create a progress bar in the console
-
-## shortcuts
-
-- shosho
+## shosho
 
 快捷方式设置
-
-## SortableJS
-
-[SortableJS](https://github.com/SortableJS)
 
 ## svgo
 
 SVG Optimizer
 
-## serve-static
-
-Create a new middleware function to serve files from within a given root directory
+## preview html
 
 ```js
 var express = require('express')
@@ -98,11 +80,7 @@ app.listen(3000)
 
 ## @tweenjs/tween.js
 
-```js
-import * as TWEEN from '@tweenjs/tween.js'
-```
-
-## path-to-regexp
+动画
 
 ## p-retry
 
@@ -112,14 +90,11 @@ import * as TWEEN from '@tweenjs/tween.js'
 
 转换字节形式: 1337 → 1.34 kB
 
-## roughjs
-
-手绘风格 Canvas
-
 ## xstate
 
 状态管理和编排
 
-## undici
+## axios/undici
 
-HTTP/1.1 客户端
+axios 广泛应用于前端
+undici 完全支持 HTTP/1.1 和 HTTP/2，专门为 Node.js 环境设计

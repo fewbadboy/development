@@ -64,36 +64,6 @@ console.log('in main, a.done = %j, b.done = %j', a.done, b.done);
 - `process.nextTick()` 是一个异步API, 从技术上讲不属于事件循环
 - `Promise.then/catch/finally` 回调
 
-```js
-setTimeout(() => {
-  console.log('timeout');
-}, 0);
-
-setImmediate(() => {
-  console.log('immediate');
-});
-
-new Promise((resolve, reject) => {
-  console.log('promise')
-  resolve('hello')
-}).then((data) => {
-  console.log(data)
-})
-
-process.nextTick(() => {
-  console.log('tick')
-})
-
-console.info('info')
-
-// promise
-// info
-// tick
-// hello
-// timeout
-// immediate
-```
-
 ## 非阻塞 I/O
 
 libuv 负责处理事件循环、异步 I/O、线程池、定时器等核心功能

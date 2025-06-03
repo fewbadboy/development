@@ -84,7 +84,6 @@
 
 - accent-color: 设置 input 元素 type 为 checkbox, radio, range 和 progress 元素背景色
 - all：所有属性的简写
-- appearance: 用平台的样式展示 UI 样式
 - backdrop-filter: 将过滤器效果应用于元素后面的区域
 - backface-visibility: 设置元素的背面朝向用户时是否可见
 - background
@@ -93,7 +92,7 @@
   - origin: border/padding/content-box
   - repeat: space(尽可能重复，不进行裁剪) round(拉伸)
 - block-size: 依据 writing-mode 设置宽高
-- inline-size
+- inline-size: 依据 writing-mode 设置宽高
 - border
   - collapse: table 元素内部单元格是否共享或单独的边框
   - image-slice:  将指定的图像分成多个区域
@@ -101,18 +100,15 @@
   - block: 依据 writing-mode, direction, 和 text-orientation 简写
   - inline: 同上
 - box
+  - shadow: inset offset-x offset-y blur-radius spread-radius color
   - sizing: 设置如何计算元素的总宽度和高度
 - caret-color: 插入符号颜色
 - clip-path: 创建剪辑区域
-- color-scheme: 颜色方案
+- color-scheme: 颜色方案(normal,dark,light)
 - column
   - count: 列数目
   - rule: rule-width, rule-style, rule-color 的简写
-- fill
-  - opacity
-- flex
-- float: 从页面的正常流程中移除，但仍保留为流程的一部分
-- gap
+- float: 从页面的正常流程中移除，但仍保留为流程的一部分(文字环绕)
 - grid
   - auto-flow: 控制自动放置算法
   - auto-columns: min-content / minmax(20px, auto) / auto / 1fr
@@ -124,7 +120,7 @@
   - image: 用作元素的遮罩层
   - repeat
 - object
-  - fit: 调整元素(img,video)大小适应容器
+  - fit:调整元素(img,video)大小适应容器
   - position
 - offset: 沿定义路径对元素进行动画
   - anchor
@@ -133,7 +129,7 @@
   - position
   - rotate
 - outline
-  - offset
+  - offset: 轮廓偏移
 - place:  允许你同时沿块和行内方向对齐内容, align/justify-* 的简写
   - self
   - content
@@ -146,14 +142,9 @@
   - outside
   - margin
   - image-threshold
-- stop: svg 渐变
+- stop:
   - color
   - opacity
-- stroke
-  - dasharray
-  - dashoffset
-  - opacity
-  - width
 - text
   - decoration: 简写
   - emphasis: 简写 *-style/color
@@ -165,11 +156,7 @@
 - transform
   - origin: 默认 center
 - transition: 过度动画
-  - property
-  - duration
   - timing-function: ease-in-out, linear, steps(integer, step-position) 位置默认 end
-  - delay
-- translate
 - user-select: 控制用户是否可以选择文本
 - visibility: visible/hidden
 - white-space: 空白处理
@@ -188,13 +175,9 @@
 
 ## 函数
 
-- conic-gradient
-- cubic-bezier
 - drop-shadow
 - fit-content
 - inset
 - minmax
-- mod
 - path
-- polygon
 - steps
