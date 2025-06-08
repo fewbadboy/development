@@ -306,6 +306,10 @@ const attrs = useAttrs()
   <template #header="slotProps">
     <!-- content for the header slot -->
   </template>
+  <template #[dynamicSlotName]="slotProps">
+    <!-- 动态插槽名，不能绑定 name 属性 -->
+  </template>
+
 </BaseLayout>
 ```
 
@@ -427,3 +431,8 @@ const node = h(
   ]
 )
 ```
+
+## 防抖、节流、中断请求
+
+防抖、节流：控制请求点击频率
+中断请求(`AbortController`)：响应时间久的请求的处理

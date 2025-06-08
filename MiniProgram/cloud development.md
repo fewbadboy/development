@@ -53,6 +53,10 @@ const {
 
 ## 云函数示例
 
+注意：
+**排序的时候,为保证排序的稳定性和可靠性，需要加一个次排序的字段(保证唯一性)，从而避免跳页、重复、丢失问题**
+**数据库并不保证重复值之间的记录顺序**
+
 ```js
 const cloud = require('wx-server-sdk');
 
@@ -61,89 +65,36 @@ cloud.init({
 });
 const db = cloud.database();
 
+const pageSize = 20
+
 // 数据库操作示例
 exports.main = async (event, context) => {
 
-  /**
-   * 查询：
-   * exists/mod
-   * and/or/not/nor
-   * eq/neq/le/lee/gt/gte/in/nin
-   * all/elemMatch/size
-   * geoNear/geoWithin/geoIntersects 地理位置操作
-   * expr 表达式
-   * 
-   * 更新：
-   * set/remove/inc/mul/min/max/rename
-   * push/pop/unshift/shift/pull/pullAll/addToSet/size/slice
-   * and/or/not
-   * cmp/eq/neq
-   * cond/ifNull/switch
-   * dateFromString/dateToString/year/dayOfYear
-   * literal 直接返回一个字面量
-   * mergeObjects/objectToArray
-   * setUnion/setDifference/setEquals/setIntersection
-   * split/substr/toLower
-   * avg/first/last/sum/max/min/mergeObjects
-   * 
-   */
+  const { pageIndex } = event
+
   const _ = db.command
 
-  /**
-   * replaceRoot({ newRoot: $.mergeObjects([$.arrayElemAt('', 0), '$$ROOT']) }) 
-   * sample 随机选取指定的数量
-   * sortByCount
-   * unwind 拆分数组，文档会从一个变成多个
-   * 
-   * 聚合操作符
-   * mod/multiply/pow/add/subtract/trunc
-   * arrayElemAt/arrayToObject/
-   */
   const $ = db.command.aggregate
 
   const { OPENID, APPID } = cloud.getWXContext()
 
   /**
-   * 0. 统计匹配条数
-   * total
+   * 1. 统计匹配条数
+   * { total, errMsg }
    */
-  const res = await db.collection('user')
-    .count()
+  const res = await db.collection('user').count()
 
   /**
-   * 1. 添加数据
-   * 成功返回
-   * _id
-   * errMsg
-   * 
-   * 添加索引冲突时 抛出 error
-   */
-  const res = await db.collection('user')
-    .add({
-      data: {
-        // _id 系统自动设置 或 自己配置
-        name: 'admin',
-        createTime: db.serverDate() // 服务器时间
-      }
-    });
-
-  /**
-    * 2. 查询数据
-    * 查询一个记录
-    * success: false 查询值为 null
-    * data: {}
-    * errMsg
+    * 2. 查询数据-单条(默认主键 _id 的快捷查询方式)
+    * 查询条件不存在时返回 data:{}
+    * { data: { _id, ...}, errMsg }
     */
-  const res = await db.collection('user')
-    .doc('_id')
-    .get()
+  const res = await db.collection('user').doc('_id').get()
 
   /**
-    * 2.1 查询数据 where
-    * 查询多个记录
-    * success: false 查询值为 null
-    * data: [] 
-    * errMsg
+    * 2. 查询数据-文档/集合
+    * 查询条件不存在时返回 data: []
+    * { data: [], errMsg }
     */
   const res = await db.collection('user')
     .where(_.and([
@@ -155,34 +106,61 @@ exports.main = async (event, context) => {
       }
     ]))
     /**
-     * field 普通查询指定返回字段
-     *  */ 
+     * 普通查询指定返回字段
+     * 不支持字段重命名，不支持表达式
+     * 支持字段嵌套选择(不解构或提升字段，也不会消除嵌套解构)
+     */ 
     .field({
-      _id: true,
+      _id: true, // 1 或 -1
       name: true
     })
     .orderBy('name', 'desc')
-    .skip(0)
-    .limit(10) // 最大上限 20
+    /**
+     * 默认不写分页时，云开发平台默认 get() 返回 20 条记录，永远从第 0 条开始
+     * 建议分页时 limit 参数效值 20
+     * 获取大数据量数据：循环分页拉取
+     * 
+     * 单独获取时可以 设置 limit 最大 100
+     */
+    .skip((pageIndex - 1) * pageSize)  
+    .limit(pageSize)
     .get()
 
   /**
-   * 3. 更新数据
-   * 成功返回
-   * stats: { updated: 1 }
-   * errMsg
+   * 3. 添加数据, 多数据添加 Promise.all()
+   * 添加数据存在重复索引属性时，会直接抛错
+   * { _id, errMsg }
    */
-  // 更新部分字段
   const res = await db.collection('user')
-    .doc('test-1')
+    .add({
+      data: {
+        // _id 系统自动设置 或 自己配置
+        name: 'admin',
+        createTime: db.serverDate() // 服务器时间
+      }
+    });
+
+  /**
+   * @see https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/collection/Collection.update.html
+   * 4. 更新数据
+   * where 条件在事务中可以
+   * 更新部分字段
+   *  { stats: { updated: 1 }, errMsg }
+   */
+  const res = await db.collection('user')
+    .doc('_id')
     .update({
       data: {
         age: 31
       }
     })
-  // 整体更新-未指定的数据被清除
+  /**
+   * 整体更新
+   * 创建 或 修改
+   * { _id, stats: { created: 1, updated: 1 }, errMsg }
+   */ 
   const res = await db.collection('user')
-    .doc('test-1')
+    .doc('_id')
     .set({
       data: {
         age: 31
@@ -190,48 +168,62 @@ exports.main = async (event, context) => {
     })
 
   /**
-   * 4. 删除数据
-   * 成功返回
-   * stats: { removed: 1 }
-   * errMsg
+   * 5. 删除数据
+   * { stats: { removed: 1 }, errMsg }
    */
   const res = await db.collection('user')
-    .doc('test-1')
+    .doc('_id')
     .remove()
 
   /**
-   * 5. 聚合
+   * 6. 聚合
+   * @see https://developers.weixin.qq.com/miniprogram/dev/wxcloudservice/wxcloud/reference-sdk-api/database/Command.html
+   * { list: [], errMsg }
    */ 
-  const res = await db.collection('books')
-    .aggregate()
+  const res = await db.collection('books').aggregate()
+    // 添加字段，也可嵌套添加字段
+    .addFields({
+      order: '1'
+    })
+    // 创建新文档解构
     .group({
       /**
+       * _id: null, 全表作为一组
        * 按 category 字段分组
+       * 累计器必须是以下操作符之一：
+       * addToSet
+       * avg
+       * first
+       * last
+       * max
+       * min
+       * push
+       * stdDevPop
+       * stdDevSamp
+       * sum
+       * 
+       * 内存限制：该阶段有 100M 内存使用限制
        *  */ 
       _id: "$category",
       total: $.sum('$sales')
     })
+    /**
+     * 过滤显示字段
+     * 支持算数表达式 $.floor/multiply 等
+     */ 
+    .project({
+      category: 1,
+      total: 0 // 除去字段
+    })
+    .sort({ category: -1 }) // 降序
     .end()
 
   /**
-   * 6. 事务
-   *  */
-  const result = await db.runTransaction(async transaction => {
-    try {
-      // todo 数据库多操作
-      if () {
-        return {} // runTransaction resolve 的结果
-      } else {
-        await transaction.rollback(-100) // runTransaction reject 的结果
-      }
-
-    } catch (e) {
-
-    }
-  })
+   * 7. 事务
+   */
 
   /**
-   * 7. 索引
+   * 8. 索引
    * 云开发控制台 - 数据库 - 可设置索引字段的排序(查询只能使用的排序)
    *  */ 
   const res = db.collection('user')
@@ -241,7 +233,7 @@ exports.main = async (event, context) => {
           updated_at: _.gte(startTime).and(_.lte(endTime))
         },
         {
-          updated_at: _.exists(false), // 仅判断不存在
+          updated_at: _.exists(false),
           created_at: _.gte(startTime).and(_.lte(endTime))
         }
       ])
@@ -251,7 +243,7 @@ exports.main = async (event, context) => {
     .get()
   
   /**
-   * 8. 联合查询
+   * 9. 联合查询
    * list: [],
    * errMsg
    */
@@ -259,15 +251,6 @@ exports.main = async (event, context) => {
     .match({
       created_at: _.gte(new Date('2025-03-01')).lte('2025-03-31')
     })
-    /**
-     * 自定义连接条件(或 多相等条件)
-     * lookup({
-     *   from, 
-     *   left: {  }, 
-     *   pipeline: [], 
-     *   as 
-     * })
-     */
     .lookup({
       from: 'product',    // 被关联 product 表
       localField: 'code', // 主表 user user.code
@@ -278,7 +261,7 @@ exports.main = async (event, context) => {
       unit_price: { $arrayElemAt: ["$product_info.price", 0] }, // 获取单价
       total_price: { 
         $multiply: ["$quantity", { $arrayElemAt: ["$product_info.price", 0] }] 
-      } // 计算单项订单总价
+      }
     })
     .group({
       _id: null,                 // 统计所有订单

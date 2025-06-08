@@ -54,11 +54,6 @@
 [video js](https://docs.videojs.com/)
 [LivePlayer](https://www.liveqing.com/docs/manuals/LivePlayer.html)
 
-## 桌面
-
-[electron js](https://www.electronjs.org/)
-[cordova](https://cordova.apache.org/)
-
 ## 3D
 
 [book shaders](https://thebookofshaders.com/)

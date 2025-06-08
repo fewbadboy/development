@@ -102,6 +102,7 @@
 - box
   - shadow: inset offset-x offset-y blur-radius spread-radius color
   - sizing: 设置如何计算元素的总宽度和高度
+  - decoration-break: clone/slice 元素内容跨行渲染方式
 - caret-color: 插入符号颜色
 - clip-path: 创建剪辑区域
 - color-scheme: 颜色方案(normal,dark,light)
@@ -111,9 +112,9 @@
 - float: 从页面的正常流程中移除，但仍保留为流程的一部分(文字环绕)
 - grid
   - auto-flow: 控制自动放置算法
-  - auto-columns: min-content / minmax(20px, auto) / auto / 1fr
-  - grid-template-areas/rows/columns
-- inset: 对应 top, bottom, right 和 left 属性
+  - auto-columns: min-content / minmax(20px, auto) / auto / 1fr 超出手动定义的行列后浏览器自动添加的
+  - grid-template-areas/rows/columns 手动定义的行列
+- inset: top, bottom, right 和 left 属性值的简写
   - block-start/end
   - inline-start/end
 - mask: 通过在特定点遮罩或剪切图像来隐藏元素

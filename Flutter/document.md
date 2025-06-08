@@ -6,6 +6,8 @@ flutter upgrade
 dart --version
 ```
 
+构建 ios 需要 macOS 和 Xcode
+
 ## Design System
 
 [Material 3](https://m3.material.io/)
