@@ -1,6 +1,13 @@
 # document
 
-## 
+## Docker
+
+```shell
+# 重新加载 nginx 配置文件
+docker exec nginx-container nginx -t # 检查语法及测试成功
+
+docker exec nginx-container nginx -s reload
+```
 
 ## 配置
 
@@ -8,7 +15,7 @@
 # nginx.conf
 
 http {
-    
+
 
     # 负载均衡 加权轮询
     upstream backend {

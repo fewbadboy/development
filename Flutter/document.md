@@ -4,6 +4,8 @@
 flutter channel stable
 flutter upgrade
 dart --version
+
+flutter create code_lab
 ```
 
 构建 ios 需要 macOS 和 Xcode

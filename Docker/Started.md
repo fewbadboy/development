@@ -49,14 +49,15 @@ share multi-container application
 # docker-compose.yml file
 services:
   app:
-    image: node:22.12.0-alpine
-    command: sh -c "yarn install && yarn run dev"
+    image: node:22.16.0-alpine
+    command: sh -c "npm install -g pnpm && pnpm install && pnpm dev"
     # 宿主机:容器
     ports:
       - 3000:3000
     working_dir: /app
     volumes:
       - ./:/app
+      - /app/node_modules # 避免容器 /app/node_modules 被宿主机的覆盖
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
@@ -82,7 +83,7 @@ volumes:
 ```
 
 ```shell
-# see version 
+# see version
 docker compose version
 
 # at the root, create docker-compose.yml file
@@ -92,7 +93,7 @@ docker compose up -d
 
 # give you live output as it’s generated
 # to see specific service, add the service name to the end of the logs command
-# eg. docker compose logs -f app 
+# eg. docker compose logs -f app
 docker compose logs -f
 
 # tear it all down

@@ -1,5 +1,12 @@
 # document
 
+## InnoBD
+
+索引本质都是 B+ 树(所有数据在叶子节点)实现
+
+- 一级索引：主键索引保存整行数据，
+- 二级索引：保存主键(需要回表)
+
 ## 临时表
 
 只在当前连接可见，关闭连接时，自动删除并释放所有空间
@@ -31,10 +38,10 @@ EXPLAIN SELECT * FROM records WHERE id BETWEEN 80001 AND 90000;
 
 ## 优化
 
-1. 为 WHERE 子句， JOIN 条件， ORDER BY 和 GROUP BY 子句中常用列创建索引
+1. 为 WHERE 子句， JOIN 条件， ORDER BY 和 GROUP BY 子句中常用列创建索引(避免函数或表达式包裹索引列)
 2. 覆盖索引(联合索引包含所有要查询的列)
 3. 分页优化：大数据集分页 LIMIT 和 OFFSET 导致性能下降，可以使用索引列或主键列优化
-    - `SELECT * FROM table WHERE id > ? ORDER BY id LIMIT 10`
+   - `SELECT * FROM table WHERE id > ? ORDER BY id LIMIT 10`
 4. 使用 EXISTS 代替 IN 检查存在性条件
 5. 仅选择必要的列
 6. 启用缓存减少频繁的相同查询

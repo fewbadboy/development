@@ -34,10 +34,8 @@
 */
 .parent {
   & ~ .child {
-
   }
 }
-
 ```
 
 ## 简写属性
@@ -95,7 +93,7 @@
 - inline-size: 依据 writing-mode 设置宽高
 - border
   - collapse: table 元素内部单元格是否共享或单独的边框
-  - image-slice:  将指定的图像分成多个区域
+  - image-slice: 将指定的图像分成多个区域
   - image-outset: 设置元素的边框图像与其边框之间的距离
   - block: 依据 writing-mode, direction, 和 text-orientation 简写
   - inline: 同上
@@ -114,9 +112,12 @@
   - auto-flow: 控制自动放置算法
   - auto-columns: min-content / minmax(20px, auto) / auto / 1fr 超出手动定义的行列后浏览器自动添加的
   - grid-template-areas/rows/columns 手动定义的行列
+- gap: row/column-gap
 - inset: top, bottom, right 和 left 属性值的简写
   - block-start/end
   - inline-start/end
+- justify-content: space-evenly 着容器的主轴，使得每个项目周围都有相等的空间
+- justify-items/self: 仅对 grid 布局有效
 - mask: 通过在特定点遮罩或剪切图像来隐藏元素
   - image: 用作元素的遮罩层
   - repeat
@@ -131,14 +132,14 @@
   - rotate
 - outline
   - offset: 轮廓偏移
-- place:  允许你同时沿块和行内方向对齐内容, align/justify-* 的简写
+- place: 允许你同时沿块和行内方向对齐内容, align/justify-\* 的简写
   - self
   - content
   - items
 - resize: boh/horizontal/vertical 元素可调整大小
 - scroll
   - behavior: smooth/auto
-- scrollbar-*
+- scrollbar-\*
 - shape: 元素外添加一个形状
   - outside
   - margin
@@ -148,7 +149,7 @@
   - opacity
 - text
   - decoration: 简写
-  - emphasis: 简写 *-style/color
+  - emphasis: 简写 \*-style/color
   - indent: 设置块中文本行前的空格的长度
   - overflow: 溢出内容样式
   - shadow

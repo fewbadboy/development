@@ -7,11 +7,11 @@ npm install --registry=https://registry.npmmirror.com
 
 ## semantic versioning
 
-|Stage|Code states|Example version|
-|:----:|:----:|:----:|
-|Major release|Changes that break backward compatibility|2.0.0|
-|Minor release|new features|1.1.0|
-|Patch release|bug fixes|1.0.1|
+|     Stage     |                Code states                | Example version |
+| :-----------: | :---------------------------------------: | :-------------: |
+| Major release | Changes that break backward compatibility |      2.0.0      |
+| Minor release |               new features                |      1.1.0      |
+| Patch release |                 bug fixes                 |      1.0.1      |
 
 continuous integration (CI) / deployment (CD)
 
@@ -33,7 +33,7 @@ npm access restricted package-name
 # Random errors
 npm cache clean --force
 
-# 
+#
 npm install --verbose # npm install 报错可以查看更多详情
 
 # 管理配置文件

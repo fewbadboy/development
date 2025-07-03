@@ -18,9 +18,9 @@ footer?
 type:
 
 1. build: 影响 build 或外部依赖项的更改
-2. ci: CI 配置文件和脚本的更改
+2. ci: 集成配置文件和脚本的更改
 3. docs: 仅修改文档
-4. feat:  添加新功能
+4. feat: 添加新功能
 5. fix: 修复 bug
 6. pref: 提升性能
 7. refactor: 重构(既不是修复 bug 也不是添加新的功能)

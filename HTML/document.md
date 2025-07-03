@@ -52,7 +52,7 @@
 
 ## section
 
-## slot  web 组件内部的占位符
+## slot web 组件内部的占位符
 
 ## template 保存客户端内容机制
 
@@ -62,4 +62,5 @@
 
 ## 属性
 
+- contenteditable 元素可编辑否
 - pattern 表单控件值匹配正则表达式

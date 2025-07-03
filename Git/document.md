@@ -7,6 +7,10 @@
 ## 命令
 
 ```shell
+# .gitignore 规则
+# / 开头防止递归， / 结尾指定目录
+# glob 模式 ? 只匹配一个字符(除/)， * 匹配零个或多个字符(除/)， ** 匹配任意层级的目录，! 表示不忽略
+
 # 查看配置
 git config --list
 
@@ -16,12 +20,6 @@ git config --global user.email git@git.com
 
 # 凭据管理策略 cache 保存内存，安全，重启失效；store 明文存磁盘，永久保存
 git config --global credential.helper 'cache --timeout=3600' # 缓存一小时
-
-# .gitignore 规则
-# / 开头防止递归， / 结尾指定目录
-# glob 模式 ? 只匹配一个字符， * 匹配零个或多个字符， ** 匹配任意层级的目录，! 表示不忽略
-
-# git help <verb>
 
 # -b <branch-name>
 git init --initial-branch=main # default name: master
@@ -55,7 +53,7 @@ git checkout main
 # 等效于 git branch dev, git checkout dev
 git checkout -b dev
 
-# 撤销之前所作的修改, 就是用最近一次提交版本去覆盖
+# 撤销所作的修改(未 add)
 git checkout -- a.txt
 ```
 
@@ -109,7 +107,7 @@ git diff
 git diff --staged
 
 # 已提交，未推送 与 远程仓库的文件差异
-git diff master origin/master 
+git diff master origin/master
 ```
 
 ## grep
@@ -123,27 +121,27 @@ git diff master origin/master
 git log -p -2 # --patch 最近 2 次提交
 git log --stat # 简略统计信息
 git log --pretty=formate:"%h  - %an : %s" --graph # --pretty=oneline
-# since/after until/before 
-git log --since=2.weeks --author='any' --committer='some' --grep='匹配的提交说明' 
+# since/after until/before
+git log --since=2.weeks --author='any' --committer='some' --grep='匹配的提交说明'
 ```
 
-|选项|说明|
-|:----:|:----|
-|%H|提交的完整哈希值|
-|%h|提交的简写哈希值|
-|%T|树的完整哈希值|
-|%t|树的简写哈希值|
-|%P|父提交的完整哈希值|
-|%p|父提交的简写哈希值|
-|%an|作者名字|
-|%ae|作者的电子邮件地址|
-|%ad|作者修订日期（可以用 --date=选项 来定制格式）|
-|%ar|作者修订日期，按多久以前的方式显示|
-|%cn|提交者的名字(项目核心人员，将补丁并于项目的人)|
-|%ce|提交者的电子邮件地址|
-|%cd|提交日期|
-|%cr|提交日期（距今多长时间）|
-|%s|提交说明|
+| 选项 | 说明                                           |
+| :--: | :--------------------------------------------- |
+|  %H  | 提交的完整哈希值                               |
+|  %h  | 提交的简写哈希值                               |
+|  %T  | 树的完整哈希值                                 |
+|  %t  | 树的简写哈希值                                 |
+|  %P  | 父提交的完整哈希值                             |
+|  %p  | 父提交的简写哈希值                             |
+| %an  | 作者名字                                       |
+| %ae  | 作者的电子邮件地址                             |
+| %ad  | 作者修订日期（可以用 --date=选项 来定制格式）  |
+| %ar  | 作者修订日期，按多久以前的方式显示             |
+| %cn  | 提交者的名字(项目核心人员，将补丁并于项目的人) |
+| %ce  | 提交者的电子邮件地址                           |
+| %cd  | 提交日期                                       |
+| %cr  | 提交日期（距今多长时间）                       |
+|  %s  | 提交说明                                       |
 
 ## merge
 
@@ -158,10 +156,10 @@ git push origin -d brach-name
 
 # 冲突时（俩分支对同一文件的同一部分做了不同的修改，解决冲突需要合并或者二选一
 # <<<<<<<< HEAD:index.html
-# xxxxxxxxxx part1
+# xxxxxxxxxx part1 本地分支内容
 # =========
 # xxxxxxxxxx part2
-# >>>>>>>> iss53:index.html
+# >>>>>>>> iss53:index.html 合并进来的
 ```
 
 ## rebase

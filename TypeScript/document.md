@@ -3,19 +3,15 @@
 ## Union Type
 
 ```ts
-type fruits = 
-  | 'apple'
-  | 'banana'
-  | 'pear';
+type fruits = "apple" | "banana" | "pear";
 
 type Animal = {
-  name: string
-}
+  name: string;
+};
 
 type Bear = Animal & {
-  honey: boolean
-}
-
+  honey: boolean;
+};
 ```
 
 ```ts
@@ -37,33 +33,34 @@ class MyClass implements SomeObject {
 }
 
 type CatConstructor = {
-  new (name: string): SomeObject
-}
+  new (name: string): SomeObject;
+};
 ```
 
 ```ts
 type CatFunction = {
   description: string;
-  (name: string): void; 
-}
+  (name: string): void;
+};
 
 function MyCat(name: string) {
-  console.log(name)
+  console.log(name);
 }
 
-MyCat.description = 'default description'
+MyCat.description = "default description";
 ```
 
 ## Type Assertions
 
 ```ts
-document.getElementById("main_canvas") as HTMLCanvasElement
-<HTMLCanvasElement>document.getElementById("main_canvas")
+(document.getElementById("main_canvas") as HTMLCanvasElement) <
+  HTMLCanvasElement >
+  document.getElementById("main_canvas");
 
 const a = expr as any as T;
 
 // 会让值变成字面量类型, 是具体的 red 而不是 string 类型
-const color = 'red' as const
+const color = "red" as const;
 ```
 
 ## Non-null Assertion
@@ -72,11 +69,17 @@ const color = 'red' as const
 
 ```ts
 function doWhat(x?: number | null) {
-  return x!.toFixed()
+  return x!.toFixed();
 }
 ```
 
 ## Generic
+
+```ts
+function getProperty<Type, Key extends keyof Type>(obj： Type, key: Key) {
+  return obj[key]
+}
+```
 
 ## Function
 
@@ -127,7 +130,7 @@ interface Colorful {
 interface Circle {
   radius: number;
 }
- 
+
 type ColorfulCircle = Colorful & Circle;
 
 /**
@@ -143,7 +146,6 @@ type StringNumberBooleans = [string, number, ...boolean[]];
 ```ts
 type Point = { x: number; y: number };
 type PointKey = keyof Point; // 'x' | 'y'
-
 
 // JavaScript 对象键总是被强制转换为字符串, obj[0] 始终和 obj["0"] 相同
 type StringObject = { [k: string]: boolean };
@@ -175,7 +177,7 @@ interface Animal {
 interface Dog extends Animal {
   woof(): void;
 }
- 
+
 type Example = Dog extends Animal ? number : string;
 ```
 
@@ -184,15 +186,17 @@ type Example = Dog extends Animal ? number : string;
 ```ts
 //从类型的属性中删除 ? ,同是改名
 type Getters<Type> = {
-  [Property in keyof Type as `get${Capitalize<string & Property>}`]-?: () => Type[Property];
+  [Property in keyof Type as `get${Capitalize<
+    string & Property
+  >}`]-?: () => Type[Property];
 };
 
 type MaybeUser = {
   id: string;
   name?: string; // string | undefined
 };
- 
-type User = Getters<MaybeUser>; 
+
+type User = Getters<MaybeUser>;
 // { getId: () => string, name: () => string | undefined }
 ```
 
@@ -210,9 +214,7 @@ interface Animal {
   age?: number;
 }
 
-interface Dog extends Animal {
-  
-}
+interface Dog extends Animal {}
 
 // 实现带有可选属性的接口并不会创建该属性
 class AnimalHouse {
@@ -223,28 +225,27 @@ class AnimalHouse {
    * private 仅当前类
    * readonly
    */
-  resident: Animal
+  resident: Animal;
 
   constructor(animal: Animal) {
     this.animal = animal;
   }
 
   say() {
-    console.log('Hello, AnimalHouse');
+    console.log("Hello, AnimalHouse");
   }
 }
 
 class DogHouse extends AnimalHouse {
-
   static {
-    console.log('static block')
+    console.log("static block");
   }
 
   /**
    * 类字段在父类构造函数完成后初始化，覆盖父类设置的任何值
    * 当您只想为继承的字段重新声明更准确的类型时，这可能会有问题
    * 为了处理这些情况，您可以编写 declare
-   *  */ 
+   *  */
   declare resident: Dog; // declare 字段声明不应产生运行时效果
 
   constructor(dog: Dog) {
@@ -253,7 +254,7 @@ class DogHouse extends AnimalHouse {
 
   say(name?: string) {
     if (name === undefined) {
-      super.say()
+      super.say();
     } else {
       console.log(`Hello, ${name.toUpperCase()}`);
     }
@@ -267,13 +268,13 @@ class Person {
   name: string;
   age: number;
 }
- 
+
 class Employee {
   name: string;
   age: number;
   salary: number;
 }
- 
+
 const p: Person = new Employee();
 ```
 
@@ -281,17 +282,17 @@ const p: Person = new Employee();
 
 ```ts
 /**
- * 文件中无 import 或 export 
+ * 文件中无 import 或 export
  * 但你想文件被视为一个模块(模块作用域)
  * 不然文件就是一个全局脚本
- *  */ 
+ *  */
 export {};
 ```
 
 ```ts
-export type Cat = { breed: string }
+export type Cat = { breed: string };
 
-import type { Cat } from 'someFile'
+import type { Cat } from "someFile";
 ```
 
 ## Utility Types
@@ -313,9 +314,9 @@ import type { Cat } from 'someFile'
  * 13. ReturnType<Type>
  * 14. InstanceType<Type>
  * 15. ThisType<Type>
- *  */ 
+ *  */
 
-Awaited<Promise<string>>
+Awaited<Promise<string>>;
 ```
 
 ## 资源释放管理

@@ -34,7 +34,7 @@
 
 ## husky
 
-## oxlint
+## OXlint
 
 高性能编译器
 
@@ -52,9 +52,9 @@ event emitter / pubsub
 
 ## mqtt
 
-## mock 数据
+Node.JS 和 Browser 实现处理 MQTT 协议
 
-### @faker-js/faker
+## @faker-js/faker
 
 创建 mock 数据
 
@@ -65,18 +65,6 @@ event emitter / pubsub
 ## svgo
 
 SVG Optimizer
-
-## preview html
-
-```js
-var express = require('express')
-
-var app = express()
-
-// 预览已经 build 完的包
-app.use(express.static('./dist', { index: ['index.html', 'index.htm'] }))
-app.listen(3000)
-```
 
 ## @tweenjs/tween.js
 
@@ -98,3 +86,21 @@ app.listen(3000)
 
 axios 广泛应用于前端
 undici 完全支持 HTTP/1.1 和 HTTP/2，专门为 Node.js 环境设计
+
+## preview html
+
+```js
+const Koa = require("koa");
+const serve = require("koa-static");
+const path = require("path");
+const app = new Koa();
+app.use(
+  serve(path.join(__dirname, "dist"), {
+    index: "index.html",
+  })
+);
+
+app.listen(3000, () => {
+  console.log("Koa server is running at http://localhost:3000");
+});
+```

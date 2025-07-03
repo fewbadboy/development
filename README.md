@@ -17,6 +17,7 @@ git push -uf origin main
 [StackBlitz](https://stackblitz.com/) example
 [VisualGo](https://visualgo.net/zh) 通过动画可视化数据结构和算法
 [V2EX](https://www.v2ex.com/)
+[Hacker](https://news.ycombinator.com/)
 
 ## Commit
 
