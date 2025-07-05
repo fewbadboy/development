@@ -18,7 +18,7 @@
   - Q x1 y1, x y (quadratic)
   - T x y (smooth quadratic) 只有前一个命令是 Q / T 时才有效
   - A rx ry a-axis-rotation large-arc-flag sweep-flag x y (arcs)
-![示例](./svgarcs_flags.png)
+    ![示例](./svgarcs_flags.png)
 
 ## Gradient
 

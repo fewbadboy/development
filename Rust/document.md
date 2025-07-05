@@ -11,7 +11,7 @@ Rust 允许先声明，后初始化(保证使用前已经赋值)。
 /**
  * 变量默认是不可变的
  * 1. mut : 变量可被修改
- */ 
+ */
 let mut age = 12;
 age = 18;
 
@@ -105,9 +105,9 @@ for name in names.iter_mut() {
 }
 
 /**
- * match 用多种方式解构 
+ * match 用多种方式解构
  * - 元组
- * - 数组/切片 
+ * - 数组/切片
  * - 枚举: enum Color { RED }
  * - 指针/ref
  * - structs: struct Student { name: &str, .. }
@@ -154,7 +154,7 @@ if let Some(n) == number {
 
 语法： `|val| val + x`
 
-优先是通过引用捕获变量(&T, &mut T 闭包只是 borrow外部变量)，只有在需要时才通过值捕获变量(闭包获得变量所有权)
+优先是通过引用捕获变量(&T, &mut T 闭包只是 borrow 外部变量)，只有在需要时才通过值捕获变量(闭包获得变量所有权)
 
 move 闭包：把闭包中用到的外部变量的所有权移进闭包内部
 

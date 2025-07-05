@@ -30,7 +30,7 @@
 - only-child: 等价于 :first-child:last-child
 - only-of-type: 基于在兄弟元素中的相同类型(tag 名)
 - focus: select 影响 option
-- focus-visible: select 不影响option
+- focus-visible: select 不影响 option
 - focus-within: 元素或其任何后代被聚焦，则匹配该元素
 - fullscreen: 元素在全屏下样式
 - has()

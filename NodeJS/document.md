@@ -15,26 +15,26 @@ node --env-file=.env --env-file=.development.env test.js
 
 ```js
 // a.js
-console.log('a starting');
+console.log("a starting");
 exports.done = false;
-const b = require('./b.js');
-console.log('in a, b.done = %j', b.done);
+const b = require("./b.js");
+console.log("in a, b.done = %j", b.done);
 exports.done = true;
-console.log('a done'); 
+console.log("a done");
 
 // b.js
-console.log('b starting');
+console.log("b starting");
 exports.done = false;
-const a = require('./a.js');
-console.log('in b, a.done = %j', a.done);
+const a = require("./a.js");
+console.log("in b, a.done = %j", a.done);
 exports.done = true;
-console.log('b done'); 
+console.log("b done");
 
 // main.js
-console.log('main starting');
-const a = require('./a.js');
-const b = require('./b.js');
-console.log('in main, a.done = %j, b.done = %j', a.done, b.done); 
+console.log("main starting");
+const a = require("./a.js");
+const b = require("./b.js");
+console.log("in main, a.done = %j, b.done = %j", a.done, b.done);
 
 // main starting
 // a starting
@@ -61,7 +61,7 @@ console.log('in main, a.done = %j, b.done = %j', a.done, b.done);
 
 微任务：
 
-- `process.nextTick()` 是一个异步API, 从技术上讲不属于事件循环
+- `process.nextTick()` 是一个异步 API, 从技术上讲不属于事件循环
 - `Promise.then/catch/finally` 回调
 
 ## 非阻塞 I/O

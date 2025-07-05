@@ -18,7 +18,7 @@
   - Feature
   - FeatureCollection
   - 上面 geometry.type 的可选值.
-- FeatureCollection 和 GeometryCollection 中的  features 和 geometries 的成员是标准有序的数组
+- FeatureCollection 和 GeometryCollection 中的 features 和 geometries 的成员是标准有序的数组
 
 Example:
 
@@ -40,7 +40,10 @@ Example:
       "type": "Feature",
       "geometry": {
         "type": "LineString",
-        "coordinates": [[10, 10],[20, 20]]
+        "coordinates": [
+          [10, 10],
+          [20, 20]
+        ]
       },
       "properties": {
         "prop0": "value0",
@@ -74,4 +77,4 @@ World Geodetic System 1984 (WGS 84), 十进制 longitude 和 latitude
 
 ## Bounding Box
 
-Geometries, Features, 或 FeatureCollections 有一个 "bbox" 成员，值是长度为 2*n 的数组
+Geometries, Features, 或 FeatureCollections 有一个 "bbox" 成员，值是长度为 2\*n 的数组

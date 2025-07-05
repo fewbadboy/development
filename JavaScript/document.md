@@ -18,19 +18,23 @@
 复制一个对象的第一层属性，对于嵌套的对象或数组，浅拷贝并不会递归地复制它们的内部数据，而是复制它们的引用
 
 ```js
-const obj = { name: '张三', age: 18, skill: ['javascript', 'python'] }
-const copy = Object.assign({}, obj, { sex: '男' })
-obj.name = '李四'
+const obj = { name: "张三", age: 18, skill: ["javascript", "python"] };
+const copy = Object.assign({}, obj, { sex: "男" });
+obj.name = "李四";
 // copy.name '张三'
 
-const shallow = { ...obj }
-obj.name = '李四'
+const shallow = { ...obj };
+obj.name = "李四";
 // shallow.name '张三'
-obj.skill.push('java')
+obj.skill.push("java");
 // shallow.skill ['javascript', 'python', 'java']
 
 // 添加 css 样式
-console.log(`%c 成功:%c 成功的消息`,'color:green','border: 1px solid green;color: red')
+console.log(
+  `%c 成功:%c 成功的消息`,
+  "color:green",
+  "border: 1px solid green;color: red"
+);
 ```
 
 ## deep clone
@@ -96,7 +100,7 @@ Object.is(NaN, NaN) // 比较严格相等
 
 Object.prototype.toString.call([]).slice(8, -1)
 
-const obj = { name: 'js' }; 
+const obj = { name: 'js' };
 Object.getOwnPropertyDescriptors(obj);
 // {
 //   name: {
@@ -112,27 +116,27 @@ Object.getOwnPropertyDescriptors(obj);
 2. `Object.keys()` 遍历对象自身的所有可枚举的属性的键名
 3. `JSON.stringify()` 序列化对象自身可枚举的属性
 4. `Object.assign()` 只拷贝对象自身可枚举的属性
-5. `Object.getOwnPropertyNames()` 返回对象自身所有属性(不含Symbol)
-6. `Object.getOwnPropertySymbols()` 返回对象自身所有Symbol属性
+5. `Object.getOwnPropertyNames()` 返回对象自身所有属性(不含 Symbol)
+6. `Object.getOwnPropertySymbols()` 返回对象自身所有 Symbol 属性
 7. `Reflect.ownKeys()` 包含自身的所有键名
 8. `Object.getOwnPropertyDescriptors` 获取对象的所以自身属性的描述符
 
 ## utf-16
 
-Unicode的编码空间从 U+0000 到 U+10FFFF，共有1,112,064个码位（code point）可用来映射字符。
-Unicode的编码空间可以划分为17个平面（plane），每个平面包含216（65,536）个码位。17个平面的码位可表示为从 U+xx0000 到 U+xxFFFF，其中xx表示十六进制值从0016到1016，共计17个平面。
+Unicode 的编码空间从 U+0000 到 U+10FFFF，共有 1,112,064 个码位（code point）可用来映射字符。
+Unicode 的编码空间可以划分为 17 个平面（plane），每个平面包含 216（65,536）个码位。17 个平面的码位可表示为从 U+xx0000 到 U+xxFFFF，其中 xx 表示十六进制值从 0016 到 1016，共计 17 个平面。
 
 ## String
 
-字符串 utf-16 编码单元序列，意思最大字符的表示值为65535
+字符串 utf-16 编码单元序列，意思最大字符的表示值为 65535
 
-Unicode 字符集(U+0000 - U+10FFFF)远大于 65535个，额外的字符以`surrogate pairs`（代理对）的形式存储在 utf-16中
+Unicode 字符集(U+0000 - U+10FFFF)远大于 65535 个，额外的字符以`surrogate pairs`（代理对）的形式存储在 utf-16 中
 为了避免歧义，`0xD800` 到 `0xDFFF` 不会用来表示单个字符编码
 `0xD800` 到 `0xDBFF` 前代理项(高代理项),它是字符串中的最后一个码元，或者下一个码元不是尾代理
 `0xDC00` 到 `0xDFFF` 尾代理项(低代理项),它是字符串中的第一个码元，或者前一个码元不是前代理
 每个 Unicode 字符由 1 或 2 个 uft-16 编码单元组成，字符串表示为 `\u{xxxxxx}`, x 表示 1-6 位 16 进制数
 
-除 Unicode 字符外，某些字符序列应视为一个视觉单元如 emoji(许多具有多种变体的 emoji，实际上是由多个 emoji组成`U+200D`字符连接)
+除 Unicode 字符外，某些字符序列应视为一个视觉单元如 emoji(许多具有多种变体的 emoji，实际上是由多个 emoji 组成`U+200D`字符连接)
 
 ```js
 [..."👨‍👦"]; // [ '👨', '‍', '👦' ]
@@ -147,7 +151,7 @@ String.prototype.charCodeAt()
 String.prototype.codePointAt()
 String.prototype.startsWith()
 String.prototype.endsWith()
-String.prototype.match(regexp) // 
+String.prototype.match(regexp) //
 String.prototype.localeCompare(compareString, locales, options)
 String.prototype.padStart(targetLength, padString)
 String.prototype.padEnd(targetLength, padString)
@@ -165,26 +169,26 @@ String.prototype.trimEnd()
 ```js
 // 负数主要，判断奇数同样通过 0 去实现
 function isEven(n) {
-  return n%2 === 0
+  return n % 2 === 0;
 }
 
 function isOdd(n) {
-  return n%2 !== 0
+  return n % 2 !== 0;
 }
 ```
 
 ## Number
 
 ```js
-Number.prototype.toFixed(digits) // 指定的小数位数
-Number.prototype.toPrecision(precision) // 指定的有效数字位数
+Number.prototype.toFixed(digits); // 指定的小数位数
+Number.prototype.toPrecision(precision); // 指定的有效数字位数
 ```
 
 ## Date
 
 ```js
-Date.now()
-Date.parse()
+Date.now();
+Date.parse();
 
 // ISO 8601, YYYY-MM-DDTHH:mm:ss.sssZ 或 ±YYYYYY-MM-DDTHH:mm:ss.sssZ
 const now = new Date();
@@ -199,17 +203,17 @@ console.log(now.toLocaleString("en-US", { timeZone: "Asia/Shanghai" }));
 - for...of
 - 解构赋值(数组，Set)
 - 扩展运算符
-- yield*
+- yield\*
 - Array.from
 - Promise.all/race()
 
 ```js
-const arr = [3, 4]
-arr.foo = 5
-for(let i in arr){
+const arr = [3, 4];
+arr.foo = 5;
+for (let i in arr) {
   // '0' '1' 'foo'
 }
-for(let i of arr){
+for (let i of arr) {
   // '3' '4'
 }
 ```
@@ -217,19 +221,19 @@ for(let i of arr){
 ## Generator
 
 ```js
-Generator.prototype.next(value)
-Generator.prototype.return(value)
-Generator.prototype.throw(exception)
-function* gen () {
+Generator.prototype.next(value);
+Generator.prototype.return(value);
+Generator.prototype.throw(exception);
+function* gen() {
   yield 1;
   yield 2;
   return 3;
 }
-const g = gen()
-g.next() // { value: 1, done: false }
-g.next() // { value: 2, done: false }
-g.next() // { value: 3, done: true }
-g.next() // { value: undefined, done: true }
+const g = gen();
+g.next(); // { value: 1, done: false }
+g.next(); // { value: 2, done: false }
+g.next(); // { value: 3, done: true }
+g.next(); // { value: undefined, done: true }
 
 // next方法参数当作上一条 yield 语句的返回值
 ```
@@ -242,8 +246,8 @@ g.next() // { value: undefined, done: true }
 `(?:)` 非捕获组，相当于匹配空字符串
 
 ```js
-RegExp.prototype.exec(str)
-RegExp.prototype.test(str)
+RegExp.prototype.exec(str);
+RegExp.prototype.test(str);
 ```
 
 ## Promise
@@ -261,18 +265,18 @@ Promise.withResolvers() // 返回 { promise, resolve, reject }
 
 ```js
 // math.js
-export const pi = 3.14
+export const pi = 3.14;
 export default class RandomNumber {}
 
 // 别名调用
-import * as math from 'math.js'
-math.default
+import * as math from "math.js";
+math.default;
 
 // 解构调用
-import { default as RandomNumber } from 'math.js'
+import { default as RandomNumber } from "math.js";
 
 // 重导出
-export * from 'math.js'
+export * from "math.js";
 ```
 
 ## 操作符
@@ -286,7 +290,7 @@ export * from 'math.js'
 ### 幂
 
 ```js
-2 ** 10 // 1024 
+2 ** 10; // 1024
 ```
 
 ### in
@@ -304,10 +308,10 @@ export * from 'math.js'
 `[]` 中放一个表达式
 
 ```js
-let i = 0
+let i = 0;
 const person = {
-  [`id${++i}`]: i
-}
+  [`id${++i}`]: i,
+};
 ```
 
 ### 属性访问器
@@ -317,28 +321,28 @@ const person = {
 ## Proxy
 
 ```js
-const target = {}
+const target = {};
 const proxy = new Proxy(target, {
-  get(target, property, receiver){},
-  set(target, property, value, receiver){
-    return true // 代表属性设置成功
+  get(target, property, receiver) {},
+  set(target, property, value, receiver) {
+    return true; // 代表属性设置成功
   },
-  apply(target, thisArg, argumentsList){},
+  apply(target, thisArg, argumentsList) {},
   defineProperty(target, property, descriptor) {},
   deleteProperty(target, property) {},
   getPrototypeOf(target) {},
   setPrototypeOf(target, prototype) {},
-})
+});
 ```
 
 ```js
-const deps = new Map()
+const deps = new Map();
 
-let activeEffect = null
+let activeEffect = null;
 function watchEffect(effect) {
-  activeEffect = effect
-  effect()
-  activeEffect = null
+  activeEffect = effect;
+  effect();
+  activeEffect = null;
 }
 
 function reactive(object) {
@@ -346,36 +350,35 @@ function reactive(object) {
     get(target, key) {
       if (!deps.has(key)) {
         // 简易收集依赖
-        deps.set(key, [])
+        deps.set(key, []);
       }
-      if (activeEffect) deps.get(key).push(activeEffect)
-      return target[key]
+      if (activeEffect) deps.get(key).push(activeEffect);
+      return target[key];
     },
     set(target, key, value) {
-      target[key] = value
+      target[key] = value;
       // 触发更新
       if (deps.has(key)) {
-        deps.get(key).forEach((fn) => fn())
+        deps.get(key).forEach((fn) => fn());
       }
-      return true
-    }
-  })
+      return true;
+    },
+  });
 }
 
 const state = reactive({
-  message: 'hello'
-})
+  message: "hello",
+});
 
-input.addEventListener('input', (e) => {
+input.addEventListener("input", (e) => {
   // 触发 set
-  state.message = e.target.value
-})
+  state.message = e.target.value;
+});
 
 watchEffect(() => {
   // 触发 get
-  text.textContent = state.message
-})
-
+  text.textContent = state.message;
+});
 ```
 
 ## Reflect
@@ -401,10 +404,10 @@ Reflect.preventExtensions(target)
 ## 动画
 
 1. window.requestAnimationFrame(callback)
-大多数浏览器在后台标签页或者隐藏的 iframe标签里时暂停调用，为了提高性能和电池使用寿命
+   大多数浏览器在后台标签页或者隐藏的 iframe 标签里时暂停调用，为了提高性能和电池使用寿命
 
 2. setTimeout(fun, delay, param1,...)/setInterval(func, delay, arg1,...)
-根据 HTML 标准，setTimeout 嵌套调用超时 五次以上时， 浏览器强制执行 4ms 的最小超时
+   根据 HTML 标准，setTimeout 嵌套调用超时 五次以上时， 浏览器强制执行 4ms 的最小超时
 
 如果想在浏览器中实现 0ms 延时的定时器，可以参考 window.postMessage()
 

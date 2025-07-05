@@ -27,7 +27,7 @@ pnpm dlx # 别名 pnpx
 pnpm self-update
 
 # 部署
-pnpm deploy 
+pnpm deploy
 
 # 发布
 pnpm publish --access public

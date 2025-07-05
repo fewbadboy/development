@@ -29,8 +29,8 @@ def add_end(L=None):
 double = lambda x : x * 2
 ```
 
-- 可变参数 *parament, 函数内部 parament 接收到一个 tuple
-- 关键字参数 **kw, 允许传入任意个含参数名的参数
+- 可变参数 \*parament, 函数内部 parament 接收到一个 tuple
+- 关键字参数 \*\*kw, 允许传入任意个含参数名的参数
 
 ```python
 def person(name, age, **kw):

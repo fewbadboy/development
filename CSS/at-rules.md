@@ -45,6 +45,5 @@
 }
 
 @media (orientation: landscape) {
-
 }
 ```

@@ -26,31 +26,31 @@ PWA 与此应用程序关联的图标上设置 Badge
 const taskList = [
   {
     handle: (args) => console.log(args),
-    data: [1,2,3]
-  }
+    data: [1, 2, 3],
+  },
 ];
 
 function performNonCriticalTask(deadline) {
   while (deadline.timeRemaining() > 0 && taskList.length > 0) {
     const task = taskList.shift(); // 从任务队列中取出一个任务
-    task.handle(task.data)
+    task.handle(task.data);
   }
 
   if (taskList.length > 0) {
     // 如果还有任务，继续请求下一个空闲回调
-    requestIdleCallback(performNonCriticalTask, { timeout: 1000 })
+    requestIdleCallback(performNonCriticalTask, { timeout: 1000 });
   }
 }
 
 // 请求空闲回调
-requestIdleCallback(performNonCriticalTask)
+requestIdleCallback(performNonCriticalTask);
 ```
 
 ## Battery Status
 
 ## Broadcast Channel
 
-允许浏览上下文（即windows、tabs、frames 或 iframe）和同源之间进行基本通信
+允许浏览上下文（即 windows、tabs、frames 或 iframe）和同源之间进行基本通信
 
 ## Clipboard
 
@@ -77,7 +77,7 @@ const registration = await navigator.clipboard.read()
  *    lax: 同源请求和跨站 Get 请求（如script,link,a,img,iframe等）发送 Cookie，跨站的 POST 请求除外
  *    none: 任何情况下均发送 Cookies
  */
-CookieStore.set(options)
+CookieStore.set(options);
 ```
 
 ## Credential Management
@@ -205,9 +205,9 @@ navigator.mediaDevices.getUserMedia({
 
 ```js
 // 将视频放回其初始框中
-document.exitPictureInPicture()
+document.exitPictureInPicture();
 // 请求视频进入画中画模式
-video.requestPictureInPicture()
+video.requestPictureInPicture();
 ```
 
 ## Resize Observer

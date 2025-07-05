@@ -1,4 +1,4 @@
-# 任务、微任务和JS运行时环境
+# 任务、微任务和 JS 运行时环境
 
 ## 任务（Tasks）
 
@@ -27,7 +27,7 @@
 ```js
 queueMicrotask(() => {
   // 微任务中运行的代码
-})
+});
 ```
 
 ### 使用场景
@@ -60,11 +60,11 @@ console.log("Data fetched");
 
 以上代码如若未在 if 语句中加入微任务执行效果如下
 
-|数据未缓存|数据已缓存|
-|--|--|
-|Fetching data|Fetching data|
-|Data fetched|Loaded data|
-|Loaded data|Data fetched|
+| 数据未缓存    | 数据已缓存    |
+| ------------- | ------------- |
+| Fetching data | Fetching data |
+| Data fetched  | Loaded data   |
+| Loaded data   | Data fetched  |
 
 ### 来自函数的微任务
 
@@ -76,7 +76,7 @@ let urgentCallback = () => log("*** Oh noes! An urgent callback has run!");
 let doWork = () => {
   let result = 1;
   queueMicrotask(urgentCallback);
-  for (let i=2; i<=10; i++) {
+  for (let i = 2; i <= 10; i++) {
     result *= i;
   }
   return result;

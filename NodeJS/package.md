@@ -74,9 +74,9 @@ SVG Optimizer
 
 反复执行 promise-returning 或 async 函数
 
-## pretty-bytes
+## postcss
 
-转换字节形式: 1337 → 1.34 kB
+使用 JS 插件转换样式
 
 ## xstate
 

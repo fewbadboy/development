@@ -53,9 +53,8 @@ MyCat.description = "default description";
 ## Type Assertions
 
 ```ts
-(document.getElementById("main_canvas") as HTMLCanvasElement) <
-  HTMLCanvasElement >
-  document.getElementById("main_canvas");
+document.getElementById("main_canvas") as HTMLCanvasElement<HTMLCanvasElement>;
+document.getElementById("main_canvas");
 
 const a = expr as any as T;
 
