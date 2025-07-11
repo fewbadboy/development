@@ -1,18 +1,5 @@
 # File Stream
 
-## ArrayBuffer
-
-```js
-const buffer = new ArrayBuffer(8);
-const uint8 = new Uint8Array(buffer);
-uint8.set([255, 255], 1);
-// [0, 255, 255, 0, 0, 0, 0, 0]
-
-const view = new DataView(buffer);
-view.setUint8(1, 255);
-view.getUint8(1); // 255
-```
-
 ## Blob
 
 ```js
@@ -20,11 +7,6 @@ view.getUint8(1); // 255
 new Blob(array, { type: "application/octet-stream" });
 URL.createObjectURL(File / Blob / MediaSource);
 ```
-
-- arrayBuffer()
-- slice()
-- stream()
-- text()
 
 ## File
 
@@ -42,6 +24,8 @@ FileList 接口表示由 HTML `<input>` 元素的 files 属性返回的该类型
 
 ## FileReader
 
+异步读取文件内容
+
 - readAsArrayBuffer(Blob / File)
 - readAsDataURL(Blob / File)
 - readAsText(Blob / File)
@@ -55,6 +39,7 @@ async function test(file) {
         preview.src = reader.result;
         resolve();
       },
+      progress: ({ loaded, total }) => {},
       onerror: () => reject(reader.error),
     });
     reader.readAsDataURL(file);
@@ -62,7 +47,7 @@ async function test(file) {
 }
 
 export async function loadImage(image) {
-  return new Promise((resolve, reject) => {
+  return await new Promise((resolve, reject) => {
     const img = new Image();
     img.src = image;
     Object.assign(img, {

@@ -39,9 +39,21 @@ console.log(
 
 ## deep clone
 
-许多 JavaScript 对象根本不能序列化。
-函数（带有闭包）、Symbol、在 [HTML DOM API](https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API) 中表示 HTML 元素的对象、递归数据以及许多其他情况。
-在这些条件下调用 JSON.stringify() 来序列化会失效。
+在以下条件下调用 JSON.stringify() 来序列化会失效。
+
+|          类型          |            序列化结果             |
+| :--------------------: | :-------------------------------: |
+|          函数          |              被忽略               |
+|         Symbol         |              被忽略               |
+|       undefined        | 被忽略(对象属性值)/null(数组元素) |
+| 循环应用(obj.self=obj) |             抛出错误              |
+|      DOM 节点对象      |                {}                 |
+|         BigInt         |             抛出错误              |
+|        Map/Set         |                {}                 |
+|          Date          |            ISO 字符串             |
+|         RegExp         |                {}                 |
+
+[HTML DOM API] 中表示 HTML 元素的对象
 
 ## Array
 
@@ -77,7 +89,7 @@ Array.property.toSpliced()
 Array.property.with(index, value)
 
 const arr = [1, 2, { name: 'test' }, 4, 5];
-const tes = arr.with(1, 6); // 改变给定索引的值
+const tes = arr.with(1, 6); // 改变给定索引的值,返回新数组
 arr.at(2).name = 'hello'
 // tes.at(2).name
 ```
@@ -121,16 +133,13 @@ Object.getOwnPropertyDescriptors(obj);
 7. `Reflect.ownKeys()` 包含自身的所有键名
 8. `Object.getOwnPropertyDescriptors` 获取对象的所以自身属性的描述符
 
-## utf-16
-
-Unicode 的编码空间从 U+0000 到 U+10FFFF，共有 1,112,064 个码位（code point）可用来映射字符。
-Unicode 的编码空间可以划分为 17 个平面（plane），每个平面包含 216（65,536）个码位。17 个平面的码位可表示为从 U+xx0000 到 U+xxFFFF，其中 xx 表示十六进制值从 0016 到 1016，共计 17 个平面。
-
 ## String
 
 字符串 utf-16 编码单元序列，意思最大字符的表示值为 65535
 
-Unicode 字符集(U+0000 - U+10FFFF)远大于 65535 个，额外的字符以`surrogate pairs`（代理对）的形式存储在 utf-16 中
+Unicode 字符集(U+0000 - U+10FFFF)远大于 65535 个
+额外的字符以`surrogate pairs`（代理对）的形式存储在 utf-16 中
+
 为了避免歧义，`0xD800` 到 `0xDFFF` 不会用来表示单个字符编码
 `0xD800` 到 `0xDBFF` 前代理项(高代理项),它是字符串中的最后一个码元，或者下一个码元不是尾代理
 `0xDC00` 到 `0xDFFF` 尾代理项(低代理项),它是字符串中的第一个码元，或者前一个码元不是前代理
@@ -149,19 +158,14 @@ String.raw() // 模板文字的原始字符串
 String.prototype.at()
 String.prototype.charCodeAt()
 String.prototype.codePointAt()
-String.prototype.startsWith()
-String.prototype.endsWith()
 String.prototype.match(regexp) //
 String.prototype.localeCompare(compareString, locales, options)
 String.prototype.padStart(targetLength, padString)
 String.prototype.padEnd(targetLength, padString)
-String.prototype.repeat(count)
 String.prototype.replace(pattern, replacement)
 String.prototype.search(regexp)
 String.prototype.split(separator, limit)
 String.prototype.trim()
-String.prototype.trimStart()
-String.prototype.trimEnd()
 ```
 
 ## Math
@@ -303,20 +307,13 @@ export * from "math.js";
 
 左侧为 null 或 undefined 时返回右侧操作数
 
-### 计算属性
-
-`[]` 中放一个表达式
-
-```js
-let i = 0;
-const person = {
-  [`id${++i}`]: i,
-};
-```
-
 ### 属性访问器
 
 分别是点和方括号
+
+属性名称必须是字符串或符号 Symbol
+
+任何非字符串对象都会通过 toString 方法，被转换成一个字符串
 
 ## Proxy
 
@@ -336,6 +333,7 @@ const proxy = new Proxy(target, {
 ```
 
 ```js
+// 简易响应式实现
 const deps = new Map();
 
 let activeEffect = null;
@@ -396,9 +394,9 @@ Reflect.preventExtensions(target)
 
 ## Encode
 
-- encode/decodeURI()
-- encode/decodeURIComponent(): 编码时转义的字符更多
-- TextEncode/Decode(): 返回 UTF-8 字节流
+- encode/decodeURI()： 除 `A–Z a–z 0–9 - _ . ! ~ * ' ( ) ; / ? : @ & = + $ , #`
+- encode/decodeURIComponent(): 除 `A–Z a–z 0–9 - _ . ! ~ * ' ( )`
+- TextEncode/Decode(): 返回 UTF-8 编码的 Uint8Array
 - btoa/atob(): Base64 加密解密
 
 ## 动画
@@ -427,3 +425,5 @@ Reflect.preventExtensions(target)
 
 - deltaMode
 - deltaX/Y/Z deltaMode 中的滚动量
+
+[HTML DOM API]: https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API

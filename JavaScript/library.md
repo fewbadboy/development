@@ -53,6 +53,7 @@
 
 [video js](https://docs.videojs.com/)
 [LivePlayer](https://www.liveqing.com/docs/manuals/LivePlayer.html)
+[MediaSoup](https://mediasoup.org/) WebRTC
 
 ## 3D
 
@@ -169,3 +170,7 @@ export function downloadURL(fileName, url) {
 [create js](https://createjs.com/)
 
 [Browserslist](https://browsersl.ist/)
+
+[socket.io](https://socket.io/) 双向通信
+
+MediaMTX 媒体服务器和媒体代理
