@@ -1,9 +1,5 @@
 # document
 
-[ecma-262](https://ecma-international.org/publications-and-standards/standards/ecma-262/)
-
-[MDN web Docs 词汇表](https://developer.mozilla.org/en-US/docs/Glossary)
-
 ```js
 // let 不能重复声明，TDZ
 ```
@@ -407,6 +403,20 @@ Reflect.preventExtensions(target)
 2. setTimeout(fun, delay, param1,...)/setInterval(func, delay, arg1,...)
    根据 HTML 标准，setTimeout 嵌套调用超时 五次以上时， 浏览器强制执行 4ms 的最小超时
 
+```js
+/**
+ * 避免堆积问题：setInterval 在上一次回调没完成时，下一次时间到达时继续执行，导致多个回调
+ * 递归的 setTimeout 根据上次执行的时间决定下次的延迟(超过1000ms的就取消上次的setTimeout)
+ */
+function do() {
+  setTimeout(() => {
+    console.log('Task completed');
+  }, 2000);
+  setTimeout(do, 1000) // 当前任务执行完成后再触发
+}
+setTimeout(do, 1000)
+```
+
 如果想在浏览器中实现 0ms 延时的定时器，可以参考 window.postMessage()
 
 未被激活的 tabs 的定时最小延迟>=1000ms
@@ -421,9 +431,6 @@ Reflect.preventExtensions(target)
 - currentTarget(Event) 绑定事件处理程序的元素
 - target(Event) 调度事件的元素
 
-## WheelEvent
-
-- deltaMode
-- deltaX/Y/Z deltaMode 中的滚动量
+## [uint8array-to-string](https://ourcodeworld.com/articles/read/164/how-to-convert-an-uint8array-to-string-in-javascript)
 
 [HTML DOM API]: https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API

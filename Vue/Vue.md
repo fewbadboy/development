@@ -2,42 +2,23 @@
 
 ## [vue-macros](https://vue-macros.dev/)
 
-## 嵌套对象或数组修改(新加属性)触发视图更新(更改响应式)
-
-### 数组变化侦测
-
-侦听响应式数组的变更方法
-
-- push / pop / shift / unshift / sort / reverse / splice
-
-```js
-/**
- * vue 2 利用索引设置数组项不能检测到数据变动(导致UI无法渲染)
- * vm.items[indexOfItem] = newValue 错误
- */
-const newValue = [];
-this.temp.userList.splice(index, 1, {
-  ...this.temp.userList.at(index),
-  property: newValue,
-});
-```
+## [vue use](https://vueuse.org/)
 
 ## 3.x
 
 ### 响应式
 
-- ref: 深层嵌套的对象、数组或者 JavaScript 内置的数据结构具有深入响应式。将值包装在特殊对象中
+- ref
+  - 传递任何类型(包括深层嵌套对象，数组或 JS 内置数据解构 Map 等), 非原始类型通过 `reactive()` 转换成响应式代理
   - 模板渲染上下文中，只有顶级的 ref 属性才会被解包
   - 作为响应式对象的属性被访问或修改时自动解包
   - 作为响应式数组或原生集合类型 (如 Map) 中的元素被访问时，它不会被解包
 - shallowRef: 只追踪 .value 的访问(放弃深层响应式)
 - reactive: 使对象本身具有响应性，深层转换，返回一个原始对象的 Proxy
   - 局限
-    - 仅使用于对象类型
-    - 不能操作原始类型(string,number,boolean)
+    - 仅使用于对象类型,不能操作原始类型(string,number,boolean，bigint,undefined,null,symbol)
     - 不能替换整个对象(不然丢失引用关系)
     - 解构丢失响应式连接
-- shallowReactive:
 
 ### nextTick
 
@@ -181,13 +162,7 @@ v-for 与 对象
   ```
 
 - watchEffect(onCleanup): 自动跟踪回调的响应式依赖，父组件更新之后所属组件 DOM 更新之前调用回调
-- watchPostEffect: vue 更新后执行回调
-- watchSyncEffect: 同步侦听器，会在 vue 进行任何更新前触发
 - onWatcherCleanup: 清理副作用
-- unref: 参数是 ref，则返回内部值，否则返回参数本身
-- toRef: 将值、refs 或 getters 规范化为 refs
-- toValue: 将值、refs 或 getters 规范化为值
-- toRefs: 一个响应式对象转换为一个普通对象，这个普通对象的每个属性都是指向源对象相应属性的 ref
 
 ### 模板引用
 
@@ -282,6 +257,14 @@ defineOptions({
 
 // JavaScript 访问贯穿属性
 const attrs = useAttrs();
+
+// 定义插槽名称和类型检查
+defineSlots<{
+  default(props: {}): any
+}>()
+
+// 配合检查插槽是否存在并渲染它
+useSlots()
 ```
 
 - Slots
@@ -391,6 +374,9 @@ const myPlugin = {
   - Suspense
 
 ```css
+.bounce-enter-from,
+.bounce-leave-to {
+}
 .bounce-enter-active {
   animation: bounce-in 0.5s;
 }

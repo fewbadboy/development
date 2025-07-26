@@ -16,12 +16,6 @@ document.querySelector("input[type=file]").files[0];
 
 `<input type="file">` 元素选择文件后返回的 FileList 对象，或者拖拽生成的 DataTransfer 对象
 
-## FileList
-
-FileList 接口表示由 HTML `<input>` 元素的 files 属性返回的该类型的对象
-
-- item()
-
 ## FileReader
 
 异步读取文件内容

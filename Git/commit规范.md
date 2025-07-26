@@ -1,7 +1,10 @@
 # Commit 规范
 
 [Git commit rules](https://www.conventionalcommits.org)
+
 [CommitLint](https://github.com/conventional-changelog/commitlint)
+
+[Keep a Changelog](https://keepachangelog.com/)
 
 ## Commit 消息指导
 

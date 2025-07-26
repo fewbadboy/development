@@ -53,7 +53,6 @@
 
 [video js](https://docs.videojs.com/)
 [LivePlayer](https://www.liveqing.com/docs/manuals/LivePlayer.html)
-[MediaSoup](https://mediasoup.org/) WebRTC
 
 ## 3D
 
@@ -66,7 +65,6 @@
 ## vue
 
 [awesome-vue](https://github.com/vuejs/awesome-vue)
-[vue use](https://vueuse.org/)
 
 vue-puzzle-vcode
 
@@ -161,10 +159,7 @@ export function downloadURL(fileName, url) {
 ## 其他
 
 [sonar](https://www.sonarsource.com/) 代码安全检查
-[latex](https://latex.js.org/)
-[crypto js](https://cryptojs.gitbook.io/) 加密
 [GreenSock Animation Platform](https://gsap.com/) 动画
-[easing](https://easings.net/) Easing functions
 [scroll magic](https://scrollmagic.io/)
 [lottie](https://airbnb.io/lottie) 解析 Adobe After Effects 导出的 JSON 动画
 [create js](https://createjs.com/)
@@ -172,5 +167,3 @@ export function downloadURL(fileName, url) {
 [Browserslist](https://browsersl.ist/)
 
 [socket.io](https://socket.io/) 双向通信
-
-MediaMTX 媒体服务器和媒体代理

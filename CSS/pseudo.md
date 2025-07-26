@@ -2,15 +2,11 @@
 
 ## Element
 
-- after / before
-- backdrop: 呈现在顶层显示的任何元素的下方
-- selection
-- placeholder
-- marker
-- first-line
-- first-letter
+- cue: WebVTT cues
 - file-selector-button: 针对 type="file" 的 input 元素
-- slotted
+- first-letter
+- marker: 列表项的标记框
+- placeholder
 
 ## Class
 
@@ -18,8 +14,7 @@
 - any-link 匹配所有 :link 或 :visited 的元素
 - autofill: 完成 autocomplete 后的样式
 - checked
-- current: 实验
-- default 设定默认值元素的样式
+- default: 设定默认值元素的样式
 - dir([ltr | rtl])
 - disabled: 重置 disabled 样式
 - empty: 空元素设置
@@ -34,6 +29,7 @@
 - focus-within: 元素或其任何后代被聚焦，则匹配该元素
 - fullscreen: 元素在全屏下样式
 - has()
+- host: shadow DOM 的 shadow host
 - hover
 - in-range: input 元素范围值在 min 和 max 之间(date 同样可以设置)
 - out-of-range:
@@ -47,6 +43,7 @@
 - optional: 针对无 required 属性的 input select textarea 元素设置
 - picture-in-picture:
 - placeholder-shown: placeholder 样式
+- popover-open
 - read-only: 不可编辑的元素
 - read-write:
 - required:
@@ -55,3 +52,4 @@
 - target: URL fragment 匹配的 id 元素
 - user-valid
 - user-invalid
+- where()

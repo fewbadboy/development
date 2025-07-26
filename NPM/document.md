@@ -36,17 +36,8 @@ npm cache clean --force
 #
 npm install --verbose # npm install 报错可以查看更多详情
 
-# 管理配置文件
-npm config set/get/delete/list/edit/fix
-
 # 废弃
 npm deprecate package-name message
-
-# git diff 相似
-npm diff --dif=a@1.1.0 --dif=a@1.1.1
-
-# 运行本地或远程 npm 包的命令
-npm exec [option] [--] <command>[@version] [args...]
 
 # scoped modules
 npm init xxx # npm exec create-xxx

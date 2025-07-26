@@ -97,52 +97,6 @@ git commit -a -m "initial project"
 git commit --amend --no-edit
 ```
 
-## diff
-
-```shell
-# 显示尚未暂存和暂存区域快照之间的差异
-git diff
-
-# 已暂存和最后一次提交的文件差异
-git diff --staged
-
-# 已提交，未推送 与 远程仓库的文件差异
-git diff master origin/master
-```
-
-## grep
-
-方便地从提交历史、工作目录、甚至索引中查找一个字符串或者正则表达式。
-
-## log
-
-```shell
-# 查看提交历史
-git log -p -2 # --patch 最近 2 次提交
-git log --stat # 简略统计信息
-git log --pretty=formate:"%h  - %an : %s" --graph # --pretty=oneline
-# since/after until/before
-git log --since=2.weeks --author='any' --committer='some' --grep='匹配的提交说明'
-```
-
-| 选项 | 说明                                           |
-| :--: | :--------------------------------------------- |
-|  %H  | 提交的完整哈希值                               |
-|  %h  | 提交的简写哈希值                               |
-|  %T  | 树的完整哈希值                                 |
-|  %t  | 树的简写哈希值                                 |
-|  %P  | 父提交的完整哈希值                             |
-|  %p  | 父提交的简写哈希值                             |
-| %an  | 作者名字                                       |
-| %ae  | 作者的电子邮件地址                             |
-| %ad  | 作者修订日期（可以用 --date=选项 来定制格式）  |
-| %ar  | 作者修订日期，按多久以前的方式显示             |
-| %cn  | 提交者的名字(项目核心人员，将补丁并于项目的人) |
-| %ce  | 提交者的电子邮件地址                           |
-| %cd  | 提交日期                                       |
-| %cr  | 提交日期（距今多长时间）                       |
-|  %s  | 提交说明                                       |
-
 ## merge
 
 ```shell
@@ -178,31 +132,3 @@ git rebase master dev
 git rebase --continue
 
 ```
-
-## reset
-
-取消暂存的文件
-
-```shell
-# --soft 仅仅恢复头指针，其他的不变
-git reset --soft
-
-# --mixed 默认 重置暂存区的文件与上一次的提交(commit)保持一致，工作区文件内容保持不变
-git reset --mixed
-
-# --hard 一切全部恢复（重置了工作目录和暂存区）
-# 每次提交包含一个指向上次提交对象(父对象)的指针
-# HEAD 上一次提交的快照，下一次提交的父结点
-git reset --hard HEAD
-```
-
-## restore
-
-```shell
-# 取消暂存的文件 a.txt
-git restore --staged a.txt
-```
-
-## tag
-
-给某个提交打"别名"

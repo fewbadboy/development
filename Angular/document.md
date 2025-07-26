@@ -1,5 +1,1 @@
-# Angular
-
-## document
-
-[document](https://angular.dev/)
+# [Angular](https://angular.dev/)

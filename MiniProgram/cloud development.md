@@ -24,7 +24,7 @@ const {
 ```json
 {
   "read": true,
-  "write": "doc.openid === auth.openid",
+  "write": "doc._openid === auth.openid",
   "create": "",
   "update": "",
   "delate": ""
@@ -129,8 +129,7 @@ exports.main = async (event, context) => {
     .get();
 
   /**
-   * 3. 添加数据, 多数据添加 Promise.all()
-   * 添加数据存在重复索引属性时，会直接抛错
+   * 3. 添加数据
    * { _id, errMsg }
    */
   const res = await db.collection("user").add({
@@ -193,17 +192,6 @@ exports.main = async (event, context) => {
       /**
        * _id: null, 全表作为一组
        * 按 category 字段分组
-       * 累计器必须是以下操作符之一：
-       * addToSet
-       * avg
-       * first
-       * last
-       * max
-       * min
-       * push
-       * stdDevPop
-       * stdDevSamp
-       * sum
        *
        * 内存限制：该阶段有 100M 内存使用限制
        *  */

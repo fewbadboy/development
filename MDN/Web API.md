@@ -99,25 +99,41 @@ With them, you can change the document's structure, style, or content.
 
 根据需要终端请求
 
-### Document
-
-Instance properties
+### [Document](https://developer.mozilla.org/en-US/docs/Web/API/Document)
 
 - documentElement
-- lastModified
+- lastModified: document 最后修改的时间
 
-### Element
+- createRange()
+- getSelection()
+- querySelector()
 
-inherit [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document)
+### [Element](https://developer.mozilla.org/en-US/docs/Web/API/Element)
 
-Methods
+- classList
+- className
+- outerHTML
+- scrollHeight: 高度包括溢出而屏幕不可见的内容
+- scrollLeft
+- shadowRoot
+- slot:
+- tagName
 
-- getBoundingClientRect
-- scrollIntoView
+- attachShadow()
+- getBoundingClientRect()
+- remove()
+- scroll()
+- scrollIntoView()
+
+- auxclick: 除主键外的其他按键
+- beforeinput
+- dblclick
+- input
+- pointerdown
+- touchstart
+- wheel
 
 ### Event
-
-Properties
 
 - currentTarget
 - target
@@ -133,6 +149,12 @@ Methods
 ### Node
 
 ### Range
+
+### Fetch
+
+返回的 Promise 仅在网络故障或有任何阻止请求完成时才会 reject
+
+默认不发送跨源 cookie
 
 ## File
 
