@@ -7,8 +7,9 @@
 ## 字体、icon
 
 [google fonts](https://fonts.google.com/)
-[google icons](https://fonts.google.com/icons)
-[ionicons](https://ionic.io/ionicons) 图标， icon font
+
+[font awesome](https://fontawesome.com/)
+[ionicons](https://ionic.io/ionicons)
 [icon 集合](https://icones.js.org/)
 
 ## UI
@@ -20,18 +21,17 @@
 ## color
 
 [duotones](https://duotones.co/)
-[flat ui colors](https://flatuicolors.com/)
 
 ## 图表
 
-[font awesome](https://fontawesome.com/) 使用 icons
 [echarts](https://echarts.apache.org/zh/index.html)
 [vis.js](https://visjs.org/)
-[ArcGIS](https://developers.arcgis.com/) SDKs 支持多种语言库
+[ArcGIS](https://developers.arcgis.com/)
 [AntV](https://antv.antgroup.com/)
+
 [Cytoscape.js](https://js.cytoscape.org/) 网络图可视化
+
 [Vue Flow](https://vueflow.dev/)
-[p5](https://p5js.org/)
 
 ## canvas
 
@@ -44,7 +44,7 @@
 [leaf let js](https://leafletjs.com/)
 [open layers](https://openlayers.org/)
 
-[cesium](https://cesium.com/platform/cesiumjs/) 3D 地理空间可视化
+[cesium](https://cesium.com/platform/cesiumjs/)
 
 [Geo JSON 地图数据](https://datav.aliyun.com/portal/school/atlas/area_selector)
 [Geo JSON 数据可视化](https://geojson.io/)
@@ -65,12 +65,6 @@
 ## vue
 
 [awesome-vue](https://github.com/vuejs/awesome-vue)
-
-vue-puzzle-vcode
-
-## 文档
-
-[documentation](https://docus.dev/)
 
 ## 规范
 
@@ -156,12 +150,16 @@ export function downloadURL(fileName, url) {
 }
 ```
 
+## Game Framework
+
+[phaser](https://phaser.io/)
+
 ## 其他
 
-[sonar](https://www.sonarsource.com/) 代码安全检查
-[GreenSock Animation Platform](https://gsap.com/) 动画
-[scroll magic](https://scrollmagic.io/)
+[GreenSock Animation Platform](https://gsap.com/)
+
 [lottie](https://airbnb.io/lottie) 解析 Adobe After Effects 导出的 JSON 动画
+
 [create js](https://createjs.com/)
 
 [Browserslist](https://browsersl.ist/)

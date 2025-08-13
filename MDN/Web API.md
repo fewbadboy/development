@@ -52,6 +52,16 @@ requestIdleCallback(performNonCriticalTask);
 
 允许浏览上下文（即 windows、tabs、frames 或 iframe）和同源之间进行基本通信
 
+## Canvas
+
+```js
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+ctx.fillStyle = "rgb(200 0 0)";
+ctx.fillRect(10, 10, 50, 50);
+```
+
 ## Clipboard
 
 ```js
@@ -145,6 +155,10 @@ Methods
 - addEventListener
 - dispatchEvent
 - removeEventListener
+
+## Intl
+
+国际化 API
 
 ### Node
 

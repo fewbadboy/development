@@ -75,7 +75,7 @@
 - inline-size: 依据 writing-mode 设置宽高
 - box
   - shadow: inset offset-x offset-y blur-radius spread-radius color
-  - sizing: 设置如何计算元素的总宽度和高度
+  - sizing: 设置如何计算元素的总宽度和高度(默认：content-box)
 - caret-color: 插入符号颜色
 - clip-path: 创建剪辑区域
 - color-scheme: 颜色方案(normal,dark,light)
@@ -87,7 +87,6 @@
   - auto-flow: 控制自动放置算法
   - auto-columns: min-content / minmax(20px, auto) / auto / 1fr 超出手动定义的行列后浏览器自动添加的
   - grid-template-areas/rows/columns 手动定义的行列
-- gap: row/column-gap
 - inset: top, bottom, right 和 left 属性值的简写
   - block-start/end
   - inline-start/end
@@ -95,17 +94,12 @@
 - mask: 通过在特定点遮罩或剪切图像来隐藏元素
   - image: 用作元素的遮罩层
   - repeat
-- object
-  - fit:调整元素(img,video)大小适应容器
-  - position
 - offset: 沿定义路径对元素进行动画
   - anchor
   - distance
   - path
   - position
   - rotate
-- outline
-  - offset: 轮廓偏移
 - place: 允许你同时沿块和行内方向对齐内容, align/justify-\* 的简写
   - self
   - content
