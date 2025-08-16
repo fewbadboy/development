@@ -83,21 +83,3 @@ SVG Optimizer
 axios 广泛应用于前端
 
 undici 完全支持 HTTP/1.1 和 HTTP/2，专门为 Node.js 环境设计
-
-## preview html
-
-```js
-const Koa = require("koa");
-const serve = require("koa-static");
-const path = require("path");
-const app = new Koa();
-app.use(
-  serve(path.join(__dirname, "dist"), {
-    index: "index.html",
-  })
-);
-
-app.listen(3000, () => {
-  console.log("Koa server is running at http://localhost:3000");
-});
-```

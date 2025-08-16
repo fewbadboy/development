@@ -15,10 +15,8 @@
 ```css
 :root {
   /**
-   * 自定义属性
-   * --*
+  * 自定义属性 --*
   */
-
   --primary-color: #409eff;
 }
 
@@ -28,10 +26,11 @@
 
 /**
   * 支持嵌套
-  * .parent .child {}
-*/
+  */
 .parent {
-  & ~ .child {
+  &:hover {
+  }
+  .child {
   }
 }
 ```
@@ -39,17 +38,6 @@
 ## 简写属性
 
 ```css
-/**
- * 取决于元素的 writing mode、方向性和文本方向
- * *-block-*:
- * *-inline-*:
- *
- * place-content/items/self: align-content justify-content;
- */
-.place {
-  place-content: center;
-}
-
 /**
  * flex 属性值说明
  * 1. 单值语法
@@ -66,55 +54,48 @@
 ## 属性
 
 - accent-color: 设置 input 元素 type 为 checkbox, radio, range 和 progress 元素背景色
-- all：所有属性的简写
+- aspect-ratio
+- backdrop-filter: 对元素后面的区域应用图形效果
+- backface-visibility
 - background
-  - attachment: fixed 相对 viewport, locale, scroll(不随内容滚动) 相对元素
   - clip: text 背景绘制在前景文本内, border/padding/content-box
-  - repeat: space(尽可能重复，不进行裁剪) round(拉伸)
-- block-size: 依据 writing-mode 设置宽高
-- inline-size: 依据 writing-mode 设置宽高
-- box
-  - shadow: inset offset-x offset-y blur-radius spread-radius color
-  - sizing: 设置如何计算元素的总宽度和高度(默认：content-box)
 - caret-color: 插入符号颜色
-- clip-path: 创建剪辑区域
+- clip
+  - path: 创建剪辑区域
+  - rule
 - color-scheme: 颜色方案(normal,dark,light)
-- column
-  - count: 列数目
-  - rule: rule-width, rule-style, rule-color 的简写
-- float: 从页面的正常流程中移除，但仍保留为流程的一部分(文字环绕)
 - grid
   - auto-flow: 控制自动放置算法
   - auto-columns: min-content / minmax(20px, auto) / auto / 1fr 超出手动定义的行列后浏览器自动添加的
-  - grid-template-areas/rows/columns 手动定义的行列
+  - template-areas/rows/columns 手动定义的行列
 - inset: top, bottom, right 和 left 属性值的简写
   - block-start/end
   - inline-start/end
 - justify-items/self: 仅对 grid 布局有效
 - mask: 通过在特定点遮罩或剪切图像来隐藏元素
   - image: 用作元素的遮罩层
-  - repeat
+- object:
+  - fit
+  - position
 - offset: 沿定义路径对元素进行动画
   - anchor
   - distance
   - path
   - position
   - rotate
+- outline
 - place: 允许你同时沿块和行内方向对齐内容, align/justify-\* 的简写
   - self
   - content
   - items
-- resize: boh/horizontal/vertical 元素可调整大小
 - scroll
   - behavior: smooth/auto
-- scrollbar-\*
+  - snap-type
+- scrollbar
 - shape: 元素外添加一个形状
   - outside
   - margin
   - image-threshold
-- stop:
-  - color
-  - opacity
 - text
   - decoration: 简写
   - emphasis: 简写 \*-style/color
@@ -123,19 +104,6 @@
   - shadow
   - transform: uppercase/lowercase/capitalize
   - wrap: 控制元素内的文本如何换行
-- transform
-  - origin: 默认 center
 - transition: 过度动画
   - timing-function: ease-in-out, linear, steps(integer, step-position) 位置默认 end
 - user-select: 控制用户是否可以选择文本
-- visibility: visible/hidden
-- white-space: 空白处理
-- word
-  - break
-  - spacing: 单词之间、标签之间的空间长度
-
-## 函数
-
-- fit-content
-- path
-- steps
