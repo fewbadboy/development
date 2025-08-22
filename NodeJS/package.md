@@ -1,7 +1,5 @@
 # package
 
-## badge-maker
-
 ## cssnano
 
 基于 postcss 快速压缩

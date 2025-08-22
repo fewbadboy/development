@@ -1,18 +1,5 @@
 # cloud development
 
-## 窗口信息
-
-```js
-const {
-  pixelRatio,
-  screenWidth,
-  windowWidth,
-  statusBarHeight,
-  safeAre: { left, right, top, bottom, width },
-  screenTop,
-} = wx.getWindowInfo();
-```
-
 ## 数据库
 
 ### 安全规则

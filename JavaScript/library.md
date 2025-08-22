@@ -1,30 +1,7 @@
 # 工具库
 
-## Logo
-
-[Cool Text](https://cooltext.com/)
-
-## 字体、icon
-
-[google fonts](https://fonts.google.com/)
-
-[font awesome](https://fontawesome.com/)
-[ionicons](https://ionic.io/ionicons)
-[icon 集合](https://icones.js.org/)
-
-## UI
-
-[Prime Vue](https://primevue.org/)
-[Element Plus](https://element-plus.org/)
-[UIverse](https://uiverse.io/)
-
-## color
-
-[duotones](https://duotones.co/)
-
 ## 图表
 
-[echarts](https://echarts.apache.org/zh/index.html)
 [vis.js](https://visjs.org/)
 [ArcGIS](https://developers.arcgis.com/)
 [AntV](https://antv.antgroup.com/)
@@ -56,19 +33,7 @@
 
 ## 3D
 
-[book shaders](https://thebookofshaders.com/)
-[learn webGL](https://learnwebgl.brown37.net/)
-[webGL fundamentals](https://webglfundamentals.org/webgl/lessons/zh_cn/)
-[webGL2 fundamentals](https://webgl2fundamentals.org/)
 [HDR](https://polyhaven.com/hdris/skies)
-
-## vue
-
-[awesome-vue](https://github.com/vuejs/awesome-vue)
-
-## 规范
-
-[jsdoc](https://www.jsdoc.com.cn/)
 
 ## HTTP 请求
 
@@ -149,10 +114,6 @@ export function downloadURL(fileName, url) {
   a.click();
 }
 ```
-
-## Game Framework
-
-[phaser](https://phaser.io/)
 
 ## 其他
 

@@ -1,25 +1,11 @@
 # document
 
-## ignore
-
-[gitignore](https://github.com/github/gitignore)
-
 ## 命令
 
 ```shell
 # .gitignore 规则
 # / 开头防止递归， / 结尾指定目录
 # glob 模式 ? 只匹配一个字符(除/)， * 匹配零个或多个字符(除/)， ** 匹配任意层级的目录，! 表示不忽略
-
-# 查看配置
-git config --list
-
-# 设置用户信息
-git config --global user.name "Git"
-git config --global user.email git@git.com
-
-# 凭据管理策略 cache 保存内存，安全，重启失效；store 明文存磁盘，永久保存
-git config --global credential.helper 'cache --timeout=3600' # 缓存一小时
 
 # -b <branch-name>
 git init --initial-branch=main # default name: master
@@ -45,16 +31,12 @@ git push origin --delete branch-name
 ## checkout
 
 ```shell
-# 保持工作目录和暂存区一个干净的状态(都已提交)
 # 切换分支 main
 git checkout main
 
 # 创建并切换分支 dev
 # 等效于 git branch dev, git checkout dev
 git checkout -b dev
-
-# 撤销所作的修改(未 add)
-git checkout -- a.txt
 ```
 
 ## clone
@@ -103,6 +85,7 @@ git commit --amend --no-edit
 # 先切换到 master 分支，再合并 dev 分支到 master 分支
 git checkout master
 git merge dev
+
 # 删除本地 dev 分支
 git branch -d dev
 # 删除远程分支
@@ -130,5 +113,4 @@ git rebase master dev
 
 # rebase 后出现冲突时，解决冲突后执行
 git rebase --continue
-
 ```
