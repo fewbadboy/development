@@ -1,13 +1,16 @@
 # document
 
-## 命令
+## gitignore
 
 ```shell
 # .gitignore 规则
 # / 开头防止递归， / 结尾指定目录
 # glob 模式 ? 只匹配一个字符(除/)， * 匹配零个或多个字符(除/)， ** 匹配任意层级的目录，! 表示不忽略
+```
 
-# -b <branch-name>
+## 命令
+
+```shell
 git init --initial-branch=main # default name: master
 ```
 
@@ -19,13 +22,11 @@ git branch testing
 
 # 删除本地分支 dev
 git branch -d dev
+# 删除远程分支
+git push origin --delete branch-name
 
 # 重命名当前分支
 git branch -M main
-
-# 删除远程分支
-# 服务器的默认名称: origin
-git push origin --delete branch-name
 ```
 
 ## checkout
@@ -34,7 +35,6 @@ git push origin --delete branch-name
 # 切换分支 main
 git checkout main
 
-# 创建并切换分支 dev
 # 等效于 git branch dev, git checkout dev
 git checkout -b dev
 ```
@@ -86,11 +86,6 @@ git commit --amend --no-edit
 git checkout master
 git merge dev
 
-# 删除本地 dev 分支
-git branch -d dev
-# 删除远程分支
-git push origin -d brach-name
-
 # 冲突时（俩分支对同一文件的同一部分做了不同的修改，解决冲突需要合并或者二选一
 # <<<<<<<< HEAD:index.html
 # xxxxxxxxxx part1 本地分支内容
@@ -101,15 +96,10 @@ git push origin -d brach-name
 
 ## rebase
 
-将提交到某一分支上(dev)的所有修改都移至另一分支上(master)
-
 ```shell
+# 把 master 分支的更改合并到你当前的 dev 分支
 git checkout dev
 git rebase master
-
-# 快进合并 master 分支，使之包含来自 dev 分支的修改
-# git rebase <basebranch> <topicbranch>
-git rebase master dev
 
 # rebase 后出现冲突时，解决冲突后执行
 git rebase --continue

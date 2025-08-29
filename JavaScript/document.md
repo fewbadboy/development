@@ -1,9 +1,5 @@
 # document
 
-```js
-// let 不能重复声明，TDZ
-```
-
 ## Data URLs
 
 [MIME_types](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types)
@@ -63,14 +59,6 @@ Array.isArray()
 Array.property.at(index) // index < 0，index + array.length
 Array.property.copyWithin(target, start, end)
 Array.property.fill(value, start, end)
-Array.property.findLast()
-
-/**
- * accumulator: 上一次调用 callbackFn 的结果。
- * 在第一次调用时，如果指定了 initialValue 则为指定的值，否则为 array[0] 的值。
- * currentValue: 当前元素的值。在第一次调用时，如果指定了 initialValue，则为 array[0] 的值，否则为 array[1]。
- */
-Array.property.reduce((accumulator, currentValue,currentIndex, array) =>{}, initialValue)
 
 /**
  * 返回新的数组，不影响原数组
@@ -78,16 +66,6 @@ Array.property.reduce((accumulator, currentValue,currentIndex, array) =>{}, init
 Array.property.toReversed()
 Array.property.toSorted(compareFn)
 Array.property.toSpliced()
-/**
- * 返回一个用给定 index 替换 value 的新数组
- * 同样是浅拷贝
- */
-Array.property.with(index, value)
-
-const arr = [1, 2, { name: 'test' }, 4, 5];
-const tes = arr.with(1, 6); // 改变给定索引的值,返回新数组
-arr.at(2).name = 'hello'
-// tes.at(2).name
 ```
 
 ## Object
@@ -98,15 +76,9 @@ arr.at(2).name = 'hello'
 ```js
 Object.assign(target, source1, ...) // copy 所有自身可枚举属性, 返回第一个参数
 Object.create(proto, propertiesObject)
-Object.freeze(obj) // 阻止对象扩展
-object.fromEntries(iterable) // reverse of Object.entries()
 Object.groupBy(items, callbackFn)
 Object.hasOwn(obj, prop)
-Object.seal(obj) // 阻止对象扩展和现有属性不可配置
-
 Object.is(NaN, NaN) // 比较严格相等
-
-Object.prototype.toString.call([]).slice(8, -1)
 
 const obj = { name: 'js' };
 Object.getOwnPropertyDescriptors(obj);
@@ -128,54 +100,6 @@ Object.getOwnPropertyDescriptors(obj);
 6. `Object.getOwnPropertySymbols()` 返回对象自身所有 Symbol 属性
 7. `Reflect.ownKeys()` 包含自身的所有键名
 8. `Object.getOwnPropertyDescriptors` 获取对象的所以自身属性的描述符
-
-## String
-
-字符串 utf-16 编码单元序列，意思最大字符的表示值为 65535
-
-Unicode 字符集(U+0000 - U+10FFFF)远大于 65535 个
-额外的字符以`surrogate pairs`（代理对）的形式存储在 utf-16 中
-
-为了避免歧义，`0xD800` 到 `0xDFFF` 不会用来表示单个字符编码
-`0xD800` 到 `0xDBFF` 前代理项(高代理项),它是字符串中的最后一个码元，或者下一个码元不是尾代理
-`0xDC00` 到 `0xDFFF` 尾代理项(低代理项),它是字符串中的第一个码元，或者前一个码元不是前代理
-每个 Unicode 字符由 1 或 2 个 uft-16 编码单元组成，字符串表示为 `\u{xxxxxx}`, x 表示 1-6 位 16 进制数
-
-除 Unicode 字符外，某些字符序列应视为一个视觉单元如 emoji(许多具有多种变体的 emoji，实际上是由多个 emoji 组成`U+200D`字符连接)
-
-```js
-[..."👨‍👦"]; // [ '👨', '‍', '👦' ]
-```
-
-```js
-String.fromCharCode(num1,...) // 返回字符串,0 <= num <= 0xFFFF
-String.fromCodePoint(num1,...) // 返回字符串,0 <= num <= 0x10FFFF
-String.raw() // 模板文字的原始字符串
-String.prototype.at()
-String.prototype.charCodeAt()
-String.prototype.codePointAt()
-String.prototype.match(regexp) //
-String.prototype.localeCompare(compareString, locales, options)
-String.prototype.padStart(targetLength, padString)
-String.prototype.padEnd(targetLength, padString)
-String.prototype.replace(pattern, replacement)
-String.prototype.search(regexp)
-String.prototype.split(separator, limit)
-String.prototype.trim()
-```
-
-## Math
-
-```js
-// 负数主要，判断奇数同样通过 0 去实现
-function isEven(n) {
-  return n % 2 === 0;
-}
-
-function isOdd(n) {
-  return n % 2 !== 0;
-}
-```
 
 ## Number
 
@@ -218,26 +142,6 @@ for (let i of arr) {
 }
 ```
 
-## Generator
-
-```js
-Generator.prototype.next(value);
-Generator.prototype.return(value);
-Generator.prototype.throw(exception);
-function* gen() {
-  yield 1;
-  yield 2;
-  return 3;
-}
-const g = gen();
-g.next(); // { value: 1, done: false }
-g.next(); // { value: 2, done: false }
-g.next(); // { value: 3, done: true }
-g.next(); // { value: undefined, done: true }
-
-// next方法参数当作上一条 yield 语句的返回值
-```
-
 ## RegExp
 
 `()` 捕获组，存储匹配内容，供后续引用或替换， 如 `\1` 引用
@@ -261,47 +165,9 @@ Promise.try(func, arg1, ...) // 接受任何回调
 Promise.withResolvers() // 返回 { promise, resolve, reject }
 ```
 
-## Modules
-
-```js
-// math.js
-export const pi = 3.14;
-export default class RandomNumber {}
-
-// 别名调用
-import * as math from "math.js";
-math.default;
-
-// 解构调用
-import { default as RandomNumber } from "math.js";
-
-// 重导出
-export * from "math.js";
-```
-
-## 操作符
-
-[优先级](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Operator_precedence#%E6%B1%87%E6%80%BB%E8%A1%A8)
-
-### 解构
-
-取出数组或对象中的值，赋值给其他变量
-
-### 幂
-
-```js
-2 ** 10; // 1024
-```
-
 ### in
 
 指定属性在指定对象或原型链中
-
-### instanceof
-
-### ??
-
-左侧为 null 或 undefined 时返回右侧操作数
 
 ### 属性访问器
 
@@ -312,21 +178,6 @@ export * from "math.js";
 任何非字符串对象都会通过 toString 方法，被转换成一个字符串
 
 ## Proxy
-
-```js
-const target = {};
-const proxy = new Proxy(target, {
-  get(target, property, receiver) {},
-  set(target, property, value, receiver) {
-    return true; // 代表属性设置成功
-  },
-  apply(target, thisArg, argumentsList) {},
-  defineProperty(target, property, descriptor) {},
-  deleteProperty(target, property) {},
-  getPrototypeOf(target) {},
-  setPrototypeOf(target, prototype) {},
-});
-```
 
 ```js
 // 简易响应式实现
@@ -375,19 +226,6 @@ watchEffect(() => {
 });
 ```
 
-## Reflect
-
-```js
-Reflect.apply(target, thisArgument, argumentsList)
-Reflect.construct(target, argumentsList[, newTarget])
-Reflect.get(target, propertyKey[, receiver])
-Reflect.set(target, propertyKey, value[, receiver])
-Reflect.getPrototypeOf(target)
-Reflect.setPrototypeOf(target, prototype)
-Reflect.isExtensible(target)
-Reflect.preventExtensions(target)
-```
-
 ## Encode
 
 - encode/decodeURI()： 除 `A–Z a–z 0–9 - _ . ! ~ * ' ( ) ; / ? : @ & = + $ , #`
@@ -428,9 +266,3 @@ setTimeout(do, 1000)
 - offsetX/Y 事件到目标节点 padding 边
 - pageX/Y 存在滚动时，返回包括滚动到试图外的像素长度
 - x/y clientX/Y 别名
-- currentTarget(Event) 绑定事件处理程序的元素
-- target(Event) 调度事件的元素
-
-## [uint8array-to-string](https://ourcodeworld.com/articles/read/164/how-to-convert-an-uint8array-to-string-in-javascript)
-
-[HTML DOM API]: https://developer.mozilla.org/zh-CN/docs/Web/API/HTML_DOM_API
