@@ -101,6 +101,8 @@ Object.getOwnPropertyDescriptors(obj);
 7. `Reflect.ownKeys()` 包含自身的所有键名
 8. `Object.getOwnPropertyDescriptors` 获取对象的所以自身属性的描述符
 
+`JSON.parse` 纯文本转换，就算解析出来的看起来是脚本也绝对不执行，是安全的 API, 然后设置 `textContent` 或者 `innerText`
+
 ## Number
 
 ```js
