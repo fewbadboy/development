@@ -117,54 +117,42 @@ updateManager.onUpdateFailed(function () {
 
 ## Skyline 渲染引擎
 
-### worklet 动画
-
 ### [自定义路由](https://developers.weixin.qq.com/miniprogram/dev/framework/runtime/skyline/preset-route.html)
 
-```js
-/**
- * routeType:
- *  wx://bottom-sheet 等
- *  */ 
-wx.navigateTo({
-  url: '',
-  routeType: ''
-})
-```
-
-## 容器转场
+## 容器转场(Skyline)
 
 `<open-container>`
-
-## 插件
 
 ## 网络
 
 不是云开发需要配置服务器域名
 
-## 分包加载
+## 分包预下载
 
-## 消息推送
+提升进入后续分包页面时的启动速度
 
 ## 大屏适配
 
 - `rpx` 单位
-  
-## XR-FRAME
-
-3D 应用解决方案
 
 ## API
 
 ### 设备
 
-- 键盘: `wx.onKeyboardHeightChange(res => res.height)`
-
-### WXML
+- 键盘
 
 ```js
-const query = wx.createSelectorQuery()
-query.select('#the-id').boundingClientRect(({ top }) => {})
+// height 键盘高度
+wx.onKeyboardHeightChange(res => res.height)
+```
 
-this.animate(selector， keyframes, duration, callback)
+- 系统
+
+```js
+// 窗口信息
+wx.getWindowInfo(({ statusBarHeight, ,safeArea }) => {})
+// 设备基础信息
+wx.getDeviceInfo(({ system }) => {})
+// 微信APP基本信息
+wx.getAppBaseInfo(({ theme, language }) => {})
 ```

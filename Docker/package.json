@@ -1,0 +1,9 @@
+{
+  "packageManager": "pnpm@10.30.2",
+  "overrides": {
+
+  },
+  "engines": {
+    "node": "24.14.0"
+  }
+}

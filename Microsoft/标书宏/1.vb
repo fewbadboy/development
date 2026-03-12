@@ -1,9 +1,11 @@
 ' 文档存在横竖混排，表格跨页等结构
 ' 1. 目录添加 toc 书签
 ' 2. 标题样式创建书签 h_index (针对 标题 1 2 3 样式创建全局索引，方便后续的前后查找)
-' 3. 标题样式后创建 返回 前 后 链接跳转
-' 4. 交叉引用，文本超链接(段落中文本及图片) 都添加一个书签叫 "ref目标书签"
-' 5. 手动实现分节(基于是混合排版)，每节页脚添加一个跳转到上下一节中第一个标题的链接
+' 3. 标题样式后创建 前 后 链接跳转(跳转到最近的标题)
+' 4. 交叉引用，文本超链接(段落中文本及图片) 
+' 	4.1 正文：每个交叉引用的新创建一个书签叫 "ref目标书签"
+' 	4.2 表格
+' 5. 手动实现分节(基于是混合排版)，每节页脚添加 上一节 目录 下一个 三个链接
 ' 页脚要关闭 首页不同,奇偶页不同，链接到前一节
 
 ' 记录标题的书签名
@@ -11,7 +13,7 @@ Dim HeadingBookmarkMap As Object  ' Scripting.Dictionary
 Dim sectionPara() As String ' 记录每节中第一个出现的标题 1-3 的书签
 
 Sub Main()
-  	Dim doc As Document: Set doc = ActiveDocument
+  	Dim doc As Document: Set doc = ActiveDocument 
 	Dim bms As Bookmarks: Set bms = doc.Bookmarks
 
   	Application.ScreenUpdating = False
@@ -67,41 +69,6 @@ Sub Main()
 			' rng.MoveEnd wdCharacter, -1        ' 
 			' rng.Collapse wdCollapseStart
 			topPos = rng.Information(wdVerticalPositionRelativeToPage)
-			
-			Dim shp As Shape
-			Set shp = ActiveDocument.Shapes.AddTextbox( _
-				msoTextOrientationHorizontal, _
-				0, 0, 34, 24, rng)    
-			
-			' 设置形状垂直相对界面，水平相对文本
-			With shp
-				.RelativeHorizontalPosition = wdRelativeHorizontalPositionPage
-                .RelativeVerticalPosition =  wdRelativeVerticalPositionPage ' wdRelativeVerticalPositionLine
-                
-                .Left = InchesToPoints(0)       ' 向右偏移（可自行调整0.2~0.5）
-                .Top = topPos
-
-				With .TextFrame.TextRange
-					.Text = "返回"
-					.Font.Size = 9
-					.Font.Color = RGB(0, 0, 200)           ' 文字
-					.Font.Underline = wdUnderlineSingle    ' 加底
-					.ParagraphFormat.Alignment = wdAlignParagraphCenter
-					
-					' 加入超链接 - 跳到目录 "toc"
-					.Hyperlinks.Add _
-						Anchor:=.Duplicate, _
-						Address:="", _
-						SubAddress:="toc", _
-						TextToDisplay:="返回目录", _
-						ScreenTip:="点击返回目录"
-				End With
-				' 外观设置
-				.Fill.Transparency = 1                     ' 1 = 完全透明
-				.Line.ForeColor.RGB = RGB(0, 0, 200)       ' 深藍色边框
-				.Line.Visible = msoFalse                    ' 显示边框
-				.Line.Weight = 0.25                        ' 边框粗细
-			End With' 定位到标题末尾（包含段落标记前）
 
 			' 上一级（左）
             Dim shpPrev As Shape
@@ -171,11 +138,6 @@ Sub Main()
 NextPara:
   	Next para
 
-	Dim l As Long
-	l = Len(sectionPara)
-	For i = 1 to l
-		Debug.Print i
-	Next
 	' 设置页脚
 	SetFooterNavLink
 
@@ -244,7 +206,6 @@ End Sub
 ' ===============================================================
 ' 函数：FindNearestHeadings
 ' 功能：同时查找当前标题前面最近 + 后面最近的标题
-
 ' ===============================================================
 Function FindNearestHeadings(currentBmName As String) As Variant
     
@@ -313,14 +274,14 @@ Sub CrossRefAddBookmark()
 				doc.Bookmarks.Add Name:=bmName, Range:=range.Duplicate
                 
             Case wdFieldHyperlink
-				' 自定义链接的书签
+				' 链接的书签
 				' 会包括标题[1-n]
-				' 但是标题样式分割后获取到的最大索引为 2
-				' 自己添加的字段超链接 最大索引却是 3
 				parts = Split(fld.code.text, " ")
-                If UBound(parts) = 3 Then
+				Debug.Print "字段超链接: "; fld.code.text
+                If UBound(parts) = 2 And Left(parts(2), 4) = """ref" Then
+                    Debug.Print "自定义超链接: "; parts(2)
 					Dim s As String
-                    s = parts(3)
+                    s = parts(2)
                     bmName = Mid(s, 2, Len(s) - 2) & "_origin"
                     Debug.Print "字段超链接: "; Mid(s, 2, Len(s) - 2)
                     Set range = fld.result
@@ -344,8 +305,13 @@ Sub CrossRefAddBack()
 		If Left(bmName, 3) = "ref" And InStr(bmName, "_origin") = 0 Then
 			bmOriginName = bmName & "_origin"
 
+			Dim orient As String
+			Dim ps As PageSetup
 			Dim rng As range
 			Set rng = bm.Range.Duplicate     ' 用副本避免修改原范围
+			Set ps = bm.range.Sections(1).PageSetup
+
+			orient = IIf(ps.Orientation = wdOrientLandscape, "横向", "纵向")
 
 			If rng.Information(wdWithInTable) Then
                 Debug.Print "在表格中无法定位"
@@ -356,30 +322,29 @@ Sub CrossRefAddBack()
 				Dim shp As shape
 				Set shp = ActiveDocument.Shapes.AddTextbox( _
 					msoTextOrientationHorizontal, _
-					0, 0, 34, 24, rng)
+					0, 0, 34+24, 24, rng) ' 返回信息多的时候，还得修改长度
 				
 				' 设置形状相对界面定位
 				With shp
 					.RelativeHorizontalPosition = wdRelativeHorizontalPositionPage
 					.RelativeVerticalPosition = wdRelativeVerticalPositionPage
 					
-					.Left = InchesToPoints(0)       ' 向右偏移（可自行调整0.2~0.5）
+					.Left = ps.pageWidth - 46 ' InchesToPoints(0)       ' 向右偏移（可自行调整0.2~0.5）
 					.Top = topPos
 
 					With .TextFrame.TextRange
-						.text = "返回"
-						.Font.Size = 9
-						.Font.Color = RGB(0, 0, 200)           ' 文字
-						.Font.Underline = wdUnderlineSingle    ' 加底
-						.ParagraphFormat.Alignment = wdAlignParagraphCenter
-						
 						' 加入超链接 - 跳转
 						.Hyperlinks.add _
 							Anchor:=.Duplicate, _
 							Address:="", _
 							SubAddress:=bmOriginName, _
-							TextToDisplay:="返回", _
+							TextToDisplay:="返回"&Replace(bmName, "ref", ""), _
 							ScreenTip:="点击返回"
+
+						.Font.Size = 9
+						.Font.Color = RGB(0, 0, 200)           ' 文字
+						.Font.Underline = wdUnderlineSingle    ' 加底
+						.ParagraphFormat.Alignment = wdAlignParagraphCenter
 					End With
 					' 外观设置
 					.Fill.Transparency = 1                     ' 1 = 完全透明
@@ -441,6 +406,7 @@ Sub SetFooterNavLink()
 	Dim sec As Section
     Dim i As Long
 	Dim rPrev As Range
+	Dim rToc As Range
 	Dim rNext As Range
     Dim prevBm As String
     Dim nextBm As String
@@ -458,7 +424,8 @@ Sub SetFooterNavLink()
 
 			Set footerRange = .Range
 			footerRange.Text = ""
-
+			
+			' 上一节
 			If prevBm <> "" Then
 				Set rPrev = footerRange.Duplicate
         		rPrev.Collapse wdCollapseStart
@@ -467,11 +434,22 @@ Sub SetFooterNavLink()
 					Anchor:=rPrev, _
 					SubAddress:=prevBm, _
 					TextToDisplay:="上一节"
-			End If
 
 			footerRange.InsertAfter "  "
+			End If
 
+			' 插入目录
+			Set rToc = footerRange.Duplicate
+			rToc.Collapse wdCollapseEnd
+
+			ActiveDocument.Hyperlinks.Add _
+				Anchor:=rToc, _
+				SubAddress:="toc", _
+				TextToDisplay:="目录"
+			
+			' 下一节
 			If nextBm <> "" Then
+				footerRange.InsertAfter "  "
 				Set rNext = footerRange.Duplicate
         		rNext.Collapse wdCollapseEnd
 				
