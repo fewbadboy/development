@@ -90,7 +90,7 @@ git merge dev
 # <<<<<<<< HEAD:index.html
 # xxxxxxxxxx part1 本地分支内容
 # =========
-# xxxxxxxxxx part2
+# xxxxxxxxxx part2 
 # >>>>>>>> iss53:index.html 合并进来的
 ```
 

@@ -18,17 +18,7 @@
 - animation-play-state: paused/running
 - animation-timing-function: ease-in-out/linear/steps/cubic-bezier
 
-## aspect-ratio
-
 ## backdrop-filter
-
-## background
-
-- background-attachment: fixed/local/scroll
-- background-clip: border-box/padding-box/content-box/text
-- background-origin: border-box/padding-box/content-box
-
-## block/inline-size
 
 ## caret
 
@@ -37,12 +27,6 @@
 ## clip
 
 - clip-path: inset/circle/ellipse/polygon/path/rect
-
-## column
-
-- column-count
-- column-rule
-- column-width
 
 ## grid
 
@@ -66,13 +50,6 @@
 }
 ```
 
-## inset
-
-## object
-
-- object-fit
-- object-position
-
 ## offset
 
 - offset-anchor
@@ -80,5 +57,3 @@
 - offset-path
 - offset-position
 - offset-rotate
-
-## user-select
