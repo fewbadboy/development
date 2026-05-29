@@ -33,20 +33,23 @@
 ```css
 .wrapper {
   display: grid;
+  /* 显示网格轨道 */
   grid-template-areas: 
     "a a b"
     "a a b";
-  /* 显示网格轨道 */
+  /* 显示网格轨道的大小 */
   grid-template-columns: repeat(3, 1fr); /* fraction */
   grid-template-rows: 100px;
-  /* 隐式网格(超出定义网格内容的项，自动创建轨道的行为) */
+  /* 内容超出显示定义的网格轨道，自动创建的轨道的行为 */
   grid-auto-columns: 100px;
   grid-auto-rows: 100px;
-  /* 决定多余项被如何放置到隐式表格中 */
   grid-auto-flow: row;
   /* 网格间距 */
   grid-column-gap: 16px;
   grid-row-gap: 16px;
+  /* 网格项的行和列 */
+  grid-row: 1 / 3;
+  grid-column: 1 / span 2;
 }
 ```
 

@@ -27,8 +27,9 @@
 
 ## Object
 
-每一个属性名是一个 string 或 Symbol
-`[]` 获取属性名时，任何非字符串对象都会通过 `toString` 方法转换
+`.expression` 获取属性, expression 必须是一个有效的 JavaScript 标识符
+
+`[expression]` 获取属性, expression 转换成属性名称的字符串或 Symbol
 
 ```js
 // 静态方法
@@ -41,65 +42,38 @@ is(v1, v2) // 比较严格相等
 2. `Object.keys()` 遍历对象自身的所有可枚举的属性的键名
 3. `JSON.stringify()` 序列化对象自身可枚举的属性
 
-`JSON.parse` 纯文本转换，就算解析出来的看起来是脚本也绝对不执行，是安全的 API, 然后设置 `textContent` 或者 `innerText`
+`JSON.parse` 纯文本转换，就算解析出来的看起来是脚本也绝对不执行，是安全的 API
 
 ## String
 
-字符串以 UTF-16 编码表示
+字符串基本上以 1 个 UTF-16 编码单元表示(有些字符占 2 个编码单元)
 
 ```js
 const str = '½A'
-// 示例方法
-at(index) // 负值就是 index + length
-charAt(index) // index 超出范围 0 -str.length - 1 返回空字符串
-match(regexp)
-padEnd(targetLength, padString)
-padStart(targetLength, padString)
+charCodeAt(index) // 返回 0 -65535 的 UTF-16
+codePointAt(index) // 返回编码 0 - 0x10FFFF 的 Unicode 码点
 
-const DATE_REG = /(?<year>\d{4})\/(?<month>\d{2})\/(?<day>\d{2}) (?<hour>\d{2}):(?<minute>\d{2}):(?<second>\d{2})/
-
-const format = ({ year, month, day, hour, minute, second }) => 
-`${second} ${minute} ${hour} ${day} ${month} ? ${year}`
-
-'2026/01/01 23:01:30'.replace(
-  /(\d{4})\/(\d{2})\/(\d{2}) (\d{2}):(\d{2}):(\d{2})/,
-  (_, groups) => format(groups)
-)
-
-search(regexp) // 返回 index
-split(separator, limit)
-charCodeAt(index) // 返回 0 -65535 的 UTF-16 code unit
-codePointAt(index) // 返回完整的 Unicode code unit 0 - 0x10FFFF 
-startsWith(searchString, endPosition)
-endsWith(searchString, endPosition)
+Array.from(str).length // 将字符串转换为数组，底层按 codePoint 分割, 类似 for...of 循环
+// 多个 codePoint 组成的字符(emoji) 使用 Intl.Segmenter 分割
 ```
 
 ## Iterator
 
-提供一个 `[Symbol.iterator]()` 方法，返回迭代器对象本身
-
-- for...of
-- 解构赋值(数组，Set)
-- 扩展运算符
-- yield\*
-- Array.from
-- Promise.all/race()
+提供一个 `[Symbol.iterator]()` 方法，`next()` 返回迭代器结果对象
 
 ## RegExp
 
 `(...)` 捕获组，会占用编号，存储匹配内容，供后续引用或替换， 如 `$1、\1、match[1]` 引用
-`(?<name>)` 命名捕获组
 `(?:pattern)` 非捕获组，只分组，不捕获，不占用编号
+`(?<name>pattern)` 命名捕获组
 
 - 默认贪婪模式，加 `?` 变成懒惰
 - `\d` `\w` `\s` `\c`
-- `(?=pattern)` `(?!pattern)` 当前位置的后面必须紧跟着能匹配 pattern，才算成功
-- `(?<=pattern)` `(?<!pattern)`
-- `\b` `\B`
-- `(pattern)` `(?<Name>pattern)` `(?:pattern)`
+- `x(?=pattern)` `x(?!pattern)` x 后面紧跟着能(不能)匹配 pattern
+- `(?<=pattern)x` `(?<!pattern)x` x 前面紧跟着能(不能)匹配 pattern
 
 ```js
-'100元 200美元'.match(/\d+(?!美元)/g);  // ["100"]
+'100元 200美元'.match(/\d+(?=美元)/g);  // ["200"]
 
 let date = '2026-01-06'
 date.replace(/(\d{4})-(\d{2})-(\d{2})/, '$3/$2/$1'); // "06/01/2026"
@@ -117,11 +91,46 @@ RegExp.prototype.test(str);
 
 - encodeURI()： 转义字符，除 `A–Z a–z 0–9 - _ . ! ~ * ' ( ) ; / ? : @ & = + $ , #` 字符
 - encodeURIComponent(): 除 `A–Z a–z 0–9 - _ . ! ~ * ' ( )`
-- TextEncode: 返回 UTF-8 编码的 Uint8Array
+- TextEncode 默认使用 UTF-8 编码将字符串转换为字节流
+  - encode(str): 将字符串转换为 Uint8Array 字节流
+-TextDecoder: 将 Uint8Array 字节流转换为字符串
+  - decode(arrayBuffer): 将 Uint8Array 字节流转换为字符串
+
+## Blob
+
+Blob(blobParts, options) blobParts 是一个可迭代对象
+
+- arrayBuffer(): 二进制数据，用于存储文件内容
+- bytes()
+- slice
+- stream(): 返回一个读取流内容的 ReadableStream 对象
+- text(): 返回一个 Promise 对象，包含 Blob 内容的字符串
+
+## FileReader
+
+异步读取文件内容
+
+- readAsArrayBuffer(file): 读取文件内容为 ArrayBuffer
+- readAsDataURL(file): 读取文件内容为 Data URL，包含文件类型和编码
+- readAsText(file, encoding): 读取文件内容为文本，默认 UTF-8 编码
+
+```js
+const file = event.target.files[0]; // FileList 对象
+
+const reader = new FileReader();
+reader.onload = function() {
+  const arrayBuffer = reader.result
+  const data = new Uint8Array(arrayBuffer)
+  console.log('Received message:', data);
+};
+reader.readAsArrayBuffer(file);
+```
 
 ## 动画
 
-1. window.requestAnimationFrame(callback)
+window.requestAnimationFrame(callback) 要求浏览器在下一次重绘前调用 callback
+回调参数为时间戳 timestamp, 表示上一帧渲染结束的时间，单位为毫秒
+
 大多数浏览器在后台标签页或者隐藏的 iframe 标签里时暂停调用，为了提高性能和电池使用寿命
 
 ```js
@@ -130,15 +139,35 @@ RegExp.prototype.test(str);
  * 递归的 setTimeout 根据上次执行的时间决定下次的延迟(超过1000ms的就取消上次的setTimeout)
  */
 function do() {
-  setTimeout(() => {
-    console.log('Task completed');
-  }, 2000);
-  setTimeout(do, 1000) // 当前任务执行完成后再触发
+  console.log('Task completed');
+  setTimeout(do, 2000) // 当前任务执行完成后再触发
 }
-setTimeout(do, 1000)
+setTimeout(do, 2000)
 ```
 
 如果想在浏览器中实现 0ms 延时的定时器，可以参考 window.postMessage()
+
+```js
+const rowHeight = tbody.querySelector('tr')!.offsetHeight
+
+// 1. 动画
+tbody.style.transition = 'transform 0.5s ease'
+tbody.style.transform = `translateY(-${rowHeight}px)`
+
+// 2. 等动画结束
+await new Promise(resolve => setTimeout(resolve, 500))
+
+// 3. 关闭动画 + 复位（第一帧）
+tbody.style.transition = 'none'
+tbody.style.transform = 'translateY(0)'
+
+// ⚠️ 强制让浏览器吃掉这一帧
+await new Promise(requestAnimationFrame)
+
+// 4. 再改数据（第二帧）
+const item = tableData.value.shift()
+tableData.value.push(item!)
+```
 
 ## await using
 
@@ -158,4 +187,43 @@ async function example() {
   await using resource = new Resource();
   // 变量超出作用域，调用对象的 [Symbol.dispose]() 方法，以确保资源被释放
 }
+```
+
+## websocket
+
+```js
+const ws = new WebSocket('ws://example.com/socket');
+ws.binaryType = 'blob'; // 设置为二进制类型，  'blob' 或 'arraybuffer'
+
+// 事件
+ws.onopen = function(event) {
+  console.log('WebSocket connection opened');
+};
+ws.onmessage = async(event) {
+  // 1. 从 Blob 转换为文本
+  const blob = event.data;
+  const text = await blob.text();
+  console.log('Received message:', JSON.parse(text));
+
+  // 2. FileReader 读取 Blob
+  const reader = new FileReader();
+  reader.onload = function() {
+    const arrayBuffer = reader.result
+    const data = new Uint8Array(arrayBuffer)
+    console.log('Received message:', data);
+  };
+  reader.readAsArrayBuffer(blob);
+
+  // 3. 从 ArrayBuffer + TextDecoder 解析
+  const textDecoder = new TextDecoder();
+  const text = textDecoder.decode(arrayBuffer);
+  console.log('Received message:', text);
+};
+ws.onclose = function(event) {
+  console.log('WebSocket connection closed');
+};
+ws.onerror = function(error) {
+  console.error('WebSocket error:', error);
+};
+ws.send(JSON.stringify({hello: 'world'}));
 ```
